@@ -1,14 +1,15 @@
-
 """
-train.py - Production Training Pipeline for Tiny-Object Drone Detection
-=======================================================================
-End-to-end pipeline:
-  1. Auto-slicing (SAHI slice_coco)
-  2. SlicedDroneDataset with tiny-object augmentations
-  3. TinyDroneDetector: Backbone (C2-C5) + TinyFPN (P2-P5) + DecoupledHead
-  4. ScaleAwareAssigner (<16px -> P2, 16-32px -> P3, 32-64px -> P4, >=64px -> P5)
-  5. TinyDetectionLoss (Focal + Centerness + 0.5*GIoU + 0.5*NWD)
-  6. AMP training loop with cosine warmup, checkpointing, and isolated mAP_tiny evaluation
+train_2.py - Linux-Optimized Training Pipeline for Tiny-Object Drone Detection
+=============================================================================
+Optimized for Linux / WSL2 environments:
+  - CSPDarknetBackbone (Cross-Stage Partial feature routing for C2-C5)
+  - Smooth 2-stage stem downsampling (stride 2 -> stride 2)
+  - Native POSIX fork-safe multiprocessing with asynchronous prefetching
+  - Pinned host memory (DMA direct-to-GPU transfer) and non_blocking copies
+  - Persistent worker pooling to eliminate inter-epoch re-initialization
+  - Full dataset training (100% tiles utilized)
+  - Full P2-FPN + NWD + Focal Loss architecture
+  - Periodic checkpointing (every 5 epochs) and robust Early Stopping
 """
 
 from __future__ import annotations
@@ -20,13 +21,14 @@ import os
 import random
 import shutil
 import time
+from pathlib import Path
 from typing import Any, Dict, List, Set, Tuple
 
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from PIL import Image, ImageDraw
+from PIL import Image
 from torch.utils.data import DataLoader, Dataset, Subset
 
 try:
@@ -38,7 +40,43 @@ except ImportError:
 
 
 # ============================================================================
-# 1. AUTOMATED DATASET SLICING
+# 1. EARLY STOPPING HANDLER
+# ============================================================================
+
+class EarlyStopping:
+    """Monitors a validation metric and flags when progress stalls."""
+
+    def __init__(self, patience: int = 5, min_delta: float = 1e-4, mode: str = "max") -> None:
+        self.patience = patience
+        self.min_delta = min_delta
+        self.mode = mode
+        self.counter = 0
+        self.best_score: float | None = None
+        self.early_stop = False
+
+    def step(self, score: float) -> bool:
+        if self.best_score is None:
+            self.best_score = score
+            return False
+
+        if self.mode == "max":
+            has_improved = score > (self.best_score + self.min_delta)
+        else:
+            has_improved = score < (self.best_score - self.min_delta)
+
+        if has_improved:
+            self.best_score = score
+            self.counter = 0
+        else:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.early_stop = True
+
+        return self.early_stop
+
+
+# ============================================================================
+# 2. AUTOMATED DATASET SLICING
 # ============================================================================
 
 def check_and_slice_dataset(
@@ -50,16 +88,15 @@ def check_and_slice_dataset(
     min_area_ratio: float = 0.1,
 ) -> Tuple[str, str]:
     """Slice high-res images and annotations into overlapping patches via SAHI."""
-    ann_base = "sliced"
-    sliced_ann_path = os.path.join(sliced_dir, f"{ann_base}_coco.json")
-    sliced_img_dir = os.path.join(sliced_dir, "images")
+    sliced_path = Path(sliced_dir)
+    sliced_ann_path = sliced_path / "sliced_coco.json"
+    sliced_img_dir = sliced_path / "images"
 
-    # Skip if pre-sliced dataset already exists
-    if os.path.isfile(sliced_ann_path) and os.path.isdir(sliced_img_dir):
+    if sliced_ann_path.is_file() and sliced_img_dir.is_dir():
         imgs = [f for f in os.listdir(sliced_img_dir) if f.lower().endswith((".jpg", ".png", ".jpeg"))]
         if len(imgs) > 0:
             print(f"[slice] Found existing sliced dataset at {sliced_dir} ({len(imgs)} tiles) -- skipping.")
-            return sliced_img_dir, sliced_ann_path
+            return str(sliced_img_dir), str(sliced_ann_path)
 
     print(f"[slice] Slicing {raw_img_dir} -> {sliced_dir} (tile={slice_size}, overlap={overlap_ratio})")
     from sahi.slicing import slice_coco
@@ -67,7 +104,7 @@ def check_and_slice_dataset(
     slice_coco(
         coco_annotation_file_path=raw_ann,
         image_dir=raw_img_dir,
-        output_coco_annotation_file_name=ann_base,
+        output_coco_annotation_file_name="sliced",
         output_dir=sliced_dir,
         slice_height=slice_size,
         slice_width=slice_size,
@@ -77,20 +114,18 @@ def check_and_slice_dataset(
         verbose=False,
     )
 
-    # Standardize image location to sliced_dir/images
-    if not os.path.isdir(sliced_img_dir):
-        os.makedirs(sliced_img_dir, exist_ok=True)
-        for f in os.listdir(sliced_dir):
-            src = os.path.join(sliced_dir, f)
-            if os.path.isfile(src) and f.lower().endswith((".jpg", ".png", ".jpeg")):
-                shutil.move(src, os.path.join(sliced_img_dir, f))
+    sliced_img_dir.mkdir(parents=True, exist_ok=True)
+    for f in os.listdir(sliced_dir):
+        src = sliced_path / f
+        if src.is_file() and f.lower().endswith((".jpg", ".png", ".jpeg")):
+            shutil.move(str(src), str(sliced_img_dir / f))
 
     print(f"[slice] Slicing completed. Tiles saved in {sliced_img_dir}")
-    return sliced_img_dir, sliced_ann_path
+    return str(sliced_img_dir), str(sliced_ann_path)
 
 
 # ============================================================================
-# 2. DATASET & TINY-OBJECT AUGMENTATION
+# 3. DATASET & TINY-OBJECT AUGMENTATION
 # ============================================================================
 
 class SlicedDroneDataset(Dataset):
@@ -98,7 +133,7 @@ class SlicedDroneDataset(Dataset):
 
     def __init__(self, img_dir: str, ann_path: str, input_size: int = 640, augment: bool = True) -> None:
         super().__init__()
-        self.img_dir = img_dir
+        self.img_dir = Path(img_dir)
         self.input_size = input_size
         self.augment = augment
 
@@ -121,15 +156,14 @@ class SlicedDroneDataset(Dataset):
         meta = self.images_meta[idx]
         img_id = meta["id"]
 
-        fname = os.path.basename(meta["file_name"])
-        img_path = os.path.join(self.img_dir, fname)
-        if not os.path.isfile(img_path):
-            img_path = os.path.join(self.img_dir, meta["file_name"])
+        fname = Path(meta["file_name"]).name
+        img_path = self.img_dir / fname
+        if not img_path.is_file():
+            img_path = self.img_dir / meta["file_name"]
 
         img = Image.open(img_path).convert("RGB")
         w, h = img.size
 
-        # Parse ground-truth boxes [x1, y1, x2, y2]
         boxes_list, labels_list = [], []
         for ann in self.anns_by_img.get(img_id, []):
             x, y, bw, bh = ann["bbox"]
@@ -141,9 +175,7 @@ class SlicedDroneDataset(Dataset):
         boxes = np.array(boxes_list, dtype=np.float32).reshape(-1, 4)
         labels = np.array(labels_list, dtype=np.int64)
 
-        # Tiny-object friendly augmentations
         if self.augment:
-            # 1. Random horizontal flip (p=0.5)
             if random.random() < 0.5:
                 img = img.transpose(Image.FLIP_LEFT_RIGHT)
                 if len(boxes) > 0:
@@ -151,20 +183,17 @@ class SlicedDroneDataset(Dataset):
                     boxes[:, 0] = w - boxes[:, 2]
                     boxes[:, 2] = w - x1
 
-            # 2. Scale jitter [0.85, 1.15] - keeps tiny objects within perceptible bounds
             scale = random.uniform(0.85, 1.15)
             nw, nh = max(int(w * scale), 1), max(int(h * scale), 1)
             img = img.resize((nw, nh), Image.BILINEAR)
             if len(boxes) > 0:
                 boxes *= scale
 
-            # 3. Color jitter for aerial illumination variance
             from torchvision.transforms import functional as TF
             img = TF.adjust_brightness(img, 1.0 + random.uniform(-0.15, 0.15))
             img = TF.adjust_contrast(img, 1.0 + random.uniform(-0.15, 0.15))
             img = TF.adjust_saturation(img, 1.0 + random.uniform(-0.15, 0.15))
 
-        # Letterbox to square input_size (aspect-ratio preservation)
         w, h = img.size
         r = min(self.input_size / w, self.input_size / h)
         nw, nh = int(round(w * r)), int(round(h * r))
@@ -180,91 +209,117 @@ class SlicedDroneDataset(Dataset):
             boxes[:, [0, 2]] = np.clip(boxes[:, [0, 2]] + pad_x, 0, self.input_size)
             boxes[:, [1, 3]] = np.clip(boxes[:, [1, 3]] + pad_y, 0, self.input_size)
 
-        img_tensor = torch.from_numpy(np.array(canvas, dtype=np.float32) / 255.0).permute(2, 0, 1)  # (3, H, W)
+        img_tensor = torch.from_numpy(np.array(canvas, dtype=np.float32) / 255.0).permute(2, 0, 1)
         return {
             "image": img_tensor,
-            "boxes": torch.from_numpy(boxes),      # (N, 4)
-            "labels": torch.from_numpy(labels),    # (N,)
+            "boxes": torch.from_numpy(boxes),
+            "labels": torch.from_numpy(labels),
             "image_id": img_id,
         }
 
 
 def collate_fn(batch: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Stacks images into tensor; preserves variable-length boxes per image."""
     return {
-        "images": torch.stack([s["image"] for s in batch], dim=0),  # (B, 3, H, W)
-        "boxes": [s["boxes"] for s in batch],                      # list of (Ni, 4)
-        "labels": [s["labels"] for s in batch],                    # list of (Ni,)
+        "images": torch.stack([s["image"] for s in batch], dim=0),
+        "boxes": [s["boxes"] for s in batch],
+        "labels": [s["labels"] for s in batch],
         "image_ids": [s["image_id"] for s in batch],
     }
 
 
 # ============================================================================
-# 3. P2-AUGMENTED MODEL ARCHITECTURE
+# 4. CSP-AUGMENTED MODEL ARCHITECTURE
 # ============================================================================
 
 class ConvBNSiLU(nn.Module):
-    """Conv2d -> BatchNorm2d -> SiLU (smooth activation preserves weak responses)."""
+    """Conv2d -> BatchNorm2d -> SiLU."""
 
     def __init__(self, in_ch: int, out_ch: int, k: int = 3, s: int = 1, p: int = 1) -> None:
         super().__init__()
-        self.conv = nn.Conv2d(in_ch, out_ch, k, s, p, bias=False)
+        self.conv = nn.Conv2d(in_ch, out_ch, kernel_size=k, stride=s, padding=p, bias=False)
         self.bn = nn.BatchNorm2d(out_ch)
         self.act = nn.SiLU(inplace=True)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.act(self.bn(self.conv(x)))  # (B, out_ch, H/s, W/s)
+        return self.act(self.bn(self.conv(x)))
 
 
-class ResidualBlock(nn.Module):
-    """Bottleneck residual block maintaining channel dimension."""
+class CSPBottleneck(nn.Module):
+    """Residual bottleneck operating on split channels."""
 
     def __init__(self, channels: int) -> None:
         super().__init__()
-        mid = max(channels // 2, 32)
-        self.conv1 = ConvBNSiLU(channels, mid, k=1, p=0)
-        self.conv2 = ConvBNSiLU(mid, channels, k=3, p=1)
+        self.conv1 = ConvBNSiLU(channels, channels, k=3, s=1, p=1)
+        self.conv2 = ConvBNSiLU(channels, channels, k=3, s=1, p=1)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return x + self.conv2(self.conv1(x))  # (B, C, H, W)
+        return x + self.conv2(self.conv1(x))
 
 
-class DroneBackbone(nn.Module):
-    """Multi-scale residual backbone retaining C2 (stride 4) for tiny objects."""
+class CSPBlock(nn.Module):
+    """Cross-Stage Partial block splitting channels, processing half, and concatenating."""
+
+    def __init__(self, in_ch: int, out_ch: int, num_blocks: int = 1) -> None:
+        super().__init__()
+        mid_ch = out_ch // 2
+        self.conv_main = ConvBNSiLU(in_ch, mid_ch, k=1, s=1, p=0)
+        self.conv_bypass = ConvBNSiLU(in_ch, mid_ch, k=1, s=1, p=0)
+        self.bottlenecks = nn.Sequential(
+            *[CSPBottleneck(mid_ch) for _ in range(num_blocks)]
+        )
+        self.conv_out = ConvBNSiLU(mid_ch * 2, out_ch, k=1, s=1, p=0)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        main_feat = self.bottlenecks(self.conv_main(x))
+        bypass_feat = self.conv_bypass(x)
+        return self.conv_out(torch.cat([main_feat, bypass_feat], dim=1))
+
+
+class CSPDarknetBackbone(nn.Module):
+    """
+    CSPDarknet Backbone retaining C2 (stride 4) for tiny objects:
+      - Stem: Smooth two-stage reduction (640 -> 320 -> 160)
+      - C2: 64 ch,  stride 4  (160x160)
+      - C3: 128 ch, stride 8  (80x80)
+      - C4: 256 ch, stride 16 (40x40)
+      - C5: 512 ch, stride 32 (20x20)
+    """
 
     def __init__(self) -> None:
         super().__init__()
-        self.stem = nn.Sequential(
-            ConvBNSiLU(3, 32, k=3, s=2, p=1),
-            ConvBNSiLU(32, 32, k=3, s=1, p=1),
-        )  # (B, 32, H/2, W/2)
+        # 1. Stem: Smooth 2-stage downsampling to avoid blind-spot sampling
+        self.stem1 = ConvBNSiLU(3, 32, k=3, s=2, p=1)   # 640x640 -> 320x320
+        self.stem2 = ConvBNSiLU(32, 64, k=3, s=2, p=1)  # 320x320 -> 160x160
 
-        self.stage1 = nn.Sequential(
-            ConvBNSiLU(32, 64, k=3, s=2, p=1),
-            ResidualBlock(64), ResidualBlock(64),
-        )  # C2: (B, 64, H/4, W/4)
+        # 2. Stage C2 (Stride 4)
+        self.c2_csp = CSPBlock(in_ch=64, out_ch=64, num_blocks=1)
 
-        self.stage2 = nn.Sequential(
-            ConvBNSiLU(64, 128, k=3, s=2, p=1),
-            ResidualBlock(128), ResidualBlock(128),
-        )  # C3: (B, 128, H/8, W/8)
+        # 3. Stage C3 (Stride 8)
+        self.c3_down = ConvBNSiLU(64, 128, k=3, s=2, p=1)
+        self.c3_csp  = CSPBlock(in_ch=128, out_ch=128, num_blocks=2)
 
-        self.stage3 = nn.Sequential(
-            ConvBNSiLU(128, 256, k=3, s=2, p=1),
-            ResidualBlock(256), ResidualBlock(256),
-        )  # C4: (B, 256, H/16, W/16)
+        # 4. Stage C4 (Stride 16)
+        self.c4_down = ConvBNSiLU(128, 256, k=3, s=2, p=1)
+        self.c4_csp  = CSPBlock(in_ch=256, out_ch=256, num_blocks=2)
 
-        self.stage4 = nn.Sequential(
-            ConvBNSiLU(256, 512, k=3, s=2, p=1),
-            ResidualBlock(512), ResidualBlock(512),
-        )  # C5: (B, 512, H/32, W/32)
+        # 5. Stage C5 (Stride 32)
+        self.c5_down = ConvBNSiLU(256, 512, k=3, s=2, p=1)
+        self.c5_csp  = CSPBlock(in_ch=512, out_ch=512, num_blocks=1)
 
     def forward(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
-        x = self.stem(x)
-        c2 = self.stage1(x)
-        c3 = self.stage2(c2)
-        c4 = self.stage3(c3)
-        c5 = self.stage4(c4)
+        x = self.stem1(x)
+        x = self.stem2(x)
+        c2 = self.c2_csp(x)
+
+        x = self.c3_down(c2)
+        c3 = self.c3_csp(x)
+
+        x = self.c4_down(c3)
+        c4 = self.c4_csp(x)
+
+        x = self.c5_down(c4)
+        c5 = self.c5_csp(x)
+
         return c2, c3, c4, c5
 
 
@@ -287,11 +342,10 @@ class TinyFPN(nn.Module):
         self, c2: torch.Tensor, c3: torch.Tensor, c4: torch.Tensor, c5: torch.Tensor
     ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
         l5, l4, l3, l2 = self.lat5(c5), self.lat4(c4), self.lat3(c3), self.lat2(c2)
-
-        p5 = self.smooth5(l5)                                                                 # (B, 128, H/32, W/32)
-        p4 = self.smooth4(l4 + F.interpolate(l5, size=l4.shape[2:], mode="nearest"))          # (B, 128, H/16, W/16)
-        p3 = self.smooth3(l3 + F.interpolate(p4, size=l3.shape[2:], mode="nearest"))          # (B, 128, H/8, W/8)
-        p2 = self.smooth2(l2 + F.interpolate(p3, size=l2.shape[2:], mode="nearest"))          # (B, 128, H/4, W/4)
+        p5 = self.smooth5(l5)
+        p4 = self.smooth4(l4 + F.interpolate(l5, size=l4.shape[2:], mode="nearest"))
+        p3 = self.smooth3(l3 + F.interpolate(p4, size=l3.shape[2:], mode="nearest"))
+        p2 = self.smooth2(l2 + F.interpolate(p3, size=l2.shape[2:], mode="nearest"))
         return p2, p3, p4, p5
 
 
@@ -310,46 +364,40 @@ class DecoupledHead(nn.Module):
         self.reg_out = nn.Conv2d(fpn_ch, 4, 3, 1, 1)
         self.ctr_out = nn.Conv2d(fpn_ch, 1, 3, 1, 1)
 
-        # Prior bias initialization for focal loss stability
         nn.init.constant_(self.cls_out.bias, -math.log((1 - 0.01) / 0.01))
 
     def forward(self, feat: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         cls_feat = self.cls_branch(feat)
         reg_feat = self.reg_branch(feat)
 
-        cls_logits = self.cls_out(cls_feat)        # (B, num_classes, H_l, W_l)
-        reg_pred = F.relu(self.reg_out(reg_feat))  # (B, 4, H_l, W_l) -> (l, t, r, b) >= 0
-        centerness = self.ctr_out(reg_feat)        # (B, 1, H_l, W_l)
+        cls_logits = self.cls_out(cls_feat)
+        reg_pred = F.relu(self.reg_out(reg_feat))
+        centerness = self.ctr_out(reg_feat)
         return cls_logits, reg_pred, centerness
 
 
 class TinyDroneDetector(nn.Module):
-    """End-to-end detector combining DroneBackbone, TinyFPN, and DecoupledHead."""
-
     STRIDES = [4, 8, 16, 32]
 
     def __init__(self, num_classes: int = 1, fpn_channels: int = 128) -> None:
         super().__init__()
         self.num_classes = num_classes
         self.fpn_channels = fpn_channels
-        self.backbone = DroneBackbone()
+        self.backbone = CSPDarknetBackbone()
         self.fpn = TinyFPN(fpn_ch=fpn_channels)
         self.head = DecoupledHead(fpn_ch=fpn_channels, num_classes=num_classes)
 
     def forward(self, x: torch.Tensor) -> List[Tuple[torch.Tensor, torch.Tensor, torch.Tensor]]:
-        # x: (B, 3, H, W)
         c2, c3, c4, c5 = self.backbone(x)
         p2, p3, p4, p5 = self.fpn(c2, c3, c4, c5)
         return [self.head(p) for p in [p2, p3, p4, p5]]
 
 
 # ============================================================================
-# 4. SCALE-AWARE TARGET ASSIGNER
+# 5. SCALE-AWARE TARGET ASSIGNER
 # ============================================================================
 
 class ScaleAwareAssigner:
-    """Routes GT boxes by sqrt(w*h) to pyramid levels and computes (l*, t*, r*, b*, ctr*)."""
-
     def __init__(
         self,
         strides: List[int] = [4, 8, 16, 32],
@@ -366,11 +414,9 @@ class ScaleAwareAssigner:
         grid_centers: List[Tuple[torch.Tensor, torch.Tensor]],
         device: torch.device,
     ) -> List[Dict[str, torch.Tensor]]:
-        """Assigns targets for a single image across all FPN levels."""
         num_levels = len(self.strides)
         N = gt_boxes.shape[0]
 
-        # 1. Level routing: sqrt(w * h) bounds
         if N > 0:
             sizes = torch.sqrt((gt_boxes[:, 2] - gt_boxes[:, 0]) * (gt_boxes[:, 3] - gt_boxes[:, 1]))
             level_idx = torch.zeros(N, dtype=torch.long, device=device)
@@ -384,7 +430,7 @@ class ScaleAwareAssigner:
         for li in range(num_levels):
             H_l, W_l = feat_sizes[li]
             num_cells = H_l * W_l
-            grid_x, grid_y = grid_centers[li]  # (num_cells,) each
+            grid_x, grid_y = grid_centers[li]
 
             cls_tgt = torch.full((num_cells,), -1, dtype=torch.long, device=device)
             reg_tgt = torch.zeros((num_cells, 4), dtype=torch.float32, device=device)
@@ -402,12 +448,10 @@ class ScaleAwareAssigner:
                     r = gx2 - grid_x
                     b = gy2 - grid_y
 
-                    # Identify positive centers strictly inside box
                     inside = (l > 0) & (t > 0) & (r > 0) & (b > 0)
                     if not inside.any():
                         continue
 
-                    # Safe centerness computation restricted to valid inside coordinates (prevents negative sqrt NaNs)
                     l_in, t_in, r_in, b_in = l[inside], t[inside], r[inside], b[inside]
                     lr_ratio = torch.min(l_in, r_in) / torch.max(l_in, r_in).clamp(min=1e-6)
                     tb_ratio = torch.min(t_in, b_in) / torch.max(t_in, b_in).clamp(min=1e-6)
@@ -433,11 +477,10 @@ class ScaleAwareAssigner:
 
 
 # ============================================================================
-# 5. LOSS OBJECTIVES (FOCAL + NWD + GIOU + CENTERNESS)
+# 6. LOSS OBJECTIVES
 # ============================================================================
 
 def sigmoid_focal_loss(pred: torch.Tensor, target: torch.Tensor, alpha: float = 0.25, gamma: float = 2.0) -> torch.Tensor:
-    """Focal loss for dense background classification imbalance."""
     p = torch.sigmoid(pred)
     bce = F.binary_cross_entropy_with_logits(pred, target, reduction="none")
     p_t = p * target + (1 - p) * (1 - target)
@@ -446,7 +489,6 @@ def sigmoid_focal_loss(pred: torch.Tensor, target: torch.Tensor, alpha: float = 
 
 
 def giou_loss(p_boxes: torch.Tensor, g_boxes: torch.Tensor) -> torch.Tensor:
-    """Generalized IoU loss for bounding box regression."""
     ix1, iy1 = torch.max(p_boxes[:, 0], g_boxes[:, 0]), torch.max(p_boxes[:, 1], g_boxes[:, 1])
     ix2, iy2 = torch.min(p_boxes[:, 2], g_boxes[:, 2]), torch.min(p_boxes[:, 3], g_boxes[:, 3])
     inter = (ix2 - ix1).clamp(min=0) * (iy2 - iy1).clamp(min=0)
@@ -465,21 +507,18 @@ def giou_loss(p_boxes: torch.Tensor, g_boxes: torch.Tensor) -> torch.Tensor:
 
 
 def nwd_loss(p_boxes: torch.Tensor, g_boxes: torch.Tensor, C: float = 12.8) -> torch.Tensor:
-    """Normalized Wasserstein Distance (NWD) loss: models boxes as 2D Gaussians."""
     px_c, py_c = (p_boxes[:, 0] + p_boxes[:, 2]) / 2.0, (p_boxes[:, 1] + p_boxes[:, 3]) / 2.0
     pw, ph = p_boxes[:, 2] - p_boxes[:, 0], p_boxes[:, 3] - p_boxes[:, 1]
 
     gx_c, gy_c = (g_boxes[:, 0] + g_boxes[:, 2]) / 2.0, (g_boxes[:, 1] + g_boxes[:, 3]) / 2.0
     gw, gh = g_boxes[:, 2] - g_boxes[:, 0], g_boxes[:, 3] - g_boxes[:, 1]
 
-    w2_sq = (px_c - gx_c)**2 + (py_c - gy_c)**2 + ((pw - gw)**2 + (ph - gh)**2) / 4.0
+    w2_sq = (px_c - gx_c) ** 2 + (py_c - gy_c) ** 2 + ((pw - gw) ** 2 + (ph - gh) ** 2) / 4.0
     nwd_sim = torch.exp(-torch.sqrt(w2_sq.clamp(min=1e-7)) / C)
     return (1.0 - nwd_sim).mean()
 
 
 class TinyDetectionLoss(nn.Module):
-    """Total Loss = Focal + Centerness + 0.5 * GIoU + 0.5 * NWD."""
-
     def __init__(self, num_classes: int = 1, strides: List[int] = [4, 8, 16, 32], nwd_c: float = 12.8) -> None:
         super().__init__()
         self.num_classes = num_classes
@@ -497,7 +536,6 @@ class TinyDetectionLoss(nn.Module):
         B = outputs[0][0].shape[0]
         L = len(outputs)
 
-        # Precompute spatial dimensions & grid coordinates once per forward pass
         feat_sizes = [(outputs[li][0].shape[2], outputs[li][0].shape[3]) for li in range(L)]
         grid_centers = []
         for li in range(L):
@@ -508,7 +546,9 @@ class TinyDetectionLoss(nn.Module):
             gy, gx = torch.meshgrid(sy, sx, indexing="ij")
             grid_centers.append((gx.reshape(-1), gy.reshape(-1)))
 
-        tot_cls, tot_reg, tot_ctr = torch.tensor(0.0, device=device), torch.tensor(0.0, device=device), torch.tensor(0.0, device=device)
+        tot_cls = torch.tensor(0.0, device=device)
+        tot_reg = torch.tensor(0.0, device=device)
+        tot_ctr = torch.tensor(0.0, device=device)
         total_pos = 0
 
         for b in range(B):
@@ -525,7 +565,6 @@ class TinyDetectionLoss(nn.Module):
                 pos_mask = tgt["pos"]
                 n_pos = pos_mask.sum().item()
 
-                # Classification focal loss
                 cls_oh = torch.zeros_like(cls_logits)
                 if n_pos > 0:
                     cls_oh[pos_mask.nonzero(as_tuple=True)[0], tgt["cls"][pos_mask]] = 1.0
@@ -535,10 +574,8 @@ class TinyDetectionLoss(nn.Module):
                     continue
                 total_pos += n_pos
 
-                # Centerness BCE loss
                 tot_ctr = tot_ctr + F.binary_cross_entropy_with_logits(ctr_pred[pos_mask], tgt["ctr"][pos_mask], reduction="sum")
 
-                # Decode boxes at positive cells
                 gx, gy = grid_centers[li]
                 cx, cy = gx[pos_mask], gy[pos_mask]
 
@@ -548,7 +585,6 @@ class TinyDetectionLoss(nn.Module):
                 t_ltrb = tgt["reg"][pos_mask]
                 t_xyxy = torch.stack([cx - t_ltrb[:, 0], cy - t_ltrb[:, 1], cx + t_ltrb[:, 2], cy + t_ltrb[:, 3]], dim=1)
 
-                # Combined regression: 0.5 * GIoU + 0.5 * NWD
                 loss_reg = 0.5 * giou_loss(p_xyxy, t_xyxy) + 0.5 * nwd_loss(p_xyxy, t_xyxy, C=self.nwd_c)
                 tot_reg = tot_reg + loss_reg * n_pos
 
@@ -562,7 +598,7 @@ class TinyDetectionLoss(nn.Module):
 
 
 # ============================================================================
-# 6. DECODER & VALIDATION (mAP_tiny)
+# 7. DECODER & VALIDATION
 # ============================================================================
 
 def decode_predictions(
@@ -572,7 +608,6 @@ def decode_predictions(
     nms_thr: float = 0.5,
     max_per_img: int = 300,
 ) -> List[Dict[str, torch.Tensor]]:
-    """Decodes raw head outputs into [x1, y1, x2, y2] detections with per-class NMS."""
     device = outputs[0][0].device
     B = outputs[0][0].shape[0]
     from torchvision.ops import batched_nms
@@ -604,7 +639,11 @@ def decode_predictions(
             all_labels.append(max_c[keep])
 
         if len(all_boxes) == 0:
-            results.append({"boxes": torch.zeros((0, 4), device=device), "scores": torch.zeros((0,), device=device), "labels": torch.zeros((0,), dtype=torch.long, device=device)})
+            results.append({
+                "boxes": torch.zeros((0, 4), device=device),
+                "scores": torch.zeros((0,), device=device),
+                "labels": torch.zeros((0,), dtype=torch.long, device=device),
+            })
             continue
 
         c_boxes = torch.cat(all_boxes, dim=0)
@@ -617,7 +656,6 @@ def decode_predictions(
 
 @torch.no_grad()
 def evaluate_map_tiny(model: nn.Module, val_loader: DataLoader, device: torch.device, ann_path: str, max_area: int = 256) -> Tuple[float, float]:
-    """Computes mAP@0.5 and mAP@0.5:0.95 for tiny objects (< 16x16 px) via pycocotools."""
     if COCO is None or COCOeval is None:
         return 0.0, 0.0
 
@@ -636,13 +674,17 @@ def evaluate_map_tiny(model: nn.Module, val_loader: DataLoader, device: torch.de
         dets = decode_predictions(model(images), TinyDroneDetector.STRIDES, score_thr=0.01, nms_thr=0.6)
 
         for bi, det in enumerate(dets):
-            boxes, scores, labels = det["boxes"].cpu().numpy(), det["scores"].cpu().numpy(), det["labels"].cpu().numpy()
+            boxes = det["boxes"].cpu().numpy()
+            scores = det["scores"].cpu().numpy()
+            labels = det["labels"].cpu().numpy()
             for k in range(len(boxes)):
                 x1, y1, x2, y2 = boxes[k]
+                cls_idx = int(labels[k])
+                target_cat = cat_ids[cls_idx] if cls_idx < len(cat_ids) else cat_ids[0]
                 coco_results.append({
                     "image_id": int(image_ids[bi]),
-                    "category_id": int(cat_ids[int(labels[k])] if int(labels[k]) < len(cat_ids) else cat_ids[0]),
-                    "bbox": [float(x1), float(y1), float(x2 - x1), float(y2 - y1)],
+                    "category_id": int(target_cat),
+                    "bbox": [float(x1), float(y1), float(max(x2 - x1, 0.1)), float(max(y2 - y1, 0.1))],
                     "score": float(scores[k]),
                 })
 
@@ -650,63 +692,32 @@ def evaluate_map_tiny(model: nn.Module, val_loader: DataLoader, device: torch.de
         return 0.0, 0.0
 
     coco_dt = coco_gt.loadRes(coco_results)
-
-    # Restrict evaluation strictly to validation images (prevents artificially collapsed mAP during subset splits)
     eval_ids = sorted(list(val_image_ids))
 
     evaluator = COCOeval(coco_gt, coco_dt, "bbox")
     evaluator.params.imgIds = eval_ids
-    evaluator.params.areaRng = [[0, max_area]]
-    evaluator.params.areaRngLbl = ["tiny"]
+    evaluator.params.areaRng = [
+        [0 ** 2, 1e5 ** 2],
+        [0 ** 2, max_area],
+        [32 ** 2, 96 ** 2],
+        [96 ** 2, 1e5 ** 2],
+    ]
+    evaluator.params.areaRngLbl = ["all", "small", "medium", "large"]
     evaluator.evaluate()
     evaluator.accumulate()
     evaluator.summarize()
-    map_50_95 = float(evaluator.stats[0])
 
-    evaluator2 = COCOeval(coco_gt, coco_dt, "bbox")
-    evaluator2.params.imgIds = eval_ids
-    evaluator2.params.areaRng = [[0, max_area]]
-    evaluator2.params.areaRngLbl = ["tiny"]
-    evaluator2.params.iouThrs = [0.5]
-    evaluator2.evaluate()
-    evaluator2.accumulate()
-    map_50 = float(evaluator2.stats[0])
+    try:
+        p_tiny_50 = evaluator.eval["precision"][0, :, :, 1, -1]
+        map_50 = float(np.mean(p_tiny_50[p_tiny_50 > -1])) if (p_tiny_50 > -1).any() else 0.0
+
+        p_tiny_all = evaluator.eval["precision"][:, :, :, 1, -1]
+        map_50_95 = float(np.mean(p_tiny_all[p_tiny_all > -1])) if (p_tiny_all > -1).any() else 0.0
+    except Exception:
+        map_50 = float(evaluator.stats[1]) if len(evaluator.stats) > 1 and evaluator.stats[1] >= 0 else 0.0
+        map_50_95 = float(evaluator.stats[0]) if len(evaluator.stats) > 0 and evaluator.stats[0] >= 0 else 0.0
 
     return map_50, map_50_95
-
-
-# ============================================================================
-# 7. SYNTHETIC BENCHMARK GENERATOR
-# ============================================================================
-
-def create_synthetic_dataset(output_dir: str, num_images: int = 4, img_size: int = 640) -> Tuple[str, str]:
-    """Generates synthetic aerial tiles with tiny colored rectangles for smoke tests."""
-    img_dir = os.path.join(output_dir, "images")
-    os.makedirs(img_dir, exist_ok=True)
-    images_json, annotations_json = [], []
-    ann_id = 1
-
-    for i in range(num_images):
-        arr = np.random.randint(90, 160, (img_size, img_size, 3), dtype=np.uint8)
-        img = Image.fromarray(arr)
-        draw = ImageDraw.Draw(img)
-
-        for _ in range(random.randint(1, 4)):
-            w, h = random.randint(4, 15), random.randint(4, 15)
-            x, y = random.randint(0, img_size - w - 1), random.randint(0, img_size - h - 1)
-            draw.rectangle([x, y, x + w, y + h], fill=(240, 50, 50))
-            annotations_json.append({"id": ann_id, "image_id": i + 1, "category_id": 1, "bbox": [x, y, w, h], "area": w * h, "iscrowd": 0})
-            ann_id += 1
-
-        fname = f"synth_{i:04d}.jpg"
-        img.save(os.path.join(img_dir, fname))
-        images_json.append({"id": i + 1, "file_name": fname, "width": img_size, "height": img_size})
-
-    ann_path = os.path.join(output_dir, "annotations.json")
-    with open(ann_path, "w") as f:
-        json.dump({"images": images_json, "annotations": annotations_json, "categories": [{"id": 1, "name": "person"}]}, f)
-
-    return img_dir, ann_path
 
 
 # ============================================================================
@@ -714,7 +725,9 @@ def create_synthetic_dataset(output_dir: str, num_images: int = 4, img_size: int
 # ============================================================================
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Train Tiny Drone Detector (P2-FPN + NWD)")
+    default_workers = min(8, os.cpu_count() or 4)
+
+    parser = argparse.ArgumentParser(description="Train Tiny Drone Detector (Linux / Multi-Process Optimized)")
     parser.add_argument("--raw_img_dir", type=str, default="VisDrone2019-DET-train/images")
     parser.add_argument("--raw_ann", type=str, default="VisDrone2019-DET-train/train_coco.json")
     parser.add_argument("--val_img_dir", type=str, default="")
@@ -723,27 +736,23 @@ def main() -> None:
     parser.add_argument("--sliced_dir", type=str, default="data/sliced_train")
     parser.add_argument("--sliced_val_dir", type=str, default="data/sliced_val")
     parser.add_argument("--epochs", type=int, default=50)
-    parser.add_argument("--batch_size", type=int, default=16)
+    parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--weight_decay", type=float, default=0.05)
     parser.add_argument("--warmup_epochs", type=int, default=3)
     parser.add_argument("--input_size", type=int, default=640)
-    parser.add_argument("--num_workers", type=int, default=0)
+    parser.add_argument("--num_workers", type=int, default=default_workers, help="DataLoader workers")
+    parser.add_argument("--prefetch_factor", type=int, default=2, help="Batches loaded in advance per worker")
     parser.add_argument("--device", type=str, default="")
     parser.add_argument("--weights_dir", type=str, default="weights")
-    parser.add_argument("--smoke_test", action="store_true")
+    parser.add_argument("--save_interval", type=int, default=5, help="Save periodic checkpoint every N epochs")
+    parser.add_argument("--early_stop_patience", type=int, default=5, help="Number of non-improving epochs before stopping")
+    parser.add_argument("--early_stop_tol", type=float, default=1e-4, help="Minimum delta to qualify as improvement")
     args = parser.parse_args()
 
     device = torch.device(args.device if args.device else ("cuda" if torch.cuda.is_available() else "cpu"))
-    print(f"[train] Running on: {device}")
+    print(f"[train] Running on: {device} | DataLoader Workers: {args.num_workers}")
 
-    # Handle smoke test / synthetic fallback
-    if args.smoke_test or (not args.raw_img_dir and not args.raw_ann):
-        print("[train] Smoke test mode: generating synthetic benchmark dataset.")
-        args.raw_img_dir, args.raw_ann = create_synthetic_dataset("data/smoke_test", 4, args.input_size)
-        args.epochs, args.batch_size, args.warmup_epochs = 2, 2, 0
-
-    # Auto-slice raw dataset
     sliced_img_dir, sliced_ann = check_and_slice_dataset(
         args.raw_img_dir, args.raw_ann, args.sliced_dir,
         slice_size=args.input_size, overlap_ratio=0.2, min_area_ratio=0.1
@@ -752,7 +761,7 @@ def main() -> None:
     full_ds = SlicedDroneDataset(sliced_img_dir, sliced_ann, input_size=args.input_size, augment=True)
     num_classes = full_ds.num_classes
 
-    # Validation split setup
+    # Full Dataset: No data halving / trimming applied
     if args.val_img_dir and args.val_ann:
         val_img_dir, val_ann = check_and_slice_dataset(
             args.val_img_dir, args.val_ann, args.sliced_val_dir,
@@ -761,18 +770,35 @@ def main() -> None:
         val_ds = SlicedDroneDataset(val_img_dir, val_ann, input_size=args.input_size, augment=False)
         train_ds = full_ds
     else:
-        n_val = max(int(len(full_ds) * args.val_split), 1)
         indices = list(range(len(full_ds)))
         random.seed(42)
         random.shuffle(indices)
+
+        n_val = max(int(len(indices) * args.val_split), 1)
         train_ds = Subset(full_ds, indices[n_val:])
-        val_ds = Subset(SlicedDroneDataset(sliced_img_dir, sliced_ann, input_size=args.input_size, augment=False), indices[:n_val])
+        val_ds = Subset(
+            SlicedDroneDataset(sliced_img_dir, sliced_ann, input_size=args.input_size, augment=False),
+            indices[:n_val]
+        )
         val_ann = sliced_ann
 
-    print(f"[train] Train tiles: {len(train_ds)} | Val tiles: {len(val_ds)} | Classes: {num_classes}")
+    print(f"[train] Full Train tiles: {len(train_ds)} | Val tiles: {len(val_ds)} | Classes: {num_classes}")
 
-    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, collate_fn=collate_fn, drop_last=True)
-    val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate_fn)
+    loader_kwargs = {
+        "num_workers": args.num_workers,
+        "pin_memory": True if device.type == "cuda" else False,
+        "persistent_workers": True if args.num_workers > 0 else False,
+        "prefetch_factor": args.prefetch_factor if args.num_workers > 0 else None,
+    }
+
+    train_loader = DataLoader(
+        train_ds, batch_size=args.batch_size, shuffle=True,
+        collate_fn=collate_fn, drop_last=True, **loader_kwargs
+    )
+    val_loader = DataLoader(
+        val_ds, batch_size=args.batch_size, shuffle=False,
+        collate_fn=collate_fn, **loader_kwargs
+    )
 
     model = TinyDroneDetector(num_classes=num_classes).to(device)
     criterion = TinyDetectionLoss(num_classes=num_classes, strides=TinyDroneDetector.STRIDES)
@@ -788,6 +814,12 @@ def main() -> None:
     best_map = -1.0
     os.makedirs(args.weights_dir, exist_ok=True)
 
+    early_stopper = EarlyStopping(
+        patience=args.early_stop_patience,
+        min_delta=args.early_stop_tol,
+        mode="max"
+    )
+
     for epoch in range(1, args.epochs + 1):
         model.train()
         ep_loss, ep_cls, ep_reg, ep_ctr = 0.0, 0.0, 0.0, 0.0
@@ -800,7 +832,7 @@ def main() -> None:
                 for pg in optimizer.param_groups:
                     pg["lr"] = warmup_lr
 
-            imgs = batch["images"].to(device)
+            imgs = batch["images"].to(device, non_blocking=True)
             optimizer.zero_grad()
 
             with torch.amp.autocast("cuda", enabled=use_amp):
@@ -821,7 +853,7 @@ def main() -> None:
             ep_cls += losses["cls"].item()
             ep_reg += losses["reg"].item()
             ep_ctr += losses["ctr"].item()
-            # to output progress of epoch
+
             if global_step % 20 == 0:
                 cur_batch = (global_step - 1) % len(train_loader) + 1
                 print(f"[Epoch {epoch:2d}] Batch {cur_batch:4d}/{len(train_loader)} | Total: {loss.item():.4f} (cls: {losses['cls'].item():.3f}, reg: {losses['reg'].item():.3f}, ctr: {losses['ctr'].item():.3f})", end="\r")
@@ -832,26 +864,44 @@ def main() -> None:
         N_b = max(len(train_loader), 1)
         elapsed = time.time() - t0
         lr_now = optimizer.param_groups[0]["lr"]
-        print(f"[Epoch {epoch:2d}/{args.epochs}] loss={ep_loss/N_b:.4f} cls={ep_cls/N_b:.4f} reg={ep_reg/N_b:.4f} ctr={ep_ctr/N_b:.4f} lr={lr_now:.6f} ({elapsed:.1f}s)")
+        avg_loss = ep_loss / N_b
+        print(f"\r[Epoch {epoch:2d}/{args.epochs}] loss={avg_loss:.4f} cls={ep_cls/N_b:.4f} reg={ep_reg/N_b:.4f} ctr={ep_ctr/N_b:.4f} lr={lr_now:.6f} ({elapsed:.1f}s)")
 
-        # Validation mAP_tiny evaluation
         map50, map50_95 = evaluate_map_tiny(model, val_loader, device, val_ann)
         print(f"         mAP_tiny@0.5: {map50:.4f} | mAP_tiny@0.5:0.95: {map50_95:.4f}")
 
-        # Checkpoint saving
         ckpt = {
             "epoch": epoch,
             "model_state_dict": model.state_dict(),
+            "optimizer_state_dict": optimizer.state_dict(),
             "num_classes": num_classes,
             "fpn_channels": model.fpn_channels,
             "map50": map50,
             "map50_95": map50_95,
+            "loss": avg_loss,
         }
+
         torch.save(ckpt, os.path.join(args.weights_dir, "last_model.pth"))
+
         if map50 > best_map:
             best_map = map50
             torch.save(ckpt, os.path.join(args.weights_dir, "best_model.pth"))
             print(f"         * Saved new best checkpoint (mAP@0.5: {best_map:.4f})")
+
+        if epoch % args.save_interval == 0:
+            interval_path = os.path.join(args.weights_dir, f"epoch_{epoch}.pth")
+            torch.save(ckpt, interval_path)
+            print(f"         * Checkpoint saved: {interval_path}")
+
+        monitored_val = map50 if map50 > 0.0 else -avg_loss
+        if early_stopper.step(monitored_val):
+            print(f"\n[train] Early stopping triggered! No improvement recorded for {early_stopper.patience} consecutive epochs.")
+            print(f"        Best validation score achieved: {early_stopper.best_score:.4f}.")
+            torch.save(ckpt, os.path.join(args.weights_dir, "early_stop_model.pth"))
+            break
+        else:
+            if early_stopper.counter > 0:
+                print(f"         [early-stop] Counter: {early_stopper.counter}/{early_stopper.patience} epochs without improvement")
 
     print(f"\n[train] Complete. Best mAP_tiny@0.5: {best_map:.4f} saved in {args.weights_dir}/")
 
