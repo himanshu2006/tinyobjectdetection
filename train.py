@@ -1,14 +1,16 @@
 """
-train_2.py - Linux-Optimized Training Pipeline for Tiny-Object Drone Detection
+train.py - Linux-Optimized Training Pipeline for Tiny-Object Drone Detection
 =============================================================================
-Optimized for Linux / WSL2 environments:
+Optimizations & Mathematical Refinements:
   - CSPDarknetBackbone (Cross-Stage Partial feature routing for C2-C5)
   - Smooth 2-stage stem downsampling (stride 2 -> stride 2)
+  - Quality Focal Loss (QFL) with continuous NWD soft-labels (Centerness Removed)
+  - ScaleAwareAssigner with soft overlapping scale bands (No boundary thrashing)
+  - Widened scale jittering [0.5, 1.5] for micro-target diversity
   - Native POSIX fork-safe multiprocessing with asynchronous prefetching
   - Pinned host memory (DMA direct-to-GPU transfer) and non_blocking copies
   - Persistent worker pooling to eliminate inter-epoch re-initialization
   - Full dataset training (100% tiles utilized)
-  - Full P2-FPN + NWD + Focal Loss architecture
   - Periodic checkpointing (every 5 epochs) and robust Early Stopping
 """
 
@@ -183,7 +185,8 @@ class SlicedDroneDataset(Dataset):
                     boxes[:, 0] = w - boxes[:, 2]
                     boxes[:, 2] = w - x1
 
-            scale = random.uniform(0.85, 1.15)
+            # Widened scale jittering [0.5, 1.5] to resolve spatial feature starvation
+            scale = random.uniform(0.5, 1.5)
             nw, nh = max(int(w * scale), 1), max(int(h * scale), 1)
             img = img.resize((nw, nh), Image.BILINEAR)
             if len(boxes) > 0:
@@ -232,8 +235,6 @@ def collate_fn(batch: List[Dict[str, Any]]) -> Dict[str, Any]:
 # ============================================================================
 
 class ConvBNSiLU(nn.Module):
-    """Conv2d -> BatchNorm2d -> SiLU."""
-
     def __init__(self, in_ch: int, out_ch: int, k: int = 3, s: int = 1, p: int = 1) -> None:
         super().__init__()
         self.conv = nn.Conv2d(in_ch, out_ch, kernel_size=k, stride=s, padding=p, bias=False)
@@ -245,8 +246,6 @@ class ConvBNSiLU(nn.Module):
 
 
 class CSPBottleneck(nn.Module):
-    """Residual bottleneck operating on split channels."""
-
     def __init__(self, channels: int) -> None:
         super().__init__()
         self.conv1 = ConvBNSiLU(channels, channels, k=3, s=1, p=1)
@@ -257,8 +256,6 @@ class CSPBottleneck(nn.Module):
 
 
 class CSPBlock(nn.Module):
-    """Cross-Stage Partial block splitting channels, processing half, and concatenating."""
-
     def __init__(self, in_ch: int, out_ch: int, num_blocks: int = 1) -> None:
         super().__init__()
         mid_ch = out_ch // 2
@@ -276,18 +273,9 @@ class CSPBlock(nn.Module):
 
 
 class CSPDarknetBackbone(nn.Module):
-    """
-    CSPDarknet Backbone retaining C2 (stride 4) for tiny objects:
-      - Stem: Smooth two-stage reduction (640 -> 320 -> 160)
-      - C2: 64 ch,  stride 4  (160x160)
-      - C3: 128 ch, stride 8  (80x80)
-      - C4: 256 ch, stride 16 (40x40)
-      - C5: 512 ch, stride 32 (20x20)
-    """
-
     def __init__(self) -> None:
         super().__init__()
-        # 1. Stem: Smooth 2-stage downsampling to avoid blind-spot sampling
+        # 1. Stem: Smooth 2-stage downsampling to prevent blind-spot skipping
         self.stem1 = ConvBNSiLU(3, 32, k=3, s=2, p=1)   # 640x640 -> 320x320
         self.stem2 = ConvBNSiLU(32, 64, k=3, s=2, p=1)  # 320x320 -> 160x160
 
@@ -324,8 +312,6 @@ class CSPDarknetBackbone(nn.Module):
 
 
 class TinyFPN(nn.Module):
-    """Feature Pyramid Network fusing semantic and spatial features down to P2."""
-
     def __init__(self, fpn_ch: int = 128) -> None:
         super().__init__()
         self.lat2 = nn.Conv2d(64, fpn_ch, 1)
@@ -350,7 +336,7 @@ class TinyFPN(nn.Module):
 
 
 class DecoupledHead(nn.Module):
-    """Decoupled anchor-free prediction head shared across FPN levels."""
+    """Decoupled prediction head (Centerness Branch completely removed)."""
 
     def __init__(self, fpn_ch: int = 128, num_classes: int = 1, num_convs: int = 4) -> None:
         super().__init__()
@@ -362,18 +348,17 @@ class DecoupledHead(nn.Module):
 
         self.reg_branch = nn.Sequential(*reg_layers)
         self.reg_out = nn.Conv2d(fpn_ch, 4, 3, 1, 1)
-        self.ctr_out = nn.Conv2d(fpn_ch, 1, 3, 1, 1)
 
+        # Prior bias initialization for focal loss stability
         nn.init.constant_(self.cls_out.bias, -math.log((1 - 0.01) / 0.01))
 
-    def forward(self, feat: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    def forward(self, feat: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         cls_feat = self.cls_branch(feat)
         reg_feat = self.reg_branch(feat)
 
         cls_logits = self.cls_out(cls_feat)
         reg_pred = F.relu(self.reg_out(reg_feat))
-        centerness = self.ctr_out(reg_feat)
-        return cls_logits, reg_pred, centerness
+        return cls_logits, reg_pred
 
 
 class TinyDroneDetector(nn.Module):
@@ -387,24 +372,31 @@ class TinyDroneDetector(nn.Module):
         self.fpn = TinyFPN(fpn_ch=fpn_channels)
         self.head = DecoupledHead(fpn_ch=fpn_channels, num_classes=num_classes)
 
-    def forward(self, x: torch.Tensor) -> List[Tuple[torch.Tensor, torch.Tensor, torch.Tensor]]:
+    def forward(self, x: torch.Tensor) -> List[Tuple[torch.Tensor, torch.Tensor]]:
         c2, c3, c4, c5 = self.backbone(x)
         p2, p3, p4, p5 = self.fpn(c2, c3, c4, c5)
         return [self.head(p) for p in [p2, p3, p4, p5]]
 
 
 # ============================================================================
-# 5. SCALE-AWARE TARGET ASSIGNER
+# 5. SCALE-AWARE TARGET ASSIGNER (SOFT OVERLAP BANDS)
 # ============================================================================
 
 class ScaleAwareAssigner:
+    """Assigns GT boxes to pyramid levels with soft overlapping scale bands."""
+
     def __init__(
         self,
         strides: List[int] = [4, 8, 16, 32],
-        bounds: List[float] = [16.0, 32.0, 64.0],
+        scale_ranges: List[Tuple[float, float]] = [
+            (0.0, 24.0),   # P2: Stride 4 (<24px)
+            (12.0, 48.0),  # P3: Stride 8 (12px to 48px)
+            (24.0, 96.0),  # P4: Stride 16 (24px to 96px)
+            (48.0, 1e5),   # P5: Stride 32 (>=48px)
+        ],
     ) -> None:
         self.strides = strides
-        self.bounds = bounds
+        self.scale_ranges = scale_ranges
 
     def assign(
         self,
@@ -419,12 +411,8 @@ class ScaleAwareAssigner:
 
         if N > 0:
             sizes = torch.sqrt((gt_boxes[:, 2] - gt_boxes[:, 0]) * (gt_boxes[:, 3] - gt_boxes[:, 1]))
-            level_idx = torch.zeros(N, dtype=torch.long, device=device)
-            level_idx[sizes >= self.bounds[0]] = 1
-            level_idx[sizes >= self.bounds[1]] = 2
-            level_idx[sizes >= self.bounds[2]] = 3
         else:
-            level_idx = torch.zeros(0, dtype=torch.long, device=device)
+            sizes = torch.zeros(0, dtype=torch.float32, device=device)
 
         targets = []
         for li in range(num_levels):
@@ -434,10 +422,11 @@ class ScaleAwareAssigner:
 
             cls_tgt = torch.full((num_cells,), -1, dtype=torch.long, device=device)
             reg_tgt = torch.zeros((num_cells, 4), dtype=torch.float32, device=device)
-            ctr_tgt = torch.zeros((num_cells,), dtype=torch.float32, device=device)
+            center_proximity = torch.zeros((num_cells,), dtype=torch.float32, device=device)
 
             if N > 0:
-                mask = level_idx == li
+                min_s, max_s = self.scale_ranges[li]
+                mask = (sizes >= min_s) & (sizes <= max_s)
                 lvl_boxes = gt_boxes[mask]
                 lvl_labels = gt_labels[mask]
 
@@ -455,37 +444,40 @@ class ScaleAwareAssigner:
                     l_in, t_in, r_in, b_in = l[inside], t[inside], r[inside], b[inside]
                     lr_ratio = torch.min(l_in, r_in) / torch.max(l_in, r_in).clamp(min=1e-6)
                     tb_ratio = torch.min(t_in, b_in) / torch.max(t_in, b_in).clamp(min=1e-6)
-                    ctr_in = torch.sqrt((lr_ratio * tb_ratio).clamp(min=0.0, max=1.0))
+                    prox = torch.sqrt((lr_ratio * tb_ratio).clamp(min=0.0, max=1.0))
 
                     inside_indices = inside.nonzero(as_tuple=True)[0]
-                    better = ctr_in > ctr_tgt[inside_indices]
+                    better = prox > center_proximity[inside_indices]
                     if not better.any():
                         continue
 
                     chosen_idx = inside_indices[better]
                     cls_tgt[chosen_idx] = lvl_labels[gi]
                     reg_tgt[chosen_idx] = torch.stack([l_in[better], t_in[better], r_in[better], b_in[better]], dim=1)
-                    ctr_tgt[chosen_idx] = ctr_in[better]
+                    center_proximity[chosen_idx] = prox[better]
 
             targets.append({
                 "cls": cls_tgt,
                 "reg": reg_tgt,
-                "ctr": ctr_tgt,
                 "pos": cls_tgt >= 0,
             })
         return targets
 
 
 # ============================================================================
-# 6. LOSS OBJECTIVES
+# 6. LOSS OBJECTIVES (QUALITY FOCAL LOSS + NWD + GIOU)
 # ============================================================================
 
-def sigmoid_focal_loss(pred: torch.Tensor, target: torch.Tensor, alpha: float = 0.25, gamma: float = 2.0) -> torch.Tensor:
-    p = torch.sigmoid(pred)
-    bce = F.binary_cross_entropy_with_logits(pred, target, reduction="none")
-    p_t = p * target + (1 - p) * (1 - target)
-    alpha_t = alpha * target + (1 - alpha) * (1 - target)
-    return (alpha_t * ((1 - p_t) ** gamma) * bce).sum()
+def quality_focal_loss(pred_logits: torch.Tensor, target_score: torch.Tensor, beta: float = 2.0) -> torch.Tensor:
+    """
+    Quality Focal Loss (QFL):
+    Dynamically soft-labels the classification target with continuous quality scores (NWD).
+    Eliminates centerness degradation on micro-targets.
+    """
+    pred_prob = torch.sigmoid(pred_logits)
+    scale = (pred_prob - target_score).abs().pow(beta)
+    bce = F.binary_cross_entropy_with_logits(pred_logits, target_score, reduction="none")
+    return (scale * bce).sum()
 
 
 def giou_loss(p_boxes: torch.Tensor, g_boxes: torch.Tensor) -> torch.Tensor:
@@ -506,7 +498,7 @@ def giou_loss(p_boxes: torch.Tensor, g_boxes: torch.Tensor) -> torch.Tensor:
     return (1.0 - giou).mean()
 
 
-def nwd_loss(p_boxes: torch.Tensor, g_boxes: torch.Tensor, C: float = 12.8) -> torch.Tensor:
+def nwd_loss_with_sim(p_boxes: torch.Tensor, g_boxes: torch.Tensor, C: float = 12.8) -> Tuple[torch.Tensor, torch.Tensor]:
     px_c, py_c = (p_boxes[:, 0] + p_boxes[:, 2]) / 2.0, (p_boxes[:, 1] + p_boxes[:, 3]) / 2.0
     pw, ph = p_boxes[:, 2] - p_boxes[:, 0], p_boxes[:, 3] - p_boxes[:, 1]
 
@@ -515,10 +507,13 @@ def nwd_loss(p_boxes: torch.Tensor, g_boxes: torch.Tensor, C: float = 12.8) -> t
 
     w2_sq = (px_c - gx_c) ** 2 + (py_c - gy_c) ** 2 + ((pw - gw) ** 2 + (ph - gh) ** 2) / 4.0
     nwd_sim = torch.exp(-torch.sqrt(w2_sq.clamp(min=1e-7)) / C)
-    return (1.0 - nwd_sim).mean()
+    loss = (1.0 - nwd_sim).mean()
+    return loss, nwd_sim
 
 
 class TinyDetectionLoss(nn.Module):
+    """Total Loss = Quality Focal Loss (QFL) + 0.5 * GIoU + 0.5 * NWD."""
+
     def __init__(self, num_classes: int = 1, strides: List[int] = [4, 8, 16, 32], nwd_c: float = 12.8) -> None:
         super().__init__()
         self.num_classes = num_classes
@@ -528,7 +523,7 @@ class TinyDetectionLoss(nn.Module):
 
     def forward(
         self,
-        outputs: List[Tuple[torch.Tensor, torch.Tensor, torch.Tensor]],
+        outputs: List[Tuple[torch.Tensor, torch.Tensor]],
         gt_boxes: List[torch.Tensor],
         gt_labels: List[torch.Tensor],
     ) -> Dict[str, torch.Tensor]:
@@ -548,7 +543,6 @@ class TinyDetectionLoss(nn.Module):
 
         tot_cls = torch.tensor(0.0, device=device)
         tot_reg = torch.tensor(0.0, device=device)
-        tot_ctr = torch.tensor(0.0, device=device)
         total_pos = 0
 
         for b in range(B):
@@ -559,42 +553,42 @@ class TinyDetectionLoss(nn.Module):
             for li in range(L):
                 cls_logits = outputs[li][0][b].permute(1, 2, 0).reshape(-1, self.num_classes)
                 reg_pred = outputs[li][1][b].permute(1, 2, 0).reshape(-1, 4)
-                ctr_pred = outputs[li][2][b].permute(1, 2, 0).reshape(-1)
 
                 tgt = targets[li]
                 pos_mask = tgt["pos"]
                 n_pos = pos_mask.sum().item()
 
-                cls_oh = torch.zeros_like(cls_logits)
+                target_score = torch.zeros_like(cls_logits)
+
                 if n_pos > 0:
-                    cls_oh[pos_mask.nonzero(as_tuple=True)[0], tgt["cls"][pos_mask]] = 1.0
-                tot_cls = tot_cls + sigmoid_focal_loss(cls_logits, cls_oh)
+                    total_pos += n_pos
 
-                if n_pos == 0:
-                    continue
-                total_pos += n_pos
+                    gx, gy = grid_centers[li]
+                    cx, cy = gx[pos_mask], gy[pos_mask]
 
-                tot_ctr = tot_ctr + F.binary_cross_entropy_with_logits(ctr_pred[pos_mask], tgt["ctr"][pos_mask], reduction="sum")
+                    p_ltrb = reg_pred[pos_mask]
+                    p_xyxy = torch.stack([cx - p_ltrb[:, 0], cy - p_ltrb[:, 1], cx + p_ltrb[:, 2], cy + p_ltrb[:, 3]], dim=1)
 
-                gx, gy = grid_centers[li]
-                cx, cy = gx[pos_mask], gy[pos_mask]
+                    t_ltrb = tgt["reg"][pos_mask]
+                    t_xyxy = torch.stack([cx - t_ltrb[:, 0], cy - t_ltrb[:, 1], cx + t_ltrb[:, 2], cy + t_ltrb[:, 3]], dim=1)
 
-                p_ltrb = reg_pred[pos_mask]
-                p_xyxy = torch.stack([cx - p_ltrb[:, 0], cy - p_ltrb[:, 1], cx + p_ltrb[:, 2], cy + p_ltrb[:, 3]], dim=1)
+                    loss_giou = giou_loss(p_xyxy, t_xyxy)
+                    loss_nwd_val, nwd_sim = nwd_loss_with_sim(p_xyxy, t_xyxy, C=self.nwd_c)
+                    loss_reg = 0.5 * loss_giou + 0.5 * loss_nwd_val
+                    tot_reg = tot_reg + loss_reg * n_pos
 
-                t_ltrb = tgt["reg"][pos_mask]
-                t_xyxy = torch.stack([cx - t_ltrb[:, 0], cy - t_ltrb[:, 1], cx + t_ltrb[:, 2], cy + t_ltrb[:, 3]], dim=1)
+                    # Soft-label positive positions with continuous Wasserstein similarity (QFL)
+                    pos_indices = pos_mask.nonzero(as_tuple=True)[0]
+                    target_score[pos_indices, tgt["cls"][pos_mask]] = nwd_sim.detach().clamp(0.0, 1.0)
 
-                loss_reg = 0.5 * giou_loss(p_xyxy, t_xyxy) + 0.5 * nwd_loss(p_xyxy, t_xyxy, C=self.nwd_c)
-                tot_reg = tot_reg + loss_reg * n_pos
+                tot_cls = tot_cls + quality_focal_loss(cls_logits, target_score)
 
         norm = max(total_pos, 1)
         loss_cls = tot_cls / norm
         loss_reg = tot_reg / norm
-        loss_ctr = tot_ctr / norm
-        total = loss_cls + loss_reg + loss_ctr
+        total = loss_cls + loss_reg
 
-        return {"total": total, "cls": loss_cls.detach(), "reg": loss_reg.detach(), "ctr": loss_ctr.detach()}
+        return {"total": total, "cls": loss_cls.detach(), "reg": loss_reg.detach()}
 
 
 # ============================================================================
@@ -602,12 +596,13 @@ class TinyDetectionLoss(nn.Module):
 # ============================================================================
 
 def decode_predictions(
-    outputs: List[Tuple[torch.Tensor, torch.Tensor, torch.Tensor]],
+    outputs: List[Tuple[torch.Tensor, torch.Tensor]],
     strides: List[int],
     score_thr: float = 0.05,
     nms_thr: float = 0.5,
     max_per_img: int = 300,
 ) -> List[Dict[str, torch.Tensor]]:
+    """Decodes predictions directly from QFL sigmoid scores without centerness penalty."""
     device = outputs[0][0].device
     B = outputs[0][0].shape[0]
     from torchvision.ops import batched_nms
@@ -616,7 +611,7 @@ def decode_predictions(
     for b in range(B):
         all_boxes, all_scores, all_labels = [], [], []
         for li, s in enumerate(strides):
-            cls_logits, reg_pred, ctr_pred = outputs[li][0][b], outputs[li][1][b], outputs[li][2][b]
+            cls_logits, reg_pred = outputs[li][0][b], outputs[li][1][b]
             C, H_l, W_l = cls_logits.shape
 
             sy = (torch.arange(0, H_l, device=device, dtype=torch.float32) + 0.5) * s
@@ -624,7 +619,8 @@ def decode_predictions(
             gy, gx = torch.meshgrid(sy, sx, indexing="ij")
             gx, gy = gx.reshape(-1), gy.reshape(-1)
 
-            scores = torch.sigmoid(cls_logits.permute(1, 2, 0).reshape(-1, C)) * torch.sigmoid(ctr_pred.reshape(-1)).unsqueeze(1)
+            # Direct QFL score: No centerness multiplier
+            scores = torch.sigmoid(cls_logits.permute(1, 2, 0).reshape(-1, C))
             max_s, max_c = scores.max(dim=1)
             keep = max_s > score_thr
             if not keep.any():
@@ -727,7 +723,7 @@ def evaluate_map_tiny(model: nn.Module, val_loader: DataLoader, device: torch.de
 def main() -> None:
     default_workers = min(8, os.cpu_count() or 4)
 
-    parser = argparse.ArgumentParser(description="Train Tiny Drone Detector (Linux / Multi-Process Optimized)")
+    parser = argparse.ArgumentParser(description="Train Tiny Drone Detector (QFL + Soft-Bands + Linux Optimized)")
     parser.add_argument("--raw_img_dir", type=str, default="VisDrone2019-DET-train/images")
     parser.add_argument("--raw_ann", type=str, default="VisDrone2019-DET-train/train_coco.json")
     parser.add_argument("--val_img_dir", type=str, default="")
@@ -761,7 +757,7 @@ def main() -> None:
     full_ds = SlicedDroneDataset(sliced_img_dir, sliced_ann, input_size=args.input_size, augment=True)
     num_classes = full_ds.num_classes
 
-    # Full Dataset: No data halving / trimming applied
+    # Full Dataset: 100% of data utilized with a 90/10 train/val split
     if args.val_img_dir and args.val_ann:
         val_img_dir, val_ann = check_and_slice_dataset(
             args.val_img_dir, args.val_ann, args.sliced_val_dir,
@@ -822,7 +818,7 @@ def main() -> None:
 
     for epoch in range(1, args.epochs + 1):
         model.train()
-        ep_loss, ep_cls, ep_reg, ep_ctr = 0.0, 0.0, 0.0, 0.0
+        ep_loss, ep_cls, ep_reg = 0.0, 0.0, 0.0
         t0 = time.time()
 
         for batch in train_loader:
@@ -852,11 +848,10 @@ def main() -> None:
             ep_loss += loss.item()
             ep_cls += losses["cls"].item()
             ep_reg += losses["reg"].item()
-            ep_ctr += losses["ctr"].item()
 
             if global_step % 20 == 0:
                 cur_batch = (global_step - 1) % len(train_loader) + 1
-                print(f"[Epoch {epoch:2d}] Batch {cur_batch:4d}/{len(train_loader)} | Total: {loss.item():.4f} (cls: {losses['cls'].item():.3f}, reg: {losses['reg'].item():.3f}, ctr: {losses['ctr'].item():.3f})", end="\r")
+                print(f"[Epoch {epoch:2d}] Batch {cur_batch:4d}/{len(train_loader)} | Total: {loss.item():.4f} (cls: {losses['cls'].item():.3f}, reg: {losses['reg'].item():.3f})", end="\r")
 
         if epoch > args.warmup_epochs:
             scheduler.step()
@@ -865,7 +860,7 @@ def main() -> None:
         elapsed = time.time() - t0
         lr_now = optimizer.param_groups[0]["lr"]
         avg_loss = ep_loss / N_b
-        print(f"\r[Epoch {epoch:2d}/{args.epochs}] loss={avg_loss:.4f} cls={ep_cls/N_b:.4f} reg={ep_reg/N_b:.4f} ctr={ep_ctr/N_b:.4f} lr={lr_now:.6f} ({elapsed:.1f}s)")
+        print(f"\r[Epoch {epoch:2d}/{args.epochs}] loss={avg_loss:.4f} cls={ep_cls/N_b:.4f} reg={ep_reg/N_b:.4f} lr={lr_now:.6f} ({elapsed:.1f}s)")
 
         map50, map50_95 = evaluate_map_tiny(model, val_loader, device, val_ann)
         print(f"         mAP_tiny@0.5: {map50:.4f} | mAP_tiny@0.5:0.95: {map50_95:.4f}")
