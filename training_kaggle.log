@@ -1,0 +1,2305 @@
+7.6s 1 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+7.6s 2 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+7.6s 3 0.00s - to python to disable frozen modules.
+7.6s 4 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+8.3s 5 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+8.3s 6 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+8.3s 7 0.00s - to python to disable frozen modules.
+8.3s 8 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+195.9s 9 Parallel copying 44,205 tiles (~22 GB) with 16 threads...
+322.9s 10 ✓ Staging complete: 44,205 tiles ready in /tmp.
+322.9s 11 Writing train_kaggle.py
+334.0s 12 [DDP] Active GPUs: 2 | Per-GPU Batch: 16 | Effective Batch: 32
+334.0s 13 [Data] Images directory: /tmp/sliced_train/images
+334.0s 14 [Data] Annotations: /tmp/sliced_train/sliced_coco.json
+339.5s 15 [Split] Leakage-Free Partition: 42691 total train tiles | 1514 val tiles
+339.5s 16 [Subsampling] Capped at 20,000 images per epoch (~625 batches)
+339.5s 17 [Aug] Mosaic Probability: 50% (Auto-disables in last 10 epochs)
+339.5s 18 loading annotations into memory...
+340.5s 19 Done (t=1.01s)
+340.5s 20 creating index...
+340.9s 21 index created!
+1370.9s 22 [Epoch  1] Batch   20/625 | Total: 1.6415 (cls: 1.001, reg: 0.640)
+[Epoch  1] Batch   40/625 | Total: 1.4812 (cls: 0.899, reg: 0.583)
+[Epoch  1] Batch   60/625 | Total: 1.3217 (cls: 0.772, reg: 0.549)
+[Epoch  1] Batch   80/625 | Total: 1.3354 (cls: 0.800, reg: 0.535)
+[Epoch  1] Batch  100/625 | Total: 1.2778 (cls: 0.763, reg: 0.515)
+[Epoch  1] Batch  120/625 | Total: 1.2999 (cls: 0.748, reg: 0.552)
+[Epoch  1] Batch  140/625 | Total: 1.3383 (cls: 0.864, reg: 0.474)
+[Epoch  1] Batch  160/625 | Total: 1.2922 (cls: 0.826, reg: 0.466)
+[Epoch  1] Batch  180/625 | Total: 1.2378 (cls: 0.800, reg: 0.438)
+[Epoch  1] Batch  200/625 | Total: 1.2144 (cls: 0.753, reg: 0.461)
+[Epoch  1] Batch  220/625 | Total: 1.2116 (cls: 0.760, reg: 0.452)
+[Epoch  1] Batch  240/625 | Total: 1.1932 (cls: 0.715, reg: 0.478)
+[Epoch  1] Batch  260/625 | Total: 1.1122 (cls: 0.682, reg: 0.430)
+[Epoch  1] Batch  280/625 | Total: 1.3739 (cls: 0.910, reg: 0.463)
+[Epoch  1] Batch  300/625 | Total: 1.2016 (cls: 0.779, reg: 0.423)
+[Epoch  1] Batch  320/625 | Total: 1.0974 (cls: 0.677, reg: 0.420)
+[Epoch  1] Batch  340/625 | Total: 1.0866 (cls: 0.668, reg: 0.418)
+[Epoch  1] Batch  360/625 | Total: 1.1879 (cls: 0.745, reg: 0.443)
+[Epoch  1] Batch  380/625 | Total: 1.2121 (cls: 0.809, reg: 0.403)
+[Epoch  1] Batch  400/625 | Total: 1.0332 (cls: 0.615, reg: 0.418)
+[Epoch  1] Batch  420/625 | Total: 1.1675 (cls: 0.756, reg: 0.411)
+[Epoch  1] Batch  440/625 | Total: 1.1947 (cls: 0.746, reg: 0.449)
+[Epoch  1] Batch  460/625 | Total: 1.2369 (cls: 0.806, reg: 0.431)
+[Epoch  1] Batch  480/625 | Total: 0.9903 (cls: 0.564, reg: 0.426)
+[Epoch  1] Batch  500/625 | Total: 0.8978 (cls: 0.511, reg: 0.387)
+[Epoch  1] Batch  520/625 | Total: 1.0936 (cls: 0.662, reg: 0.432)
+[Epoch  1] Batch  540/625 | Total: 1.0247 (cls: 0.571, reg: 0.454)
+[Epoch  1] Batch  560/625 | Total: 1.0274 (cls: 0.570, reg: 0.457)
+[Epoch  1] Batch  580/625 | Total: 1.4163 (cls: 0.970, reg: 0.447)
+[Epoch  1] Batch  600/625 | Total: 1.1919 (cls: 0.809, reg: 0.383)
+[Epoch  1] Batch  620/625 | Total: 1.1988 (cls: 0.737, reg: 0.462)
+
+[Epoch  1/80] Loss=1.1994 Cls=0.7408 Reg=0.4586 LR=0.000333 (1024.5s)
+1430.6s 23 Loading and preparing results...
+1432.9s 24 DONE (t=2.24s)
+1432.9s 25 creating index...
+1433.1s 26 index created!
+1433.1s 27 Running per image evaluation...
+1433.1s 28 Evaluate annotation type *bbox*
+1465.4s 29 DONE (t=32.34s).
+1465.4s 30 Accumulating evaluation results...
+1467.1s 31 DONE (t=1.71s).
+1467.1s 32 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.020
+1467.1s 33 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.078
+1467.1s 34 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.002
+1467.1s 35 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.006
+1467.1s 36 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.033
+1467.1s 37 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+1467.1s 38 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.007
+1467.1s 39 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.039
+1467.1s 40 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.131
+1467.1s 41 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.081
+1467.1s 42 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.130
+1467.1s 43 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+1467.3s 44 Overall mAP@0.5: 0.0780 | mAP_tiny@0.5: 0.0221 | mAP_tiny@0.5:0.95: 0.0056
+1467.6s 45 * New best checkpoint saved (Overall mAP@0.5: 0.0780)
+2445.6s 46 [Epoch  2] Batch   20/625 | Total: 1.1438 (cls: 0.718, reg: 0.426)
+[Epoch  2] Batch   40/625 | Total: 1.0680 (cls: 0.636, reg: 0.432)
+[Epoch  2] Batch   60/625 | Total: 0.9365 (cls: 0.553, reg: 0.383)
+[Epoch  2] Batch   80/625 | Total: 1.0743 (cls: 0.639, reg: 0.435)
+[Epoch  2] Batch  100/625 | Total: 1.1473 (cls: 0.747, reg: 0.400)
+[Epoch  2] Batch  120/625 | Total: 1.1474 (cls: 0.717, reg: 0.430)
+[Epoch  2] Batch  140/625 | Total: 0.8963 (cls: 0.524, reg: 0.372)
+[Epoch  2] Batch  160/625 | Total: 0.8823 (cls: 0.504, reg: 0.378)
+[Epoch  2] Batch  180/625 | Total: 0.9539 (cls: 0.593, reg: 0.361)
+[Epoch  2] Batch  200/625 | Total: 1.0666 (cls: 0.657, reg: 0.409)
+[Epoch  2] Batch  220/625 | Total: 0.9229 (cls: 0.556, reg: 0.367)
+[Epoch  2] Batch  240/625 | Total: 1.0545 (cls: 0.669, reg: 0.385)
+[Epoch  2] Batch  260/625 | Total: 0.9447 (cls: 0.568, reg: 0.376)
+[Epoch  2] Batch  280/625 | Total: 0.9846 (cls: 0.613, reg: 0.372)
+[Epoch  2] Batch  300/625 | Total: 0.9615 (cls: 0.522, reg: 0.439)
+[Epoch  2] Batch  320/625 | Total: 0.8551 (cls: 0.437, reg: 0.418)
+[Epoch  2] Batch  340/625 | Total: 1.1056 (cls: 0.700, reg: 0.405)
+[Epoch  2] Batch  360/625 | Total: 1.0073 (cls: 0.627, reg: 0.381)
+[Epoch  2] Batch  380/625 | Total: 0.9378 (cls: 0.560, reg: 0.378)
+[Epoch  2] Batch  400/625 | Total: 1.1134 (cls: 0.731, reg: 0.383)
+[Epoch  2] Batch  420/625 | Total: 0.9851 (cls: 0.598, reg: 0.387)
+[Epoch  2] Batch  440/625 | Total: 0.8529 (cls: 0.525, reg: 0.328)
+[Epoch  2] Batch  460/625 | Total: 1.0331 (cls: 0.627, reg: 0.406)
+[Epoch  2] Batch  480/625 | Total: 0.8361 (cls: 0.535, reg: 0.301)
+[Epoch  2] Batch  500/625 | Total: 0.9199 (cls: 0.544, reg: 0.376)
+[Epoch  2] Batch  520/625 | Total: 1.0443 (cls: 0.604, reg: 0.440)
+[Epoch  2] Batch  540/625 | Total: 0.9418 (cls: 0.544, reg: 0.398)
+[Epoch  2] Batch  560/625 | Total: 0.9344 (cls: 0.579, reg: 0.355)
+[Epoch  2] Batch  580/625 | Total: 0.9023 (cls: 0.528, reg: 0.374)
+[Epoch  2] Batch  600/625 | Total: 0.8879 (cls: 0.541, reg: 0.347)
+[Epoch  2] Batch  620/625 | Total: 0.8798 (cls: 0.497, reg: 0.383)
+
+[Epoch  2/80] Loss=0.9993 Cls=0.6108 Reg=0.3885 LR=0.000667 (978.0s)
+2496.6s 47 Loading and preparing results...
+2498.0s 48 DONE (t=1.41s)
+2498.0s 49 creating index...
+2498.2s 50 index created!
+2498.2s 51 Running per image evaluation...
+2498.2s 52 Evaluate annotation type *bbox*
+2530.3s 53 DONE (t=32.13s).
+2530.3s 54 Accumulating evaluation results...
+2531.8s 55 DONE (t=1.51s).
+2531.8s 56 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.056
+2531.8s 57 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.201
+2531.8s 58 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.010
+2531.8s 59 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.023
+2531.8s 60 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.082
+2531.8s 61 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+2531.8s 62 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.014
+2531.8s 63 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.073
+2531.8s 64 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.186
+2531.8s 65 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.098
+2531.8s 66 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.234
+2531.8s 67 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+2532.0s 68 Overall mAP@0.5: 0.2008 | mAP_tiny@0.5: 0.0854 | mAP_tiny@0.5:0.95: 0.0229
+2532.4s 69 * New best checkpoint saved (Overall mAP@0.5: 0.2008)
+3488.7s 70 [Epoch  3] Batch   20/625 | Total: 1.0562 (cls: 0.665, reg: 0.391)
+[Epoch  3] Batch   40/625 | Total: 0.9615 (cls: 0.549, reg: 0.412)
+[Epoch  3] Batch   60/625 | Total: 0.8469 (cls: 0.530, reg: 0.317)
+[Epoch  3] Batch   80/625 | Total: 0.7595 (cls: 0.395, reg: 0.364)
+[Epoch  3] Batch  100/625 | Total: 0.8395 (cls: 0.495, reg: 0.344)
+[Epoch  3] Batch  120/625 | Total: 0.8481 (cls: 0.468, reg: 0.380)
+[Epoch  3] Batch  140/625 | Total: 0.9514 (cls: 0.607, reg: 0.344)
+[Epoch  3] Batch  160/625 | Total: 0.9831 (cls: 0.578, reg: 0.405)
+[Epoch  3] Batch  180/625 | Total: 1.0649 (cls: 0.735, reg: 0.330)
+[Epoch  3] Batch  200/625 | Total: 0.9378 (cls: 0.496, reg: 0.442)
+[Epoch  3] Batch  220/625 | Total: 0.9758 (cls: 0.590, reg: 0.385)
+[Epoch  3] Batch  240/625 | Total: 0.9691 (cls: 0.638, reg: 0.332)
+[Epoch  3] Batch  260/625 | Total: 0.9861 (cls: 0.611, reg: 0.375)
+[Epoch  3] Batch  280/625 | Total: 1.1025 (cls: 0.755, reg: 0.348)
+[Epoch  3] Batch  300/625 | Total: 0.9226 (cls: 0.564, reg: 0.358)
+[Epoch  3] Batch  320/625 | Total: 1.0540 (cls: 0.640, reg: 0.414)
+[Epoch  3] Batch  340/625 | Total: 0.8483 (cls: 0.497, reg: 0.352)
+[Epoch  3] Batch  360/625 | Total: 1.2563 (cls: 0.913, reg: 0.343)
+[Epoch  3] Batch  380/625 | Total: 0.7649 (cls: 0.432, reg: 0.333)
+[Epoch  3] Batch  400/625 | Total: 1.0181 (cls: 0.673, reg: 0.345)
+[Epoch  3] Batch  420/625 | Total: 1.0361 (cls: 0.742, reg: 0.295)
+[Epoch  3] Batch  440/625 | Total: 1.0163 (cls: 0.647, reg: 0.369)
+[Epoch  3] Batch  460/625 | Total: 0.9365 (cls: 0.569, reg: 0.368)
+[Epoch  3] Batch  480/625 | Total: 1.1675 (cls: 0.795, reg: 0.373)
+[Epoch  3] Batch  500/625 | Total: 0.8748 (cls: 0.502, reg: 0.373)
+[Epoch  3] Batch  520/625 | Total: 0.9875 (cls: 0.675, reg: 0.313)
+[Epoch  3] Batch  540/625 | Total: 0.8979 (cls: 0.500, reg: 0.398)
+[Epoch  3] Batch  560/625 | Total: 0.8490 (cls: 0.482, reg: 0.367)
+[Epoch  3] Batch  580/625 | Total: 0.8401 (cls: 0.510, reg: 0.330)
+[Epoch  3] Batch  600/625 | Total: 0.8119 (cls: 0.463, reg: 0.349)
+[Epoch  3] Batch  620/625 | Total: 0.8880 (cls: 0.554, reg: 0.334)
+
+[Epoch  3/80] Loss=0.9367 Cls=0.5742 Reg=0.3626 LR=0.001000 (956.3s)
+3541.3s 71 Loading and preparing results...
+3542.8s 72 DONE (t=1.49s)
+3542.8s 73 creating index...
+3543.0s 74 index created!
+3543.0s 75 Running per image evaluation...
+3543.0s 76 Evaluate annotation type *bbox*
+3575.2s 77 DONE (t=32.20s).
+3575.2s 78 Accumulating evaluation results...
+3576.5s 79 DONE (t=1.37s).
+3576.5s 80 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.038
+3576.5s 81 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.155
+3576.5s 82 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.004
+3576.5s 83 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.012
+3576.5s 84 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.092
+3576.5s 85 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+3576.5s 86 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.012
+3576.5s 87 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.060
+3576.5s 88 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.157
+3576.5s 89 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.105
+3576.5s 90 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.160
+3576.5s 91 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+3576.7s 92 Overall mAP@0.5: 0.1554 | mAP_tiny@0.5: 0.0505 | mAP_tiny@0.5:0.95: 0.0118
+4532.8s 93 [Epoch  4] Batch   20/625 | Total: 0.9433 (cls: 0.607, reg: 0.337)
+[Epoch  4] Batch   40/625 | Total: 0.7791 (cls: 0.443, reg: 0.336)
+[Epoch  4] Batch   60/625 | Total: 0.8541 (cls: 0.496, reg: 0.359)
+[Epoch  4] Batch   80/625 | Total: 0.9634 (cls: 0.611, reg: 0.352)
+[Epoch  4] Batch  100/625 | Total: 0.8261 (cls: 0.466, reg: 0.360)
+[Epoch  4] Batch  120/625 | Total: 0.8199 (cls: 0.525, reg: 0.295)
+[Epoch  4] Batch  140/625 | Total: 0.8191 (cls: 0.465, reg: 0.355)
+[Epoch  4] Batch  160/625 | Total: 1.0267 (cls: 0.650, reg: 0.377)
+[Epoch  4] Batch  180/625 | Total: 0.8124 (cls: 0.424, reg: 0.388)
+[Epoch  4] Batch  200/625 | Total: 0.7214 (cls: 0.421, reg: 0.301)
+[Epoch  4] Batch  220/625 | Total: 0.9995 (cls: 0.650, reg: 0.349)
+[Epoch  4] Batch  240/625 | Total: 1.0550 (cls: 0.699, reg: 0.356)
+[Epoch  4] Batch  260/625 | Total: 0.9034 (cls: 0.546, reg: 0.357)
+[Epoch  4] Batch  280/625 | Total: 0.8005 (cls: 0.446, reg: 0.355)
+[Epoch  4] Batch  300/625 | Total: 0.9685 (cls: 0.644, reg: 0.325)
+[Epoch  4] Batch  320/625 | Total: 0.8488 (cls: 0.504, reg: 0.345)
+[Epoch  4] Batch  340/625 | Total: 1.0235 (cls: 0.642, reg: 0.381)
+[Epoch  4] Batch  360/625 | Total: 0.8173 (cls: 0.500, reg: 0.317)
+[Epoch  4] Batch  380/625 | Total: 0.8962 (cls: 0.511, reg: 0.385)
+[Epoch  4] Batch  400/625 | Total: 1.0336 (cls: 0.668, reg: 0.366)
+[Epoch  4] Batch  420/625 | Total: 0.8809 (cls: 0.542, reg: 0.339)
+[Epoch  4] Batch  440/625 | Total: 0.7821 (cls: 0.416, reg: 0.366)
+[Epoch  4] Batch  460/625 | Total: 0.8857 (cls: 0.569, reg: 0.316)
+[Epoch  4] Batch  480/625 | Total: 0.8190 (cls: 0.481, reg: 0.338)
+[Epoch  4] Batch  500/625 | Total: 0.7180 (cls: 0.400, reg: 0.318)
+[Epoch  4] Batch  520/625 | Total: 0.9270 (cls: 0.575, reg: 0.352)
+[Epoch  4] Batch  540/625 | Total: 1.1337 (cls: 0.780, reg: 0.353)
+[Epoch  4] Batch  560/625 | Total: 0.8779 (cls: 0.526, reg: 0.352)
+[Epoch  4] Batch  580/625 | Total: 1.1466 (cls: 0.799, reg: 0.348)
+[Epoch  4] Batch  600/625 | Total: 0.8294 (cls: 0.502, reg: 0.327)
+[Epoch  4] Batch  620/625 | Total: 0.7769 (cls: 0.439, reg: 0.338)
+
+[Epoch  4/80] Loss=0.8904 Cls=0.5447 Reg=0.3457 LR=0.001000 (955.9s)
+4584.7s 94 Loading and preparing results...
+4586.1s 95 DONE (t=1.42s)
+4586.1s 96 creating index...
+4586.2s 97 index created!
+4586.2s 98 Running per image evaluation...
+4586.2s 99 Evaluate annotation type *bbox*
+4617.5s 100 DONE (t=31.27s).
+4617.5s 101 Accumulating evaluation results...
+4619.2s 102 DONE (t=1.71s).
+4619.2s 103 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.085
+4619.2s 104 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.246
+4619.2s 105 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.037
+4619.2s 106 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.036
+4619.2s 107 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.100
+4619.2s 108 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+4619.2s 109 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.018
+4619.2s 110 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.097
+4619.2s 111 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.220
+4619.2s 112 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.124
+4619.2s 113 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.352
+4619.2s 114 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+4619.4s 115 Overall mAP@0.5: 0.2460 | mAP_tiny@0.5: 0.1161 | mAP_tiny@0.5:0.95: 0.0362
+4619.7s 116 * New best checkpoint saved (Overall mAP@0.5: 0.2460)
+5566.2s 117 [Epoch  5] Batch   20/625 | Total: 1.0599 (cls: 0.695, reg: 0.365)
+[Epoch  5] Batch   40/625 | Total: 0.7803 (cls: 0.488, reg: 0.292)
+[Epoch  5] Batch   60/625 | Total: 0.8282 (cls: 0.482, reg: 0.346)
+[Epoch  5] Batch   80/625 | Total: 0.7314 (cls: 0.439, reg: 0.292)
+[Epoch  5] Batch  100/625 | Total: 1.2433 (cls: 0.901, reg: 0.342)
+[Epoch  5] Batch  120/625 | Total: 0.8336 (cls: 0.504, reg: 0.330)
+[Epoch  5] Batch  140/625 | Total: 0.8953 (cls: 0.547, reg: 0.348)
+[Epoch  5] Batch  160/625 | Total: 0.8383 (cls: 0.505, reg: 0.334)
+[Epoch  5] Batch  180/625 | Total: 0.7894 (cls: 0.428, reg: 0.362)
+[Epoch  5] Batch  200/625 | Total: 0.9694 (cls: 0.616, reg: 0.354)
+[Epoch  5] Batch  220/625 | Total: 0.7511 (cls: 0.418, reg: 0.333)
+[Epoch  5] Batch  240/625 | Total: 0.8559 (cls: 0.532, reg: 0.324)
+[Epoch  5] Batch  260/625 | Total: 0.7712 (cls: 0.427, reg: 0.345)
+[Epoch  5] Batch  280/625 | Total: 0.7068 (cls: 0.412, reg: 0.295)
+[Epoch  5] Batch  300/625 | Total: 0.7631 (cls: 0.443, reg: 0.320)
+[Epoch  5] Batch  320/625 | Total: 0.8691 (cls: 0.525, reg: 0.344)
+[Epoch  5] Batch  340/625 | Total: 0.8029 (cls: 0.453, reg: 0.350)
+[Epoch  5] Batch  360/625 | Total: 0.9223 (cls: 0.574, reg: 0.349)
+[Epoch  5] Batch  380/625 | Total: 0.8113 (cls: 0.494, reg: 0.318)
+[Epoch  5] Batch  400/625 | Total: 0.7944 (cls: 0.493, reg: 0.302)
+[Epoch  5] Batch  420/625 | Total: 0.9105 (cls: 0.543, reg: 0.367)
+[Epoch  5] Batch  440/625 | Total: 0.8175 (cls: 0.484, reg: 0.334)
+[Epoch  5] Batch  460/625 | Total: 0.9110 (cls: 0.524, reg: 0.387)
+[Epoch  5] Batch  480/625 | Total: 0.7482 (cls: 0.434, reg: 0.314)
+[Epoch  5] Batch  500/625 | Total: 0.7567 (cls: 0.457, reg: 0.300)
+[Epoch  5] Batch  520/625 | Total: 0.7557 (cls: 0.445, reg: 0.311)
+[Epoch  5] Batch  540/625 | Total: 0.7021 (cls: 0.394, reg: 0.308)
+[Epoch  5] Batch  560/625 | Total: 0.8449 (cls: 0.518, reg: 0.327)
+[Epoch  5] Batch  580/625 | Total: 0.8575 (cls: 0.550, reg: 0.308)
+[Epoch  5] Batch  600/625 | Total: 0.9336 (cls: 0.579, reg: 0.355)
+[Epoch  5] Batch  620/625 | Total: 0.7731 (cls: 0.448, reg: 0.326)
+
+[Epoch  5/80] Loss=0.8550 Cls=0.5196 Reg=0.3354 LR=0.000998 (946.5s)
+5618.2s 118 Loading and preparing results...
+5619.7s 119 DONE (t=1.45s)
+5619.7s 120 creating index...
+5619.9s 121 index created!
+5619.9s 122 Running per image evaluation...
+5619.9s 123 Evaluate annotation type *bbox*
+5651.8s 124 DONE (t=31.91s).
+5651.8s 125 Accumulating evaluation results...
+5653.8s 126 DONE (t=2.02s).
+5653.8s 127 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.109
+5653.8s 128 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.310
+5653.8s 129 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.048
+5653.8s 130 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.048
+5653.8s 131 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.162
+5653.8s 132 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+5653.8s 133 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.021
+5653.8s 134 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.113
+5653.8s 135 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.249
+5653.8s 136 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.151
+5653.8s 137 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.344
+5653.8s 138 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+5654.0s 139 Overall mAP@0.5: 0.3097 | mAP_tiny@0.5: 0.1420 | mAP_tiny@0.5:0.95: 0.0482
+5654.3s 140 * New best checkpoint saved (Overall mAP@0.5: 0.3097)
+5654.5s 141 * Periodic checkpoint saved: epoch_5.pth
+6581.6s 142 [Epoch  6] Batch   20/625 | Total: 0.8275 (cls: 0.513, reg: 0.314)
+[Epoch  6] Batch   40/625 | Total: 0.8511 (cls: 0.491, reg: 0.360)
+[Epoch  6] Batch   60/625 | Total: 0.9240 (cls: 0.557, reg: 0.367)
+[Epoch  6] Batch   80/625 | Total: 0.7061 (cls: 0.402, reg: 0.304)
+[Epoch  6] Batch  100/625 | Total: 0.6581 (cls: 0.349, reg: 0.309)
+[Epoch  6] Batch  120/625 | Total: 0.9124 (cls: 0.592, reg: 0.321)
+[Epoch  6] Batch  140/625 | Total: 0.8474 (cls: 0.528, reg: 0.319)
+[Epoch  6] Batch  160/625 | Total: 0.9260 (cls: 0.631, reg: 0.295)
+[Epoch  6] Batch  180/625 | Total: 0.8289 (cls: 0.476, reg: 0.353)
+[Epoch  6] Batch  200/625 | Total: 0.7471 (cls: 0.418, reg: 0.330)
+[Epoch  6] Batch  220/625 | Total: 0.8054 (cls: 0.511, reg: 0.295)
+[Epoch  6] Batch  240/625 | Total: 0.7377 (cls: 0.469, reg: 0.269)
+[Epoch  6] Batch  260/625 | Total: 1.1077 (cls: 0.720, reg: 0.387)
+[Epoch  6] Batch  280/625 | Total: 0.8021 (cls: 0.477, reg: 0.325)
+[Epoch  6] Batch  300/625 | Total: 0.8204 (cls: 0.508, reg: 0.312)
+[Epoch  6] Batch  320/625 | Total: 0.8550 (cls: 0.542, reg: 0.313)
+[Epoch  6] Batch  340/625 | Total: 0.7879 (cls: 0.486, reg: 0.302)
+[Epoch  6] Batch  360/625 | Total: 0.7480 (cls: 0.462, reg: 0.286)
+[Epoch  6] Batch  380/625 | Total: 0.7638 (cls: 0.443, reg: 0.321)
+[Epoch  6] Batch  400/625 | Total: 0.7733 (cls: 0.462, reg: 0.311)
+[Epoch  6] Batch  420/625 | Total: 0.8953 (cls: 0.565, reg: 0.331)
+[Epoch  6] Batch  440/625 | Total: 1.1019 (cls: 0.724, reg: 0.378)
+[Epoch  6] Batch  460/625 | Total: 0.8327 (cls: 0.511, reg: 0.322)
+[Epoch  6] Batch  480/625 | Total: 0.7570 (cls: 0.440, reg: 0.317)
+[Epoch  6] Batch  500/625 | Total: 0.7174 (cls: 0.413, reg: 0.304)
+[Epoch  6] Batch  520/625 | Total: 0.7724 (cls: 0.447, reg: 0.325)
+[Epoch  6] Batch  540/625 | Total: 0.9025 (cls: 0.571, reg: 0.332)
+[Epoch  6] Batch  560/625 | Total: 0.8080 (cls: 0.479, reg: 0.329)
+[Epoch  6] Batch  580/625 | Total: 0.7791 (cls: 0.463, reg: 0.316)
+[Epoch  6] Batch  600/625 | Total: 0.8174 (cls: 0.486, reg: 0.332)
+[Epoch  6] Batch  620/625 | Total: 0.6936 (cls: 0.360, reg: 0.334)
+
+[Epoch  6/80] Loss=0.8314 Cls=0.5056 Reg=0.3258 LR=0.000996 (927.1s)
+6632.7s 143 Loading and preparing results...
+6634.6s 144 DONE (t=1.97s)
+6634.6s 145 creating index...
+6634.8s 146 index created!
+6634.8s 147 Running per image evaluation...
+6634.8s 148 Evaluate annotation type *bbox*
+6665.0s 149 DONE (t=30.20s).
+6665.0s 150 Accumulating evaluation results...
+6666.3s 151 DONE (t=1.35s).
+6666.3s 152 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.113
+6666.3s 153 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.330
+6666.3s 154 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.042
+6666.3s 155 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.052
+6666.3s 156 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.177
+6666.3s 157 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+6666.3s 158 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.021
+6666.3s 159 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.113
+6666.3s 160 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.245
+6666.3s 161 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.146
+6666.3s 162 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.332
+6666.3s 163 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+6666.5s 164 Overall mAP@0.5: 0.3301 | mAP_tiny@0.5: 0.1682 | mAP_tiny@0.5:0.95: 0.0518
+6666.8s 165 * New best checkpoint saved (Overall mAP@0.5: 0.3301)
+7606.6s 166 [Epoch  7] Batch   20/625 | Total: 0.7396 (cls: 0.427, reg: 0.313)
+[Epoch  7] Batch   40/625 | Total: 0.6610 (cls: 0.344, reg: 0.317)
+[Epoch  7] Batch   60/625 | Total: 0.8401 (cls: 0.570, reg: 0.270)
+[Epoch  7] Batch   80/625 | Total: 0.8001 (cls: 0.477, reg: 0.323)
+[Epoch  7] Batch  100/625 | Total: 1.0618 (cls: 0.636, reg: 0.426)
+[Epoch  7] Batch  120/625 | Total: 0.6540 (cls: 0.340, reg: 0.314)
+[Epoch  7] Batch  140/625 | Total: 0.8618 (cls: 0.528, reg: 0.334)
+[Epoch  7] Batch  160/625 | Total: 0.8555 (cls: 0.548, reg: 0.307)
+[Epoch  7] Batch  180/625 | Total: 0.7916 (cls: 0.442, reg: 0.350)
+[Epoch  7] Batch  200/625 | Total: 0.7608 (cls: 0.448, reg: 0.313)
+[Epoch  7] Batch  220/625 | Total: 0.8935 (cls: 0.574, reg: 0.319)
+[Epoch  7] Batch  240/625 | Total: 0.8543 (cls: 0.513, reg: 0.341)
+[Epoch  7] Batch  260/625 | Total: 0.8163 (cls: 0.488, reg: 0.328)
+[Epoch  7] Batch  280/625 | Total: 0.7539 (cls: 0.451, reg: 0.303)
+[Epoch  7] Batch  300/625 | Total: 0.7337 (cls: 0.413, reg: 0.321)
+[Epoch  7] Batch  320/625 | Total: 0.7670 (cls: 0.458, reg: 0.309)
+[Epoch  7] Batch  340/625 | Total: 0.6802 (cls: 0.371, reg: 0.309)
+[Epoch  7] Batch  360/625 | Total: 0.6789 (cls: 0.386, reg: 0.293)
+[Epoch  7] Batch  380/625 | Total: 0.8339 (cls: 0.521, reg: 0.313)
+[Epoch  7] Batch  400/625 | Total: 1.1497 (cls: 0.792, reg: 0.358)
+[Epoch  7] Batch  420/625 | Total: 0.7980 (cls: 0.471, reg: 0.327)
+[Epoch  7] Batch  440/625 | Total: 0.8832 (cls: 0.561, reg: 0.323)
+[Epoch  7] Batch  460/625 | Total: 0.9154 (cls: 0.581, reg: 0.334)
+[Epoch  7] Batch  480/625 | Total: 0.7864 (cls: 0.510, reg: 0.277)
+[Epoch  7] Batch  500/625 | Total: 0.8132 (cls: 0.476, reg: 0.337)
+[Epoch  7] Batch  520/625 | Total: 0.7505 (cls: 0.448, reg: 0.303)
+[Epoch  7] Batch  540/625 | Total: 0.8884 (cls: 0.583, reg: 0.305)
+[Epoch  7] Batch  560/625 | Total: 0.7365 (cls: 0.443, reg: 0.293)
+[Epoch  7] Batch  580/625 | Total: 0.9498 (cls: 0.572, reg: 0.378)
+[Epoch  7] Batch  600/625 | Total: 0.7956 (cls: 0.482, reg: 0.313)
+[Epoch  7] Batch  620/625 | Total: 0.7803 (cls: 0.499, reg: 0.281)
+
+[Epoch  7/80] Loss=0.8157 Cls=0.4952 Reg=0.3204 LR=0.000993 (939.7s)
+7657.3s 167 Loading and preparing results...
+7659.7s 168 DONE (t=2.32s)
+7659.7s 169 creating index...
+7659.9s 170 index created!
+7659.9s 171 Running per image evaluation...
+7659.9s 172 Evaluate annotation type *bbox*
+7690.9s 173 DONE (t=31.03s).
+7690.9s 174 Accumulating evaluation results...
+7692.2s 175 DONE (t=1.35s).
+7692.2s 176 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.128
+7692.2s 177 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.350
+7692.2s 178 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.061
+7692.2s 179 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.055
+7692.2s 180 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.184
+7692.2s 181 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+7692.2s 182 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.023
+7692.2s 183 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.123
+7692.2s 184 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.264
+7692.2s 185 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.160
+7692.2s 186 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.350
+7692.2s 187 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+7692.4s 188 Overall mAP@0.5: 0.3500 | mAP_tiny@0.5: 0.1729 | mAP_tiny@0.5:0.95: 0.0554
+7692.8s 189 * New best checkpoint saved (Overall mAP@0.5: 0.3500)
+8645.8s 190 [Epoch  8] Batch   20/625 | Total: 0.8460 (cls: 0.549, reg: 0.297)
+[Epoch  8] Batch   40/625 | Total: 0.7907 (cls: 0.509, reg: 0.282)
+[Epoch  8] Batch   60/625 | Total: 0.8048 (cls: 0.477, reg: 0.328)
+[Epoch  8] Batch   80/625 | Total: 0.7594 (cls: 0.448, reg: 0.312)
+[Epoch  8] Batch  100/625 | Total: 0.8169 (cls: 0.497, reg: 0.320)
+[Epoch  8] Batch  120/625 | Total: 0.8004 (cls: 0.503, reg: 0.298)
+[Epoch  8] Batch  140/625 | Total: 0.6935 (cls: 0.398, reg: 0.295)
+[Epoch  8] Batch  160/625 | Total: 0.9355 (cls: 0.577, reg: 0.358)
+[Epoch  8] Batch  180/625 | Total: 0.7613 (cls: 0.453, reg: 0.308)
+[Epoch  8] Batch  200/625 | Total: 0.6205 (cls: 0.340, reg: 0.281)
+[Epoch  8] Batch  220/625 | Total: 0.8830 (cls: 0.571, reg: 0.312)
+[Epoch  8] Batch  240/625 | Total: 0.6912 (cls: 0.378, reg: 0.313)
+[Epoch  8] Batch  260/625 | Total: 0.6702 (cls: 0.382, reg: 0.288)
+[Epoch  8] Batch  280/625 | Total: 0.8513 (cls: 0.534, reg: 0.317)
+[Epoch  8] Batch  300/625 | Total: 0.8121 (cls: 0.435, reg: 0.377)
+[Epoch  8] Batch  320/625 | Total: 0.9489 (cls: 0.634, reg: 0.315)
+[Epoch  8] Batch  340/625 | Total: 0.8147 (cls: 0.480, reg: 0.335)
+[Epoch  8] Batch  360/625 | Total: 0.8355 (cls: 0.547, reg: 0.289)
+[Epoch  8] Batch  380/625 | Total: 0.7632 (cls: 0.424, reg: 0.339)
+[Epoch  8] Batch  400/625 | Total: 0.8032 (cls: 0.521, reg: 0.282)
+[Epoch  8] Batch  420/625 | Total: 0.7557 (cls: 0.397, reg: 0.359)
+[Epoch  8] Batch  440/625 | Total: 0.8339 (cls: 0.528, reg: 0.306)
+[Epoch  8] Batch  460/625 | Total: 1.1156 (cls: 0.769, reg: 0.347)
+[Epoch  8] Batch  480/625 | Total: 0.8786 (cls: 0.597, reg: 0.282)
+[Epoch  8] Batch  500/625 | Total: 0.8216 (cls: 0.526, reg: 0.296)
+[Epoch  8] Batch  520/625 | Total: 0.7653 (cls: 0.474, reg: 0.291)
+[Epoch  8] Batch  540/625 | Total: 0.7697 (cls: 0.448, reg: 0.322)
+[Epoch  8] Batch  560/625 | Total: 0.8512 (cls: 0.518, reg: 0.333)
+[Epoch  8] Batch  580/625 | Total: 0.8095 (cls: 0.510, reg: 0.299)
+[Epoch  8] Batch  600/625 | Total: 0.7661 (cls: 0.441, reg: 0.325)
+[Epoch  8] Batch  620/625 | Total: 0.8102 (cls: 0.487, reg: 0.323)
+
+[Epoch  8/80] Loss=0.7954 Cls=0.4837 Reg=0.3117 LR=0.000990 (953.0s)
+8697.2s 191 Loading and preparing results...
+8698.6s 192 DONE (t=1.43s)
+8698.6s 193 creating index...
+8698.8s 194 index created!
+8698.8s 195 Running per image evaluation...
+8698.8s 196 Evaluate annotation type *bbox*
+8730.1s 197 DONE (t=31.28s).
+8730.1s 198 Accumulating evaluation results...
+8731.4s 199 DONE (t=1.34s).
+8731.5s 200 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.125
+8731.5s 201 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.347
+8731.5s 202 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.050
+8731.5s 203 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.054
+8731.5s 204 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.173
+8731.5s 205 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+8731.5s 206 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.022
+8731.5s 207 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.120
+8731.5s 208 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.265
+8731.5s 209 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.168
+8731.5s 210 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.348
+8731.5s 211 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+8731.7s 212 Overall mAP@0.5: 0.3474 | mAP_tiny@0.5: 0.1724 | mAP_tiny@0.5:0.95: 0.0542
+9678.4s 213 [Epoch  9] Batch   20/625 | Total: 0.8206 (cls: 0.538, reg: 0.283)
+[Epoch  9] Batch   40/625 | Total: 0.8036 (cls: 0.483, reg: 0.321)
+[Epoch  9] Batch   60/625 | Total: 0.8346 (cls: 0.538, reg: 0.296)
+[Epoch  9] Batch   80/625 | Total: 0.7859 (cls: 0.458, reg: 0.328)
+[Epoch  9] Batch  100/625 | Total: 0.8893 (cls: 0.574, reg: 0.316)
+[Epoch  9] Batch  120/625 | Total: 0.7214 (cls: 0.436, reg: 0.285)
+[Epoch  9] Batch  140/625 | Total: 0.9416 (cls: 0.607, reg: 0.335)
+[Epoch  9] Batch  160/625 | Total: 0.7095 (cls: 0.414, reg: 0.296)
+[Epoch  9] Batch  180/625 | Total: 0.8865 (cls: 0.560, reg: 0.327)
+[Epoch  9] Batch  200/625 | Total: 0.9028 (cls: 0.560, reg: 0.343)
+[Epoch  9] Batch  220/625 | Total: 0.7062 (cls: 0.412, reg: 0.294)
+[Epoch  9] Batch  240/625 | Total: 0.7077 (cls: 0.402, reg: 0.305)
+[Epoch  9] Batch  260/625 | Total: 0.9087 (cls: 0.486, reg: 0.422)
+[Epoch  9] Batch  280/625 | Total: 0.6419 (cls: 0.361, reg: 0.281)
+[Epoch  9] Batch  300/625 | Total: 0.7031 (cls: 0.424, reg: 0.279)
+[Epoch  9] Batch  320/625 | Total: 0.7192 (cls: 0.406, reg: 0.314)
+[Epoch  9] Batch  340/625 | Total: 0.7929 (cls: 0.411, reg: 0.382)
+[Epoch  9] Batch  360/625 | Total: 0.7504 (cls: 0.448, reg: 0.303)
+[Epoch  9] Batch  380/625 | Total: 0.7499 (cls: 0.478, reg: 0.272)
+[Epoch  9] Batch  400/625 | Total: 0.7112 (cls: 0.428, reg: 0.283)
+[Epoch  9] Batch  420/625 | Total: 0.8644 (cls: 0.537, reg: 0.327)
+[Epoch  9] Batch  440/625 | Total: 0.7120 (cls: 0.409, reg: 0.303)
+[Epoch  9] Batch  460/625 | Total: 0.7150 (cls: 0.409, reg: 0.306)
+[Epoch  9] Batch  480/625 | Total: 0.6817 (cls: 0.398, reg: 0.284)
+[Epoch  9] Batch  500/625 | Total: 0.8248 (cls: 0.552, reg: 0.273)
+[Epoch  9] Batch  520/625 | Total: 0.7529 (cls: 0.414, reg: 0.339)
+[Epoch  9] Batch  540/625 | Total: 0.7180 (cls: 0.405, reg: 0.313)
+[Epoch  9] Batch  560/625 | Total: 0.7267 (cls: 0.465, reg: 0.262)
+[Epoch  9] Batch  580/625 | Total: 0.7397 (cls: 0.452, reg: 0.288)
+[Epoch  9] Batch  600/625 | Total: 0.8524 (cls: 0.548, reg: 0.305)
+[Epoch  9] Batch  620/625 | Total: 0.7376 (cls: 0.444, reg: 0.293)
+
+[Epoch  9/80] Loss=0.7886 Cls=0.4791 Reg=0.3095 LR=0.000985 (946.5s)
+9729.9s 214 Loading and preparing results...
+9732.1s 215 DONE (t=2.26s)
+9732.1s 216 creating index...
+9732.3s 217 index created!
+9732.3s 218 Running per image evaluation...
+9732.3s 219 Evaluate annotation type *bbox*
+9763.8s 220 DONE (t=31.48s).
+9763.8s 221 Accumulating evaluation results...
+9765.1s 222 DONE (t=1.37s).
+9765.1s 223 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.120
+9765.1s 224 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.345
+9765.1s 225 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.047
+9765.1s 226 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.051
+9765.1s 227 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.204
+9765.1s 228 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+9765.1s 229 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.021
+9765.1s 230 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.118
+9765.1s 231 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.268
+9765.1s 232 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.180
+9765.1s 233 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.348
+9765.1s 234 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+9765.4s 235 Overall mAP@0.5: 0.3450 | mAP_tiny@0.5: 0.1603 | mAP_tiny@0.5:0.95: 0.0511
+10713.9s 236 [Epoch 10] Batch   20/625 | Total: 0.6644 (cls: 0.360, reg: 0.305)
+[Epoch 10] Batch   40/625 | Total: 0.7774 (cls: 0.493, reg: 0.285)
+[Epoch 10] Batch   60/625 | Total: 0.8237 (cls: 0.531, reg: 0.293)
+[Epoch 10] Batch   80/625 | Total: 0.8475 (cls: 0.566, reg: 0.282)
+[Epoch 10] Batch  100/625 | Total: 0.8323 (cls: 0.487, reg: 0.346)
+[Epoch 10] Batch  120/625 | Total: 0.7816 (cls: 0.479, reg: 0.302)
+[Epoch 10] Batch  140/625 | Total: 0.7517 (cls: 0.440, reg: 0.311)
+[Epoch 10] Batch  160/625 | Total: 0.7578 (cls: 0.433, reg: 0.325)
+[Epoch 10] Batch  180/625 | Total: 0.7510 (cls: 0.450, reg: 0.301)
+[Epoch 10] Batch  200/625 | Total: 0.8908 (cls: 0.509, reg: 0.382)
+[Epoch 10] Batch  220/625 | Total: 0.7126 (cls: 0.440, reg: 0.272)
+[Epoch 10] Batch  240/625 | Total: 0.6253 (cls: 0.341, reg: 0.285)
+[Epoch 10] Batch  260/625 | Total: 0.6844 (cls: 0.397, reg: 0.287)
+[Epoch 10] Batch  280/625 | Total: 0.6611 (cls: 0.382, reg: 0.279)
+[Epoch 10] Batch  300/625 | Total: 0.9005 (cls: 0.604, reg: 0.296)
+[Epoch 10] Batch  320/625 | Total: 0.7423 (cls: 0.415, reg: 0.327)
+[Epoch 10] Batch  340/625 | Total: 0.8985 (cls: 0.591, reg: 0.307)
+[Epoch 10] Batch  360/625 | Total: 0.8521 (cls: 0.553, reg: 0.299)
+[Epoch 10] Batch  380/625 | Total: 0.8206 (cls: 0.504, reg: 0.317)
+[Epoch 10] Batch  400/625 | Total: 0.7050 (cls: 0.381, reg: 0.324)
+[Epoch 10] Batch  420/625 | Total: 0.6862 (cls: 0.396, reg: 0.291)
+[Epoch 10] Batch  440/625 | Total: 0.7823 (cls: 0.481, reg: 0.302)
+[Epoch 10] Batch  460/625 | Total: 0.6839 (cls: 0.397, reg: 0.287)
+[Epoch 10] Batch  480/625 | Total: 0.6419 (cls: 0.377, reg: 0.265)
+[Epoch 10] Batch  500/625 | Total: 0.7144 (cls: 0.440, reg: 0.274)
+[Epoch 10] Batch  520/625 | Total: 0.7629 (cls: 0.481, reg: 0.282)
+[Epoch 10] Batch  540/625 | Total: 0.8590 (cls: 0.523, reg: 0.336)
+[Epoch 10] Batch  560/625 | Total: 0.7505 (cls: 0.425, reg: 0.325)
+[Epoch 10] Batch  580/625 | Total: 0.6900 (cls: 0.424, reg: 0.266)
+[Epoch 10] Batch  600/625 | Total: 0.8590 (cls: 0.538, reg: 0.321)
+[Epoch 10] Batch  620/625 | Total: 0.8508 (cls: 0.541, reg: 0.310)
+
+[Epoch 10/80] Loss=0.7735 Cls=0.4694 Reg=0.3041 LR=0.000980 (948.4s)
+10765.5s 237 Loading and preparing results...
+10767.1s 238 DONE (t=1.61s)
+10767.1s 239 creating index...
+10767.3s 240 index created!
+10767.3s 241 Running per image evaluation...
+10767.3s 242 Evaluate annotation type *bbox*
+10798.1s 243 DONE (t=30.85s).
+10798.1s 244 Accumulating evaluation results...
+10799.5s 245 DONE (t=1.35s).
+10799.5s 246 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.115
+10799.5s 247 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.347
+10799.5s 248 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.037
+10799.5s 249 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.053
+10799.5s 250 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.206
+10799.5s 251 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+10799.5s 252 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.021
+10799.5s 253 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.116
+10799.5s 254 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.259
+10799.5s 255 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.182
+10799.5s 256 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.341
+10799.5s 257 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+10799.7s 258 Overall mAP@0.5: 0.3473 | mAP_tiny@0.5: 0.1729 | mAP_tiny@0.5:0.95: 0.0531
+10799.9s 259 * Periodic checkpoint saved: epoch_10.pth
+11754.4s 260 [Epoch 11] Batch   20/625 | Total: 0.8128 (cls: 0.511, reg: 0.302)
+[Epoch 11] Batch   40/625 | Total: 0.8041 (cls: 0.460, reg: 0.344)
+[Epoch 11] Batch   60/625 | Total: 0.6758 (cls: 0.386, reg: 0.290)
+[Epoch 11] Batch   80/625 | Total: 0.8039 (cls: 0.484, reg: 0.320)
+[Epoch 11] Batch  100/625 | Total: 0.8278 (cls: 0.516, reg: 0.312)
+[Epoch 11] Batch  120/625 | Total: 0.7254 (cls: 0.430, reg: 0.296)
+[Epoch 11] Batch  140/625 | Total: 0.8131 (cls: 0.490, reg: 0.323)
+[Epoch 11] Batch  160/625 | Total: 0.7517 (cls: 0.461, reg: 0.291)
+[Epoch 11] Batch  180/625 | Total: 0.7405 (cls: 0.468, reg: 0.272)
+[Epoch 11] Batch  200/625 | Total: 0.8386 (cls: 0.533, reg: 0.306)
+[Epoch 11] Batch  220/625 | Total: 0.7807 (cls: 0.521, reg: 0.260)
+[Epoch 11] Batch  240/625 | Total: 0.6919 (cls: 0.455, reg: 0.237)
+[Epoch 11] Batch  260/625 | Total: 0.7121 (cls: 0.429, reg: 0.284)
+[Epoch 11] Batch  280/625 | Total: 0.7594 (cls: 0.442, reg: 0.317)
+[Epoch 11] Batch  300/625 | Total: 0.7407 (cls: 0.432, reg: 0.308)
+[Epoch 11] Batch  320/625 | Total: 0.8444 (cls: 0.530, reg: 0.314)
+[Epoch 11] Batch  340/625 | Total: 0.9239 (cls: 0.607, reg: 0.317)
+[Epoch 11] Batch  360/625 | Total: 0.7594 (cls: 0.479, reg: 0.280)
+[Epoch 11] Batch  380/625 | Total: 0.6677 (cls: 0.355, reg: 0.313)
+[Epoch 11] Batch  400/625 | Total: 0.6790 (cls: 0.380, reg: 0.299)
+[Epoch 11] Batch  420/625 | Total: 0.6804 (cls: 0.413, reg: 0.268)
+[Epoch 11] Batch  440/625 | Total: 0.8616 (cls: 0.513, reg: 0.349)
+[Epoch 11] Batch  460/625 | Total: 0.7428 (cls: 0.451, reg: 0.292)
+[Epoch 11] Batch  480/625 | Total: 0.6880 (cls: 0.406, reg: 0.282)
+[Epoch 11] Batch  500/625 | Total: 0.8656 (cls: 0.558, reg: 0.308)
+[Epoch 11] Batch  520/625 | Total: 0.7891 (cls: 0.479, reg: 0.310)
+[Epoch 11] Batch  540/625 | Total: 0.6166 (cls: 0.338, reg: 0.278)
+[Epoch 11] Batch  560/625 | Total: 0.6914 (cls: 0.417, reg: 0.274)
+[Epoch 11] Batch  580/625 | Total: 0.7190 (cls: 0.447, reg: 0.272)
+[Epoch 11] Batch  600/625 | Total: 0.6656 (cls: 0.386, reg: 0.279)
+[Epoch 11] Batch  620/625 | Total: 0.7417 (cls: 0.450, reg: 0.292)
+
+[Epoch 11/80] Loss=0.7571 Cls=0.4567 Reg=0.3005 LR=0.000974 (954.5s)
+11806.2s 261 Loading and preparing results...
+11807.6s 262 DONE (t=1.41s)
+11807.6s 263 creating index...
+11807.8s 264 index created!
+11807.8s 265 Running per image evaluation...
+11807.8s 266 Evaluate annotation type *bbox*
+11838.4s 267 DONE (t=30.58s).
+11838.4s 268 Accumulating evaluation results...
+11839.7s 269 DONE (t=1.37s).
+11839.7s 270 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.148
+11839.7s 271 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.381
+11839.7s 272 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.078
+11839.7s 273 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.066
+11839.7s 274 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.231
+11839.7s 275 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+11839.7s 276 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.025
+11839.8s 277 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.136
+11839.8s 278 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.284
+11839.8s 279 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.175
+11839.8s 280 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.406
+11839.8s 281 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+11840.0s 282 Overall mAP@0.5: 0.3813 | mAP_tiny@0.5: 0.1967 | mAP_tiny@0.5:0.95: 0.0662
+11840.2s 283 * New best checkpoint saved (Overall mAP@0.5: 0.3813)
+12778.4s 284 [Epoch 12] Batch   20/625 | Total: 0.7859 (cls: 0.504, reg: 0.282)
+[Epoch 12] Batch   40/625 | Total: 0.8153 (cls: 0.532, reg: 0.283)
+[Epoch 12] Batch   60/625 | Total: 0.6481 (cls: 0.396, reg: 0.252)
+[Epoch 12] Batch   80/625 | Total: 0.7520 (cls: 0.470, reg: 0.282)
+[Epoch 12] Batch  100/625 | Total: 0.7922 (cls: 0.519, reg: 0.273)
+[Epoch 12] Batch  120/625 | Total: 0.7325 (cls: 0.424, reg: 0.309)
+[Epoch 12] Batch  140/625 | Total: 0.7134 (cls: 0.464, reg: 0.249)
+[Epoch 12] Batch  160/625 | Total: 0.8614 (cls: 0.504, reg: 0.358)
+[Epoch 12] Batch  180/625 | Total: 0.8872 (cls: 0.605, reg: 0.282)
+[Epoch 12] Batch  200/625 | Total: 0.6968 (cls: 0.371, reg: 0.326)
+[Epoch 12] Batch  220/625 | Total: 0.7988 (cls: 0.503, reg: 0.296)
+[Epoch 12] Batch  240/625 | Total: 0.6044 (cls: 0.338, reg: 0.266)
+[Epoch 12] Batch  260/625 | Total: 0.7377 (cls: 0.473, reg: 0.265)
+[Epoch 12] Batch  280/625 | Total: 0.8387 (cls: 0.503, reg: 0.336)
+[Epoch 12] Batch  300/625 | Total: 0.8039 (cls: 0.450, reg: 0.354)
+[Epoch 12] Batch  320/625 | Total: 0.7560 (cls: 0.486, reg: 0.270)
+[Epoch 12] Batch  340/625 | Total: 0.8594 (cls: 0.504, reg: 0.356)
+[Epoch 12] Batch  360/625 | Total: 0.7053 (cls: 0.411, reg: 0.295)
+[Epoch 12] Batch  380/625 | Total: 0.8032 (cls: 0.532, reg: 0.271)
+[Epoch 12] Batch  400/625 | Total: 0.7242 (cls: 0.416, reg: 0.308)
+[Epoch 12] Batch  420/625 | Total: 0.7539 (cls: 0.501, reg: 0.253)
+[Epoch 12] Batch  440/625 | Total: 0.7684 (cls: 0.444, reg: 0.324)
+[Epoch 12] Batch  460/625 | Total: 0.7112 (cls: 0.422, reg: 0.289)
+[Epoch 12] Batch  480/625 | Total: 0.6996 (cls: 0.433, reg: 0.267)
+[Epoch 12] Batch  500/625 | Total: 0.7201 (cls: 0.413, reg: 0.307)
+[Epoch 12] Batch  520/625 | Total: 0.7024 (cls: 0.405, reg: 0.297)
+[Epoch 12] Batch  540/625 | Total: 0.7955 (cls: 0.474, reg: 0.322)
+[Epoch 12] Batch  560/625 | Total: 0.8310 (cls: 0.537, reg: 0.294)
+[Epoch 12] Batch  580/625 | Total: 0.8414 (cls: 0.549, reg: 0.293)
+[Epoch 12] Batch  600/625 | Total: 0.9116 (cls: 0.579, reg: 0.332)
+[Epoch 12] Batch  620/625 | Total: 0.8074 (cls: 0.515, reg: 0.292)
+
+[Epoch 12/80] Loss=0.7516 Cls=0.4531 Reg=0.2985 LR=0.000967 (938.2s)
+12829.5s 285 Loading and preparing results...
+12830.9s 286 DONE (t=1.45s)
+12830.9s 287 creating index...
+12831.1s 288 index created!
+12831.1s 289 Running per image evaluation...
+12831.1s 290 Evaluate annotation type *bbox*
+12862.1s 291 DONE (t=30.97s).
+12862.1s 292 Accumulating evaluation results...
+12863.5s 293 DONE (t=1.38s).
+12863.5s 294 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.150
+12863.5s 295 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.378
+12863.5s 296 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.082
+12863.5s 297 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.070
+12863.5s 298 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.223
+12863.5s 299 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+12863.5s 300 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.025
+12863.5s 301 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.136
+12863.5s 302 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.274
+12863.5s 303 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.149
+12863.5s 304 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.416
+12863.5s 305 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+12863.7s 306 Overall mAP@0.5: 0.3782 | mAP_tiny@0.5: 0.2021 | mAP_tiny@0.5:0.95: 0.0696
+13800.0s 307 [Epoch 13] Batch   20/625 | Total: 0.7384 (cls: 0.391, reg: 0.347)
+[Epoch 13] Batch   40/625 | Total: 0.6865 (cls: 0.415, reg: 0.272)
+[Epoch 13] Batch   60/625 | Total: 0.8040 (cls: 0.490, reg: 0.314)
+[Epoch 13] Batch   80/625 | Total: 0.7515 (cls: 0.475, reg: 0.277)
+[Epoch 13] Batch  100/625 | Total: 0.7025 (cls: 0.402, reg: 0.301)
+[Epoch 13] Batch  120/625 | Total: 0.7128 (cls: 0.426, reg: 0.287)
+[Epoch 13] Batch  140/625 | Total: 0.7216 (cls: 0.419, reg: 0.303)
+[Epoch 13] Batch  160/625 | Total: 0.7491 (cls: 0.483, reg: 0.266)
+[Epoch 13] Batch  180/625 | Total: 0.7577 (cls: 0.440, reg: 0.318)
+[Epoch 13] Batch  200/625 | Total: 0.8111 (cls: 0.470, reg: 0.341)
+[Epoch 13] Batch  220/625 | Total: 0.7244 (cls: 0.434, reg: 0.290)
+[Epoch 13] Batch  240/625 | Total: 0.6109 (cls: 0.302, reg: 0.309)
+[Epoch 13] Batch  260/625 | Total: 0.8091 (cls: 0.528, reg: 0.281)
+[Epoch 13] Batch  280/625 | Total: 0.7057 (cls: 0.436, reg: 0.269)
+[Epoch 13] Batch  300/625 | Total: 0.6258 (cls: 0.366, reg: 0.260)
+[Epoch 13] Batch  320/625 | Total: 0.7476 (cls: 0.460, reg: 0.288)
+[Epoch 13] Batch  340/625 | Total: 1.0620 (cls: 0.737, reg: 0.325)
+[Epoch 13] Batch  360/625 | Total: 0.8086 (cls: 0.527, reg: 0.282)
+[Epoch 13] Batch  380/625 | Total: 0.7012 (cls: 0.433, reg: 0.268)
+[Epoch 13] Batch  400/625 | Total: 0.8345 (cls: 0.482, reg: 0.352)
+[Epoch 13] Batch  420/625 | Total: 0.7848 (cls: 0.485, reg: 0.300)
+[Epoch 13] Batch  440/625 | Total: 0.7264 (cls: 0.386, reg: 0.341)
+[Epoch 13] Batch  460/625 | Total: 0.8012 (cls: 0.488, reg: 0.313)
+[Epoch 13] Batch  480/625 | Total: 0.8210 (cls: 0.538, reg: 0.283)
+[Epoch 13] Batch  500/625 | Total: 0.6311 (cls: 0.364, reg: 0.267)
+[Epoch 13] Batch  520/625 | Total: 0.7434 (cls: 0.419, reg: 0.325)
+[Epoch 13] Batch  540/625 | Total: 0.6433 (cls: 0.360, reg: 0.284)
+[Epoch 13] Batch  560/625 | Total: 0.7853 (cls: 0.523, reg: 0.262)
+[Epoch 13] Batch  580/625 | Total: 0.7504 (cls: 0.468, reg: 0.282)
+[Epoch 13] Batch  600/625 | Total: 0.6526 (cls: 0.374, reg: 0.279)
+[Epoch 13] Batch  620/625 | Total: 0.8753 (cls: 0.565, reg: 0.310)
+
+[Epoch 13/80] Loss=0.7390 Cls=0.4451 Reg=0.2939 LR=0.000959 (936.1s)
+13852.0s 308 Loading and preparing results...
+13853.5s 309 DONE (t=1.51s)
+13853.5s 310 creating index...
+13853.6s 311 index created!
+13853.6s 312 Running per image evaluation...
+13853.6s 313 Evaluate annotation type *bbox*
+13884.7s 314 DONE (t=31.07s).
+13884.7s 315 Accumulating evaluation results...
+13886.0s 316 DONE (t=1.34s).
+13886.0s 317 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.145
+13886.0s 318 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.401
+13886.0s 319 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.065
+13886.0s 320 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.072
+13886.0s 321 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.218
+13886.0s 322 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+13886.0s 323 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.024
+13886.0s 324 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.133
+13886.0s 325 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.277
+13886.0s 326 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.190
+13886.0s 327 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.337
+13886.0s 328 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+13886.2s 329 Overall mAP@0.5: 0.4010 | mAP_tiny@0.5: 0.2179 | mAP_tiny@0.5:0.95: 0.0715
+13886.5s 330 * New best checkpoint saved (Overall mAP@0.5: 0.4010)
+14824.1s 331 [Epoch 14] Batch   20/625 | Total: 0.7894 (cls: 0.436, reg: 0.353)
+[Epoch 14] Batch   40/625 | Total: 0.5964 (cls: 0.314, reg: 0.282)
+[Epoch 14] Batch   60/625 | Total: 0.6227 (cls: 0.346, reg: 0.277)
+[Epoch 14] Batch   80/625 | Total: 0.7781 (cls: 0.468, reg: 0.310)
+[Epoch 14] Batch  100/625 | Total: 0.6172 (cls: 0.347, reg: 0.270)
+[Epoch 14] Batch  120/625 | Total: 0.7295 (cls: 0.474, reg: 0.256)
+[Epoch 14] Batch  140/625 | Total: 0.7818 (cls: 0.560, reg: 0.222)
+[Epoch 14] Batch  160/625 | Total: 0.7758 (cls: 0.474, reg: 0.302)
+[Epoch 14] Batch  180/625 | Total: 0.8745 (cls: 0.563, reg: 0.312)
+[Epoch 14] Batch  200/625 | Total: 0.7006 (cls: 0.411, reg: 0.289)
+[Epoch 14] Batch  220/625 | Total: 0.7450 (cls: 0.454, reg: 0.291)
+[Epoch 14] Batch  240/625 | Total: 0.7468 (cls: 0.440, reg: 0.307)
+[Epoch 14] Batch  260/625 | Total: 0.6502 (cls: 0.367, reg: 0.283)
+[Epoch 14] Batch  280/625 | Total: 0.6603 (cls: 0.366, reg: 0.295)
+[Epoch 14] Batch  300/625 | Total: 0.6175 (cls: 0.362, reg: 0.256)
+[Epoch 14] Batch  320/625 | Total: 0.8091 (cls: 0.512, reg: 0.297)
+[Epoch 14] Batch  340/625 | Total: 0.7248 (cls: 0.420, reg: 0.305)
+[Epoch 14] Batch  360/625 | Total: 0.6531 (cls: 0.350, reg: 0.303)
+[Epoch 14] Batch  380/625 | Total: 0.6747 (cls: 0.382, reg: 0.292)
+[Epoch 14] Batch  400/625 | Total: 0.6572 (cls: 0.349, reg: 0.308)
+[Epoch 14] Batch  420/625 | Total: 0.8320 (cls: 0.524, reg: 0.308)
+[Epoch 14] Batch  440/625 | Total: 0.6709 (cls: 0.391, reg: 0.280)
+[Epoch 14] Batch  460/625 | Total: 1.0150 (cls: 0.670, reg: 0.345)
+[Epoch 14] Batch  480/625 | Total: 0.7287 (cls: 0.437, reg: 0.292)
+[Epoch 14] Batch  500/625 | Total: 0.6287 (cls: 0.380, reg: 0.249)
+[Epoch 14] Batch  520/625 | Total: 0.6865 (cls: 0.417, reg: 0.270)
+[Epoch 14] Batch  540/625 | Total: 0.6409 (cls: 0.348, reg: 0.293)
+[Epoch 14] Batch  560/625 | Total: 0.7975 (cls: 0.513, reg: 0.285)
+[Epoch 14] Batch  580/625 | Total: 0.8302 (cls: 0.500, reg: 0.330)
+[Epoch 14] Batch  600/625 | Total: 0.8163 (cls: 0.505, reg: 0.311)
+[Epoch 14] Batch  620/625 | Total: 0.7530 (cls: 0.435, reg: 0.318)
+
+[Epoch 14/80] Loss=0.7334 Cls=0.4426 Reg=0.2908 LR=0.000951 (937.5s)
+14874.7s 332 Loading and preparing results...
+14876.9s 333 DONE (t=2.31s)
+14876.9s 334 creating index...
+14877.1s 335 index created!
+14877.1s 336 Running per image evaluation...
+14877.1s 337 Evaluate annotation type *bbox*
+14907.8s 338 DONE (t=30.67s).
+14907.8s 339 Accumulating evaluation results...
+14909.1s 340 DONE (t=1.32s).
+14909.1s 341 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.168
+14909.1s 342 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.417
+14909.1s 343 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.100
+14909.1s 344 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.083
+14909.1s 345 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.248
+14909.1s 346 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+14909.1s 347 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.026
+14909.1s 348 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.147
+14909.1s 349 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.302
+14909.1s 350 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.196
+14909.1s 351 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.418
+14909.1s 352 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+14909.3s 353 Overall mAP@0.5: 0.4172 | mAP_tiny@0.5: 0.2292 | mAP_tiny@0.5:0.95: 0.0833
+14909.6s 354 * New best checkpoint saved (Overall mAP@0.5: 0.4172)
+15846.7s 355 [Epoch 15] Batch   20/625 | Total: 0.6515 (cls: 0.382, reg: 0.270)
+[Epoch 15] Batch   40/625 | Total: 0.6670 (cls: 0.389, reg: 0.278)
+[Epoch 15] Batch   60/625 | Total: 0.7857 (cls: 0.507, reg: 0.278)
+[Epoch 15] Batch   80/625 | Total: 0.7283 (cls: 0.422, reg: 0.306)
+[Epoch 15] Batch  100/625 | Total: 0.6565 (cls: 0.380, reg: 0.277)
+[Epoch 15] Batch  120/625 | Total: 0.7116 (cls: 0.425, reg: 0.286)
+[Epoch 15] Batch  140/625 | Total: 0.6508 (cls: 0.385, reg: 0.266)
+[Epoch 15] Batch  160/625 | Total: 0.6587 (cls: 0.403, reg: 0.256)
+[Epoch 15] Batch  180/625 | Total: 0.7287 (cls: 0.438, reg: 0.291)
+[Epoch 15] Batch  200/625 | Total: 0.7609 (cls: 0.493, reg: 0.268)
+[Epoch 15] Batch  220/625 | Total: 0.6927 (cls: 0.408, reg: 0.285)
+[Epoch 15] Batch  240/625 | Total: 0.8157 (cls: 0.528, reg: 0.288)
+[Epoch 15] Batch  260/625 | Total: 0.6349 (cls: 0.377, reg: 0.258)
+[Epoch 15] Batch  280/625 | Total: 0.6464 (cls: 0.379, reg: 0.268)
+[Epoch 15] Batch  300/625 | Total: 0.6555 (cls: 0.386, reg: 0.270)
+[Epoch 15] Batch  320/625 | Total: 0.7786 (cls: 0.485, reg: 0.293)
+[Epoch 15] Batch  340/625 | Total: 0.8158 (cls: 0.479, reg: 0.336)
+[Epoch 15] Batch  360/625 | Total: 0.8643 (cls: 0.562, reg: 0.302)
+[Epoch 15] Batch  380/625 | Total: 0.6133 (cls: 0.348, reg: 0.265)
+[Epoch 15] Batch  400/625 | Total: 0.6861 (cls: 0.446, reg: 0.240)
+[Epoch 15] Batch  420/625 | Total: 0.6034 (cls: 0.338, reg: 0.265)
+[Epoch 15] Batch  440/625 | Total: 0.7794 (cls: 0.464, reg: 0.315)
+[Epoch 15] Batch  460/625 | Total: 0.7508 (cls: 0.452, reg: 0.299)
+[Epoch 15] Batch  480/625 | Total: 1.0256 (cls: 0.673, reg: 0.353)
+[Epoch 15] Batch  500/625 | Total: 0.7073 (cls: 0.416, reg: 0.291)
+[Epoch 15] Batch  520/625 | Total: 0.6470 (cls: 0.353, reg: 0.294)
+[Epoch 15] Batch  540/625 | Total: 0.5676 (cls: 0.309, reg: 0.259)
+[Epoch 15] Batch  560/625 | Total: 0.7106 (cls: 0.421, reg: 0.290)
+[Epoch 15] Batch  580/625 | Total: 0.8189 (cls: 0.545, reg: 0.274)
+[Epoch 15] Batch  600/625 | Total: 0.6744 (cls: 0.407, reg: 0.267)
+[Epoch 15] Batch  620/625 | Total: 0.6238 (cls: 0.334, reg: 0.289)
+
+[Epoch 15/80] Loss=0.7250 Cls=0.4352 Reg=0.2897 LR=0.000942 (937.1s)
+15897.7s 356 Loading and preparing results...
+15899.7s 357 DONE (t=1.97s)
+15899.7s 358 creating index...
+15899.9s 359 index created!
+15899.9s 360 Running per image evaluation...
+15899.9s 361 Evaluate annotation type *bbox*
+15930.4s 362 DONE (t=30.44s).
+15930.4s 363 Accumulating evaluation results...
+15931.7s 364 DONE (t=1.35s).
+15931.7s 365 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.163
+15931.7s 366 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.419
+15931.7s 367 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.088
+15931.7s 368 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.081
+15931.7s 369 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.241
+15931.7s 370 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+15931.7s 371 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.025
+15931.7s 372 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.143
+15931.7s 373 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.299
+15931.7s 374 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.197
+15931.7s 375 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.402
+15931.7s 376 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+15931.9s 377 Overall mAP@0.5: 0.4187 | mAP_tiny@0.5: 0.2337 | mAP_tiny@0.5:0.95: 0.0812
+15932.2s 378 * New best checkpoint saved (Overall mAP@0.5: 0.4187)
+15932.3s 379 * Periodic checkpoint saved: epoch_15.pth
+16864.8s 380 [Epoch 16] Batch   20/625 | Total: 0.6258 (cls: 0.341, reg: 0.285)
+[Epoch 16] Batch   40/625 | Total: 0.6708 (cls: 0.432, reg: 0.239)
+[Epoch 16] Batch   60/625 | Total: 0.8845 (cls: 0.617, reg: 0.268)
+[Epoch 16] Batch   80/625 | Total: 0.6981 (cls: 0.430, reg: 0.268)
+[Epoch 16] Batch  100/625 | Total: 0.6777 (cls: 0.407, reg: 0.271)
+[Epoch 16] Batch  120/625 | Total: 1.0218 (cls: 0.587, reg: 0.435)
+[Epoch 16] Batch  140/625 | Total: 0.6109 (cls: 0.357, reg: 0.254)
+[Epoch 16] Batch  160/625 | Total: 0.6723 (cls: 0.365, reg: 0.308)
+[Epoch 16] Batch  180/625 | Total: 0.6946 (cls: 0.354, reg: 0.340)
+[Epoch 16] Batch  200/625 | Total: 0.6072 (cls: 0.372, reg: 0.235)
+[Epoch 16] Batch  220/625 | Total: 0.7770 (cls: 0.426, reg: 0.351)
+[Epoch 16] Batch  240/625 | Total: 0.6718 (cls: 0.374, reg: 0.298)
+[Epoch 16] Batch  260/625 | Total: 0.7710 (cls: 0.445, reg: 0.326)
+[Epoch 16] Batch  280/625 | Total: 0.5747 (cls: 0.320, reg: 0.255)
+[Epoch 16] Batch  300/625 | Total: 0.6823 (cls: 0.336, reg: 0.347)
+[Epoch 16] Batch  320/625 | Total: 0.7039 (cls: 0.434, reg: 0.270)
+[Epoch 16] Batch  340/625 | Total: 0.6965 (cls: 0.437, reg: 0.259)
+[Epoch 16] Batch  360/625 | Total: 0.6955 (cls: 0.412, reg: 0.283)
+[Epoch 16] Batch  380/625 | Total: 0.6847 (cls: 0.410, reg: 0.275)
+[Epoch 16] Batch  400/625 | Total: 0.6054 (cls: 0.355, reg: 0.251)
+[Epoch 16] Batch  420/625 | Total: 0.7414 (cls: 0.402, reg: 0.339)
+[Epoch 16] Batch  440/625 | Total: 0.7343 (cls: 0.422, reg: 0.312)
+[Epoch 16] Batch  460/625 | Total: 0.8030 (cls: 0.488, reg: 0.315)
+[Epoch 16] Batch  480/625 | Total: 0.6771 (cls: 0.402, reg: 0.275)
+[Epoch 16] Batch  500/625 | Total: 0.7820 (cls: 0.496, reg: 0.286)
+[Epoch 16] Batch  520/625 | Total: 0.6607 (cls: 0.407, reg: 0.254)
+[Epoch 16] Batch  540/625 | Total: 0.6829 (cls: 0.406, reg: 0.277)
+[Epoch 16] Batch  560/625 | Total: 0.9630 (cls: 0.646, reg: 0.317)
+[Epoch 16] Batch  580/625 | Total: 0.6292 (cls: 0.330, reg: 0.299)
+[Epoch 16] Batch  600/625 | Total: 0.7087 (cls: 0.459, reg: 0.250)
+[Epoch 16] Batch  620/625 | Total: 0.6573 (cls: 0.370, reg: 0.287)
+
+[Epoch 16/80] Loss=0.7201 Cls=0.4329 Reg=0.2873 LR=0.000932 (932.4s)
+16916.4s 381 Loading and preparing results...
+16917.8s 382 DONE (t=1.47s)
+16917.8s 383 creating index...
+16918.0s 384 index created!
+16918.0s 385 Running per image evaluation...
+16918.0s 386 Evaluate annotation type *bbox*
+16948.8s 387 DONE (t=30.79s).
+16948.8s 388 Accumulating evaluation results...
+16950.1s 389 DONE (t=1.32s).
+16950.1s 390 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.167
+16950.1s 391 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.419
+16950.1s 392 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.098
+16950.1s 393 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.084
+16950.1s 394 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.256
+16950.1s 395 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+16950.1s 396 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.027
+16950.1s 397 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.150
+16950.1s 398 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.299
+16950.1s 399 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.182
+16950.1s 400 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.420
+16950.1s 401 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+16950.3s 402 Overall mAP@0.5: 0.4186 | mAP_tiny@0.5: 0.2442 | mAP_tiny@0.5:0.95: 0.0845
+17890.2s 403 [Epoch 17] Batch   20/625 | Total: 0.7493 (cls: 0.425, reg: 0.324)
+[Epoch 17] Batch   40/625 | Total: 0.7865 (cls: 0.478, reg: 0.308)
+[Epoch 17] Batch   60/625 | Total: 0.7353 (cls: 0.382, reg: 0.353)
+[Epoch 17] Batch   80/625 | Total: 0.7146 (cls: 0.432, reg: 0.283)
+[Epoch 17] Batch  100/625 | Total: 0.6672 (cls: 0.343, reg: 0.324)
+[Epoch 17] Batch  120/625 | Total: 1.0312 (cls: 0.618, reg: 0.413)
+[Epoch 17] Batch  140/625 | Total: 0.9171 (cls: 0.616, reg: 0.301)
+[Epoch 17] Batch  160/625 | Total: 0.7196 (cls: 0.410, reg: 0.309)
+[Epoch 17] Batch  180/625 | Total: 0.6849 (cls: 0.423, reg: 0.262)
+[Epoch 17] Batch  200/625 | Total: 0.8085 (cls: 0.503, reg: 0.306)
+[Epoch 17] Batch  220/625 | Total: 0.6362 (cls: 0.382, reg: 0.255)
+[Epoch 17] Batch  240/625 | Total: 0.7298 (cls: 0.515, reg: 0.215)
+[Epoch 17] Batch  260/625 | Total: 0.6301 (cls: 0.323, reg: 0.307)
+[Epoch 17] Batch  280/625 | Total: 0.6988 (cls: 0.364, reg: 0.334)
+[Epoch 17] Batch  300/625 | Total: 0.5760 (cls: 0.338, reg: 0.238)
+[Epoch 17] Batch  320/625 | Total: 0.8823 (cls: 0.590, reg: 0.293)
+[Epoch 17] Batch  340/625 | Total: 0.5691 (cls: 0.306, reg: 0.263)
+[Epoch 17] Batch  360/625 | Total: 0.6473 (cls: 0.385, reg: 0.262)
+[Epoch 17] Batch  380/625 | Total: 0.6135 (cls: 0.361, reg: 0.253)
+[Epoch 17] Batch  400/625 | Total: 0.7686 (cls: 0.471, reg: 0.298)
+[Epoch 17] Batch  420/625 | Total: 0.6806 (cls: 0.398, reg: 0.282)
+[Epoch 17] Batch  440/625 | Total: 0.7254 (cls: 0.475, reg: 0.251)
+[Epoch 17] Batch  460/625 | Total: 0.7812 (cls: 0.468, reg: 0.313)
+[Epoch 17] Batch  480/625 | Total: 0.6847 (cls: 0.416, reg: 0.269)
+[Epoch 17] Batch  500/625 | Total: 0.6377 (cls: 0.377, reg: 0.261)
+[Epoch 17] Batch  520/625 | Total: 0.6924 (cls: 0.409, reg: 0.283)
+[Epoch 17] Batch  540/625 | Total: 0.6304 (cls: 0.340, reg: 0.290)
+[Epoch 17] Batch  560/625 | Total: 0.7009 (cls: 0.410, reg: 0.290)
+[Epoch 17] Batch  580/625 | Total: 0.7148 (cls: 0.426, reg: 0.289)
+[Epoch 17] Batch  600/625 | Total: 0.7921 (cls: 0.444, reg: 0.349)
+[Epoch 17] Batch  620/625 | Total: 0.5800 (cls: 0.327, reg: 0.253)
+
+[Epoch 17/80] Loss=0.7092 Cls=0.4254 Reg=0.2838 LR=0.000921 (939.7s)
+17941.3s 404 Loading and preparing results...
+17942.7s 405 DONE (t=1.49s)
+17942.7s 406 creating index...
+17942.9s 407 index created!
+17942.9s 408 Running per image evaluation...
+17942.9s 409 Evaluate annotation type *bbox*
+17974.3s 410 DONE (t=31.32s).
+17974.3s 411 Accumulating evaluation results...
+17975.6s 412 DONE (t=1.34s).
+17975.6s 413 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.138
+17975.6s 414 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.390
+17975.6s 415 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.052
+17975.6s 416 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.068
+17975.6s 417 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.242
+17975.6s 418 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+17975.6s 419 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.023
+17975.6s 420 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.128
+17975.6s 421 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.278
+17975.6s 422 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.179
+17975.6s 423 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.388
+17975.6s 424 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+17975.8s 425 Overall mAP@0.5: 0.3905 | mAP_tiny@0.5: 0.2098 | mAP_tiny@0.5:0.95: 0.0685
+18911.4s 426 [Epoch 18] Batch   20/625 | Total: 0.7770 (cls: 0.485, reg: 0.292)
+[Epoch 18] Batch   40/625 | Total: 0.7646 (cls: 0.475, reg: 0.290)
+[Epoch 18] Batch   60/625 | Total: 0.7596 (cls: 0.453, reg: 0.307)
+[Epoch 18] Batch   80/625 | Total: 0.8395 (cls: 0.556, reg: 0.283)
+[Epoch 18] Batch  100/625 | Total: 0.7212 (cls: 0.455, reg: 0.267)
+[Epoch 18] Batch  120/625 | Total: 0.6821 (cls: 0.383, reg: 0.300)
+[Epoch 18] Batch  140/625 | Total: 0.7094 (cls: 0.426, reg: 0.284)
+[Epoch 18] Batch  160/625 | Total: 0.6791 (cls: 0.356, reg: 0.323)
+[Epoch 18] Batch  180/625 | Total: 0.6253 (cls: 0.376, reg: 0.249)
+[Epoch 18] Batch  200/625 | Total: 0.5656 (cls: 0.296, reg: 0.270)
+[Epoch 18] Batch  220/625 | Total: 0.7054 (cls: 0.430, reg: 0.275)
+[Epoch 18] Batch  240/625 | Total: 0.7501 (cls: 0.446, reg: 0.304)
+[Epoch 18] Batch  260/625 | Total: 0.7318 (cls: 0.484, reg: 0.248)
+[Epoch 18] Batch  280/625 | Total: 0.6692 (cls: 0.380, reg: 0.289)
+[Epoch 18] Batch  300/625 | Total: 0.7075 (cls: 0.475, reg: 0.233)
+[Epoch 18] Batch  320/625 | Total: 0.6717 (cls: 0.371, reg: 0.301)
+[Epoch 18] Batch  340/625 | Total: 0.6396 (cls: 0.377, reg: 0.263)
+[Epoch 18] Batch  360/625 | Total: 0.6903 (cls: 0.414, reg: 0.276)
+[Epoch 18] Batch  380/625 | Total: 0.7264 (cls: 0.413, reg: 0.313)
+[Epoch 18] Batch  400/625 | Total: 0.5418 (cls: 0.311, reg: 0.231)
+[Epoch 18] Batch  420/625 | Total: 0.6549 (cls: 0.384, reg: 0.271)
+[Epoch 18] Batch  440/625 | Total: 0.6061 (cls: 0.361, reg: 0.245)
+[Epoch 18] Batch  460/625 | Total: 0.7475 (cls: 0.448, reg: 0.300)
+[Epoch 18] Batch  480/625 | Total: 0.8411 (cls: 0.533, reg: 0.308)
+[Epoch 18] Batch  500/625 | Total: 0.5778 (cls: 0.326, reg: 0.252)
+[Epoch 18] Batch  520/625 | Total: 0.6691 (cls: 0.366, reg: 0.303)
+[Epoch 18] Batch  540/625 | Total: 0.7586 (cls: 0.456, reg: 0.302)
+[Epoch 18] Batch  560/625 | Total: 0.7153 (cls: 0.427, reg: 0.288)
+[Epoch 18] Batch  580/625 | Total: 0.7708 (cls: 0.467, reg: 0.304)
+[Epoch 18] Batch  600/625 | Total: 0.7979 (cls: 0.496, reg: 0.302)
+[Epoch 18] Batch  620/625 | Total: 0.6156 (cls: 0.356, reg: 0.260)
+
+[Epoch 18/80] Loss=0.7075 Cls=0.4251 Reg=0.2824 LR=0.000910 (935.5s)
+18962.5s 427 Loading and preparing results...
+18963.9s 428 DONE (t=1.47s)
+18963.9s 429 creating index...
+18964.1s 430 index created!
+18964.1s 431 Running per image evaluation...
+18964.1s 432 Evaluate annotation type *bbox*
+18994.6s 433 DONE (t=30.40s).
+18994.6s 434 Accumulating evaluation results...
+18995.9s 435 DONE (t=1.44s).
+18995.9s 436 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.168
+18995.9s 437 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.421
+18995.9s 438 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.091
+18995.9s 439 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.080
+18995.9s 440 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.276
+18995.9s 441 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+18995.9s 442 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.027
+18995.9s 443 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.148
+18995.9s 444 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.304
+18995.9s 445 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.189
+18995.9s 446 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.425
+18995.9s 447 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+18996.2s 448 Overall mAP@0.5: 0.4214 | mAP_tiny@0.5: 0.2320 | mAP_tiny@0.5:0.95: 0.0797
+18996.5s 449 * New best checkpoint saved (Overall mAP@0.5: 0.4214)
+19932.2s 450 [Epoch 19] Batch   20/625 | Total: 0.5874 (cls: 0.355, reg: 0.232)
+[Epoch 19] Batch   40/625 | Total: 0.6465 (cls: 0.335, reg: 0.312)
+[Epoch 19] Batch   60/625 | Total: 0.5782 (cls: 0.314, reg: 0.264)
+[Epoch 19] Batch   80/625 | Total: 0.7083 (cls: 0.455, reg: 0.253)
+[Epoch 19] Batch  100/625 | Total: 0.6075 (cls: 0.361, reg: 0.246)
+[Epoch 19] Batch  120/625 | Total: 0.7597 (cls: 0.452, reg: 0.307)
+[Epoch 19] Batch  140/625 | Total: 0.6692 (cls: 0.386, reg: 0.283)
+[Epoch 19] Batch  160/625 | Total: 0.6499 (cls: 0.368, reg: 0.282)
+[Epoch 19] Batch  180/625 | Total: 0.6252 (cls: 0.375, reg: 0.250)
+[Epoch 19] Batch  200/625 | Total: 1.0630 (cls: 0.707, reg: 0.356)
+[Epoch 19] Batch  220/625 | Total: 0.6888 (cls: 0.381, reg: 0.308)
+[Epoch 19] Batch  240/625 | Total: 0.6921 (cls: 0.393, reg: 0.299)
+[Epoch 19] Batch  260/625 | Total: 0.6727 (cls: 0.404, reg: 0.269)
+[Epoch 19] Batch  280/625 | Total: 0.7649 (cls: 0.476, reg: 0.289)
+[Epoch 19] Batch  300/625 | Total: 0.5682 (cls: 0.332, reg: 0.237)
+[Epoch 19] Batch  320/625 | Total: 0.6990 (cls: 0.423, reg: 0.276)
+[Epoch 19] Batch  340/625 | Total: 0.8222 (cls: 0.507, reg: 0.316)
+[Epoch 19] Batch  360/625 | Total: 0.7456 (cls: 0.425, reg: 0.321)
+[Epoch 19] Batch  380/625 | Total: 0.7118 (cls: 0.396, reg: 0.316)
+[Epoch 19] Batch  400/625 | Total: 0.6424 (cls: 0.366, reg: 0.276)
+[Epoch 19] Batch  420/625 | Total: 0.8267 (cls: 0.527, reg: 0.300)
+[Epoch 19] Batch  440/625 | Total: 0.7183 (cls: 0.422, reg: 0.296)
+[Epoch 19] Batch  460/625 | Total: 0.7124 (cls: 0.423, reg: 0.290)
+[Epoch 19] Batch  480/625 | Total: 0.7735 (cls: 0.437, reg: 0.337)
+[Epoch 19] Batch  500/625 | Total: 0.7000 (cls: 0.400, reg: 0.300)
+[Epoch 19] Batch  520/625 | Total: 0.6292 (cls: 0.377, reg: 0.252)
+[Epoch 19] Batch  540/625 | Total: 0.6116 (cls: 0.359, reg: 0.253)
+[Epoch 19] Batch  560/625 | Total: 0.9019 (cls: 0.576, reg: 0.326)
+[Epoch 19] Batch  580/625 | Total: 0.6791 (cls: 0.438, reg: 0.241)
+[Epoch 19] Batch  600/625 | Total: 0.7100 (cls: 0.429, reg: 0.281)
+[Epoch 19] Batch  620/625 | Total: 0.6268 (cls: 0.359, reg: 0.268)
+
+[Epoch 19/80] Loss=0.7051 Cls=0.4242 Reg=0.2809 LR=0.000898 (935.7s)
+19983.9s 451 Loading and preparing results...
+19985.2s 452 DONE (t=1.42s)
+19985.2s 453 creating index...
+19985.4s 454 index created!
+19985.4s 455 Running per image evaluation...
+19985.4s 456 Evaluate annotation type *bbox*
+20016.7s 457 DONE (t=31.19s).
+20016.7s 458 Accumulating evaluation results...
+20018.0s 459 DONE (t=1.37s).
+20018.0s 460 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.176
+20018.0s 461 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.423
+20018.0s 462 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.115
+20018.0s 463 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.091
+20018.0s 464 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.263
+20018.0s 465 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+20018.0s 466 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.028
+20018.0s 467 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.154
+20018.0s 468 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.311
+20018.0s 469 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.198
+20018.0s 470 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.457
+20018.0s 471 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+20018.2s 472 Overall mAP@0.5: 0.4234 | mAP_tiny@0.5: 0.2486 | mAP_tiny@0.5:0.95: 0.0906
+20018.5s 473 * New best checkpoint saved (Overall mAP@0.5: 0.4234)
+20958.8s 474 [Epoch 20] Batch   20/625 | Total: 0.6493 (cls: 0.382, reg: 0.267)
+[Epoch 20] Batch   40/625 | Total: 0.6679 (cls: 0.373, reg: 0.295)
+[Epoch 20] Batch   60/625 | Total: 0.5845 (cls: 0.298, reg: 0.286)
+[Epoch 20] Batch   80/625 | Total: 0.7477 (cls: 0.447, reg: 0.301)
+[Epoch 20] Batch  100/625 | Total: 1.1069 (cls: 0.754, reg: 0.353)
+[Epoch 20] Batch  120/625 | Total: 0.7320 (cls: 0.457, reg: 0.275)
+[Epoch 20] Batch  140/625 | Total: 0.6906 (cls: 0.429, reg: 0.261)
+[Epoch 20] Batch  160/625 | Total: 0.7222 (cls: 0.466, reg: 0.257)
+[Epoch 20] Batch  180/625 | Total: 0.6659 (cls: 0.422, reg: 0.244)
+[Epoch 20] Batch  200/625 | Total: 0.6570 (cls: 0.398, reg: 0.259)
+[Epoch 20] Batch  220/625 | Total: 0.6890 (cls: 0.413, reg: 0.276)
+[Epoch 20] Batch  240/625 | Total: 0.6788 (cls: 0.387, reg: 0.292)
+[Epoch 20] Batch  260/625 | Total: 0.7191 (cls: 0.438, reg: 0.281)
+[Epoch 20] Batch  280/625 | Total: 0.5811 (cls: 0.330, reg: 0.251)
+[Epoch 20] Batch  300/625 | Total: 0.6079 (cls: 0.371, reg: 0.237)
+[Epoch 20] Batch  320/625 | Total: 0.7630 (cls: 0.435, reg: 0.328)
+[Epoch 20] Batch  340/625 | Total: 0.6665 (cls: 0.357, reg: 0.309)
+[Epoch 20] Batch  360/625 | Total: 0.7009 (cls: 0.439, reg: 0.262)
+[Epoch 20] Batch  380/625 | Total: 0.6046 (cls: 0.343, reg: 0.261)
+[Epoch 20] Batch  400/625 | Total: 0.7497 (cls: 0.491, reg: 0.259)
+[Epoch 20] Batch  420/625 | Total: 0.8219 (cls: 0.575, reg: 0.246)
+[Epoch 20] Batch  440/625 | Total: 0.7197 (cls: 0.441, reg: 0.278)
+[Epoch 20] Batch  460/625 | Total: 0.8202 (cls: 0.519, reg: 0.301)
+[Epoch 20] Batch  480/625 | Total: 0.7796 (cls: 0.412, reg: 0.367)
+[Epoch 20] Batch  500/625 | Total: 0.6476 (cls: 0.414, reg: 0.234)
+[Epoch 20] Batch  520/625 | Total: 0.6077 (cls: 0.308, reg: 0.300)
+[Epoch 20] Batch  540/625 | Total: 0.6620 (cls: 0.392, reg: 0.270)
+[Epoch 20] Batch  560/625 | Total: 0.6996 (cls: 0.399, reg: 0.301)
+[Epoch 20] Batch  580/625 | Total: 0.7238 (cls: 0.418, reg: 0.306)
+[Epoch 20] Batch  600/625 | Total: 0.6698 (cls: 0.395, reg: 0.275)
+[Epoch 20] Batch  620/625 | Total: 0.8487 (cls: 0.556, reg: 0.293)
+
+[Epoch 20/80] Loss=0.6988 Cls=0.4206 Reg=0.2782 LR=0.000886 (940.3s)
+21009.4s 475 Loading and preparing results...
+21011.7s 476 DONE (t=2.32s)
+21011.7s 477 creating index...
+21011.9s 478 index created!
+21011.9s 479 Running per image evaluation...
+21011.9s 480 Evaluate annotation type *bbox*
+21041.9s 481 DONE (t=29.98s).
+21041.9s 482 Accumulating evaluation results...
+21043.4s 483 DONE (t=1.55s).
+21043.4s 484 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.177
+21043.4s 485 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.435
+21043.4s 486 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.104
+21043.4s 487 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.086
+21043.4s 488 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.288
+21043.4s 489 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+21043.4s 490 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.027
+21043.4s 491 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.154
+21043.4s 492 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.316
+21043.4s 493 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.206
+21043.4s 494 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.452
+21043.4s 495 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+21043.6s 496 Overall mAP@0.5: 0.4349 | mAP_tiny@0.5: 0.2497 | mAP_tiny@0.5:0.95: 0.0855
+21043.9s 497 * New best checkpoint saved (Overall mAP@0.5: 0.4349)
+21044.0s 498 * Periodic checkpoint saved: epoch_20.pth
+21983.4s 499 [Epoch 21] Batch   20/625 | Total: 0.6922 (cls: 0.426, reg: 0.266)
+[Epoch 21] Batch   40/625 | Total: 0.6903 (cls: 0.406, reg: 0.285)
+[Epoch 21] Batch   60/625 | Total: 0.6852 (cls: 0.435, reg: 0.251)
+[Epoch 21] Batch   80/625 | Total: 0.6099 (cls: 0.361, reg: 0.249)
+[Epoch 21] Batch  100/625 | Total: 0.6900 (cls: 0.401, reg: 0.289)
+[Epoch 21] Batch  120/625 | Total: 0.6493 (cls: 0.378, reg: 0.271)
+[Epoch 21] Batch  140/625 | Total: 0.8099 (cls: 0.528, reg: 0.282)
+[Epoch 21] Batch  160/625 | Total: 0.7079 (cls: 0.431, reg: 0.277)
+[Epoch 21] Batch  180/625 | Total: 0.7287 (cls: 0.425, reg: 0.303)
+[Epoch 21] Batch  200/625 | Total: 0.7476 (cls: 0.464, reg: 0.283)
+[Epoch 21] Batch  220/625 | Total: 0.6179 (cls: 0.343, reg: 0.275)
+[Epoch 21] Batch  240/625 | Total: 0.6746 (cls: 0.404, reg: 0.271)
+[Epoch 21] Batch  260/625 | Total: 0.6558 (cls: 0.363, reg: 0.292)
+[Epoch 21] Batch  280/625 | Total: 0.8586 (cls: 0.566, reg: 0.293)
+[Epoch 21] Batch  300/625 | Total: 0.8104 (cls: 0.528, reg: 0.283)
+[Epoch 21] Batch  320/625 | Total: 0.7219 (cls: 0.473, reg: 0.249)
+[Epoch 21] Batch  340/625 | Total: 0.6071 (cls: 0.323, reg: 0.284)
+[Epoch 21] Batch  360/625 | Total: 0.6303 (cls: 0.361, reg: 0.269)
+[Epoch 21] Batch  380/625 | Total: 0.6990 (cls: 0.422, reg: 0.277)
+[Epoch 21] Batch  400/625 | Total: 0.6393 (cls: 0.367, reg: 0.272)
+[Epoch 21] Batch  420/625 | Total: 0.5955 (cls: 0.336, reg: 0.259)
+[Epoch 21] Batch  440/625 | Total: 0.8308 (cls: 0.508, reg: 0.322)
+[Epoch 21] Batch  460/625 | Total: 0.6891 (cls: 0.404, reg: 0.285)
+[Epoch 21] Batch  480/625 | Total: 0.9410 (cls: 0.646, reg: 0.295)
+[Epoch 21] Batch  500/625 | Total: 0.6206 (cls: 0.370, reg: 0.251)
+[Epoch 21] Batch  520/625 | Total: 0.6816 (cls: 0.403, reg: 0.278)
+[Epoch 21] Batch  540/625 | Total: 0.6344 (cls: 0.373, reg: 0.262)
+[Epoch 21] Batch  560/625 | Total: 0.6152 (cls: 0.346, reg: 0.269)
+[Epoch 21] Batch  580/625 | Total: 0.5233 (cls: 0.287, reg: 0.236)
+[Epoch 21] Batch  600/625 | Total: 0.6538 (cls: 0.391, reg: 0.263)
+[Epoch 21] Batch  620/625 | Total: 0.8091 (cls: 0.525, reg: 0.284)
+
+[Epoch 21/80] Loss=0.6890 Cls=0.4129 Reg=0.2761 LR=0.000872 (939.4s)
+22034.9s 500 Loading and preparing results...
+22036.3s 501 DONE (t=1.47s)
+22036.3s 502 creating index...
+22036.5s 503 index created!
+22036.5s 504 Running per image evaluation...
+22036.5s 505 Evaluate annotation type *bbox*
+22067.4s 506 DONE (t=30.88s).
+22067.4s 507 Accumulating evaluation results...
+22068.7s 508 DONE (t=1.32s).
+22068.7s 509 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.179
+22068.7s 510 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.430
+22068.7s 511 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.115
+22068.7s 512 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.091
+22068.7s 513 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.251
+22068.7s 514 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+22068.7s 515 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.028
+22068.7s 516 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.156
+22068.7s 517 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.312
+22068.7s 518 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.193
+22068.7s 519 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.460
+22068.7s 520 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+22068.9s 521 Overall mAP@0.5: 0.4296 | mAP_tiny@0.5: 0.2566 | mAP_tiny@0.5:0.95: 0.0913
+23007.9s 522 [Epoch 22] Batch   20/625 | Total: 0.7457 (cls: 0.487, reg: 0.259)
+[Epoch 22] Batch   40/625 | Total: 0.6031 (cls: 0.342, reg: 0.262)
+[Epoch 22] Batch   60/625 | Total: 0.6194 (cls: 0.343, reg: 0.277)
+[Epoch 22] Batch   80/625 | Total: 0.6084 (cls: 0.365, reg: 0.244)
+[Epoch 22] Batch  100/625 | Total: 0.6169 (cls: 0.358, reg: 0.259)
+[Epoch 22] Batch  120/625 | Total: 0.7281 (cls: 0.424, reg: 0.304)
+[Epoch 22] Batch  140/625 | Total: 0.8637 (cls: 0.543, reg: 0.321)
+[Epoch 22] Batch  160/625 | Total: 0.6924 (cls: 0.374, reg: 0.319)
+[Epoch 22] Batch  180/625 | Total: 0.6652 (cls: 0.371, reg: 0.294)
+[Epoch 22] Batch  200/625 | Total: 0.6135 (cls: 0.326, reg: 0.288)
+[Epoch 22] Batch  220/625 | Total: 0.7035 (cls: 0.401, reg: 0.302)
+[Epoch 22] Batch  240/625 | Total: 0.6853 (cls: 0.382, reg: 0.303)
+[Epoch 22] Batch  260/625 | Total: 0.6953 (cls: 0.422, reg: 0.273)
+[Epoch 22] Batch  280/625 | Total: 0.6683 (cls: 0.378, reg: 0.291)
+[Epoch 22] Batch  300/625 | Total: 0.6009 (cls: 0.377, reg: 0.224)
+[Epoch 22] Batch  320/625 | Total: 0.6476 (cls: 0.394, reg: 0.254)
+[Epoch 22] Batch  340/625 | Total: 0.5862 (cls: 0.333, reg: 0.253)
+[Epoch 22] Batch  360/625 | Total: 0.6796 (cls: 0.418, reg: 0.262)
+[Epoch 22] Batch  380/625 | Total: 0.6671 (cls: 0.397, reg: 0.270)
+[Epoch 22] Batch  400/625 | Total: 0.7248 (cls: 0.444, reg: 0.280)
+[Epoch 22] Batch  420/625 | Total: 0.5703 (cls: 0.301, reg: 0.269)
+[Epoch 22] Batch  440/625 | Total: 0.6893 (cls: 0.414, reg: 0.275)
+[Epoch 22] Batch  460/625 | Total: 0.7582 (cls: 0.463, reg: 0.295)
+[Epoch 22] Batch  480/625 | Total: 0.7611 (cls: 0.435, reg: 0.326)
+[Epoch 22] Batch  500/625 | Total: 0.6235 (cls: 0.340, reg: 0.283)
+[Epoch 22] Batch  520/625 | Total: 0.7523 (cls: 0.434, reg: 0.318)
+[Epoch 22] Batch  540/625 | Total: 0.7484 (cls: 0.459, reg: 0.290)
+[Epoch 22] Batch  560/625 | Total: 0.6717 (cls: 0.394, reg: 0.278)
+[Epoch 22] Batch  580/625 | Total: 0.7536 (cls: 0.448, reg: 0.306)
+[Epoch 22] Batch  600/625 | Total: 0.6787 (cls: 0.413, reg: 0.266)
+[Epoch 22] Batch  620/625 | Total: 0.7891 (cls: 0.499, reg: 0.290)
+
+[Epoch 22/80] Loss=0.6863 Cls=0.4116 Reg=0.2747 LR=0.000859 (938.7s)
+23058.3s 523 Loading and preparing results...
+23060.5s 524 DONE (t=2.28s)
+23060.5s 525 creating index...
+23060.7s 526 index created!
+23060.7s 527 Running per image evaluation...
+23060.7s 528 Evaluate annotation type *bbox*
+23091.3s 529 DONE (t=30.57s).
+23091.3s 530 Accumulating evaluation results...
+23092.7s 531 DONE (t=1.41s).
+23092.7s 532 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.161
+23092.7s 533 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.394
+23092.7s 534 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.096
+23092.7s 535 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.073
+23092.7s 536 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.268
+23092.7s 537 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+23092.7s 538 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.027
+23092.7s 539 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.151
+23092.7s 540 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.303
+23092.7s 541 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.184
+23092.7s 542 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.423
+23092.7s 543 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+23092.9s 544 Overall mAP@0.5: 0.3944 | mAP_tiny@0.5: 0.2142 | mAP_tiny@0.5:0.95: 0.0725
+24035.8s 545 [Epoch 23] Batch   20/625 | Total: 0.5785 (cls: 0.327, reg: 0.252)
+[Epoch 23] Batch   40/625 | Total: 0.7018 (cls: 0.415, reg: 0.287)
+[Epoch 23] Batch   60/625 | Total: 0.6059 (cls: 0.375, reg: 0.231)
+[Epoch 23] Batch   80/625 | Total: 0.7361 (cls: 0.462, reg: 0.274)
+[Epoch 23] Batch  100/625 | Total: 0.5918 (cls: 0.356, reg: 0.236)
+[Epoch 23] Batch  120/625 | Total: 0.7222 (cls: 0.467, reg: 0.255)
+[Epoch 23] Batch  140/625 | Total: 0.8351 (cls: 0.523, reg: 0.312)
+[Epoch 23] Batch  160/625 | Total: 0.6573 (cls: 0.416, reg: 0.242)
+[Epoch 23] Batch  180/625 | Total: 0.5641 (cls: 0.326, reg: 0.238)
+[Epoch 23] Batch  200/625 | Total: 0.6746 (cls: 0.373, reg: 0.302)
+[Epoch 23] Batch  220/625 | Total: 0.6269 (cls: 0.317, reg: 0.310)
+[Epoch 23] Batch  240/625 | Total: 0.7714 (cls: 0.489, reg: 0.282)
+[Epoch 23] Batch  260/625 | Total: 0.6799 (cls: 0.449, reg: 0.231)
+[Epoch 23] Batch  280/625 | Total: 0.6942 (cls: 0.424, reg: 0.270)
+[Epoch 23] Batch  300/625 | Total: 0.7354 (cls: 0.471, reg: 0.265)
+[Epoch 23] Batch  320/625 | Total: 0.5694 (cls: 0.328, reg: 0.242)
+[Epoch 23] Batch  340/625 | Total: 0.6740 (cls: 0.388, reg: 0.286)
+[Epoch 23] Batch  360/625 | Total: 0.5506 (cls: 0.316, reg: 0.234)
+[Epoch 23] Batch  380/625 | Total: 0.6111 (cls: 0.334, reg: 0.277)
+[Epoch 23] Batch  400/625 | Total: 0.7170 (cls: 0.469, reg: 0.248)
+[Epoch 23] Batch  420/625 | Total: 0.5617 (cls: 0.284, reg: 0.278)
+[Epoch 23] Batch  440/625 | Total: 0.5641 (cls: 0.323, reg: 0.241)
+[Epoch 23] Batch  460/625 | Total: 0.6664 (cls: 0.430, reg: 0.236)
+[Epoch 23] Batch  480/625 | Total: 0.6425 (cls: 0.355, reg: 0.287)
+[Epoch 23] Batch  500/625 | Total: 0.8908 (cls: 0.590, reg: 0.301)
+[Epoch 23] Batch  520/625 | Total: 0.6140 (cls: 0.361, reg: 0.253)
+[Epoch 23] Batch  540/625 | Total: 0.6016 (cls: 0.354, reg: 0.247)
+[Epoch 23] Batch  560/625 | Total: 0.9166 (cls: 0.592, reg: 0.324)
+[Epoch 23] Batch  580/625 | Total: 0.7424 (cls: 0.461, reg: 0.282)
+[Epoch 23] Batch  600/625 | Total: 0.7930 (cls: 0.537, reg: 0.256)
+[Epoch 23] Batch  620/625 | Total: 0.7107 (cls: 0.457, reg: 0.254)
+
+[Epoch 23/80] Loss=0.6829 Cls=0.4095 Reg=0.2734 LR=0.000844 (942.7s)
+24086.4s 546 Loading and preparing results...
+24087.8s 547 DONE (t=1.43s)
+24087.8s 548 creating index...
+24088.0s 549 index created!
+24088.0s 550 Running per image evaluation...
+24088.0s 551 Evaluate annotation type *bbox*
+24118.8s 552 DONE (t=30.79s).
+24118.8s 553 Accumulating evaluation results...
+24120.1s 554 DONE (t=1.34s).
+24120.1s 555 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.180
+24120.1s 556 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.443
+24120.1s 557 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.108
+24120.1s 558 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.091
+24120.1s 559 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.291
+24120.1s 560 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+24120.1s 561 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.028
+24120.1s 562 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.157
+24120.1s 563 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.316
+24120.1s 564 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.209
+24120.1s 565 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.450
+24120.1s 566 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+24120.3s 567 Overall mAP@0.5: 0.4429 | mAP_tiny@0.5: 0.2603 | mAP_tiny@0.5:0.95: 0.0907
+24120.6s 568 * New best checkpoint saved (Overall mAP@0.5: 0.4429)
+25056.4s 569 [Epoch 24] Batch   20/625 | Total: 0.6649 (cls: 0.425, reg: 0.240)
+[Epoch 24] Batch   40/625 | Total: 0.6269 (cls: 0.379, reg: 0.248)
+[Epoch 24] Batch   60/625 | Total: 0.6938 (cls: 0.447, reg: 0.247)
+[Epoch 24] Batch   80/625 | Total: 0.5225 (cls: 0.274, reg: 0.248)
+[Epoch 24] Batch  100/625 | Total: 0.5669 (cls: 0.344, reg: 0.223)
+[Epoch 24] Batch  120/625 | Total: 0.5861 (cls: 0.328, reg: 0.258)
+[Epoch 24] Batch  140/625 | Total: 0.6621 (cls: 0.408, reg: 0.254)
+[Epoch 24] Batch  160/625 | Total: 0.6202 (cls: 0.377, reg: 0.243)
+[Epoch 24] Batch  180/625 | Total: 0.7269 (cls: 0.428, reg: 0.299)
+[Epoch 24] Batch  200/625 | Total: 0.5907 (cls: 0.299, reg: 0.291)
+[Epoch 24] Batch  220/625 | Total: 0.5915 (cls: 0.361, reg: 0.230)
+[Epoch 24] Batch  240/625 | Total: 0.6664 (cls: 0.413, reg: 0.254)
+[Epoch 24] Batch  260/625 | Total: 0.6598 (cls: 0.361, reg: 0.299)
+[Epoch 24] Batch  280/625 | Total: 0.5547 (cls: 0.313, reg: 0.242)
+[Epoch 24] Batch  300/625 | Total: 0.7220 (cls: 0.455, reg: 0.267)
+[Epoch 24] Batch  320/625 | Total: 0.6438 (cls: 0.358, reg: 0.286)
+[Epoch 24] Batch  340/625 | Total: 0.7209 (cls: 0.440, reg: 0.281)
+[Epoch 24] Batch  360/625 | Total: 0.7492 (cls: 0.432, reg: 0.317)
+[Epoch 24] Batch  380/625 | Total: 0.6472 (cls: 0.389, reg: 0.259)
+[Epoch 24] Batch  400/625 | Total: 0.5694 (cls: 0.297, reg: 0.272)
+[Epoch 24] Batch  420/625 | Total: 0.6054 (cls: 0.333, reg: 0.273)
+[Epoch 24] Batch  440/625 | Total: 0.5910 (cls: 0.356, reg: 0.235)
+[Epoch 24] Batch  460/625 | Total: 0.6879 (cls: 0.427, reg: 0.260)
+[Epoch 24] Batch  480/625 | Total: 0.6678 (cls: 0.428, reg: 0.240)
+[Epoch 24] Batch  500/625 | Total: 0.6535 (cls: 0.363, reg: 0.291)
+[Epoch 24] Batch  520/625 | Total: 0.6842 (cls: 0.426, reg: 0.258)
+[Epoch 24] Batch  540/625 | Total: 0.6675 (cls: 0.398, reg: 0.269)
+[Epoch 24] Batch  560/625 | Total: 0.6980 (cls: 0.424, reg: 0.274)
+[Epoch 24] Batch  580/625 | Total: 0.6589 (cls: 0.406, reg: 0.253)
+[Epoch 24] Batch  600/625 | Total: 0.7264 (cls: 0.451, reg: 0.275)
+[Epoch 24] Batch  620/625 | Total: 0.6329 (cls: 0.376, reg: 0.257)
+
+[Epoch 24/80] Loss=0.6777 Cls=0.4052 Reg=0.2725 LR=0.000829 (935.8s)
+25108.0s 570 Loading and preparing results...
+25109.4s 571 DONE (t=1.49s)
+25109.4s 572 creating index...
+25109.6s 573 index created!
+25109.6s 574 Running per image evaluation...
+25109.6s 575 Evaluate annotation type *bbox*
+25141.1s 576 DONE (t=31.44s).
+25141.1s 577 Accumulating evaluation results...
+25142.4s 578 DONE (t=1.38s).
+25142.4s 579 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.187
+25142.4s 580 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.450
+25142.4s 581 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.112
+25142.4s 582 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.100
+25142.4s 583 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.302
+25142.4s 584 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+25142.4s 585 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.028
+25142.4s 586 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.162
+25142.4s 587 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.317
+25142.4s 588 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.203
+25142.4s 589 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.435
+25142.4s 590 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+25142.7s 591 Overall mAP@0.5: 0.4504 | mAP_tiny@0.5: 0.2652 | mAP_tiny@0.5:0.95: 0.0996
+25143.0s 592 * New best checkpoint saved (Overall mAP@0.5: 0.4504)
+26085.0s 593 [Epoch 25] Batch   20/625 | Total: 0.6823 (cls: 0.422, reg: 0.260)
+[Epoch 25] Batch   40/625 | Total: 0.6129 (cls: 0.337, reg: 0.276)
+[Epoch 25] Batch   60/625 | Total: 0.6200 (cls: 0.383, reg: 0.237)
+[Epoch 25] Batch   80/625 | Total: 0.6800 (cls: 0.404, reg: 0.276)
+[Epoch 25] Batch  100/625 | Total: 0.6809 (cls: 0.429, reg: 0.252)
+[Epoch 25] Batch  120/625 | Total: 0.6798 (cls: 0.419, reg: 0.261)
+[Epoch 25] Batch  140/625 | Total: 0.5918 (cls: 0.352, reg: 0.240)
+[Epoch 25] Batch  160/625 | Total: 0.7401 (cls: 0.450, reg: 0.290)
+[Epoch 25] Batch  180/625 | Total: 0.6846 (cls: 0.413, reg: 0.272)
+[Epoch 25] Batch  200/625 | Total: 0.6547 (cls: 0.416, reg: 0.239)
+[Epoch 25] Batch  220/625 | Total: 0.5981 (cls: 0.343, reg: 0.255)
+[Epoch 25] Batch  240/625 | Total: 0.6591 (cls: 0.414, reg: 0.245)
+[Epoch 25] Batch  260/625 | Total: 0.6623 (cls: 0.406, reg: 0.257)
+[Epoch 25] Batch  280/625 | Total: 0.6110 (cls: 0.319, reg: 0.292)
+[Epoch 25] Batch  300/625 | Total: 0.8061 (cls: 0.543, reg: 0.263)
+[Epoch 25] Batch  320/625 | Total: 0.5409 (cls: 0.297, reg: 0.244)
+[Epoch 25] Batch  340/625 | Total: 0.6442 (cls: 0.378, reg: 0.266)
+[Epoch 25] Batch  360/625 | Total: 0.5958 (cls: 0.341, reg: 0.255)
+[Epoch 25] Batch  380/625 | Total: 0.6585 (cls: 0.413, reg: 0.246)
+[Epoch 25] Batch  400/625 | Total: 0.7295 (cls: 0.409, reg: 0.320)
+[Epoch 25] Batch  420/625 | Total: 0.7077 (cls: 0.437, reg: 0.271)
+[Epoch 25] Batch  440/625 | Total: 0.6872 (cls: 0.422, reg: 0.265)
+[Epoch 25] Batch  460/625 | Total: 0.8174 (cls: 0.537, reg: 0.280)
+[Epoch 25] Batch  480/625 | Total: 0.6855 (cls: 0.421, reg: 0.264)
+[Epoch 25] Batch  500/625 | Total: 0.7658 (cls: 0.507, reg: 0.259)
+[Epoch 25] Batch  520/625 | Total: 0.7456 (cls: 0.446, reg: 0.300)
+[Epoch 25] Batch  540/625 | Total: 0.8272 (cls: 0.555, reg: 0.273)
+[Epoch 25] Batch  560/625 | Total: 0.6217 (cls: 0.387, reg: 0.235)
+[Epoch 25] Batch  580/625 | Total: 0.5396 (cls: 0.291, reg: 0.248)
+[Epoch 25] Batch  600/625 | Total: 0.6291 (cls: 0.403, reg: 0.227)
+[Epoch 25] Batch  620/625 | Total: 0.6484 (cls: 0.399, reg: 0.250)
+
+[Epoch 25/80] Loss=0.6701 Cls=0.4004 Reg=0.2697 LR=0.000814 (942.0s)
+26135.8s 594 Loading and preparing results...
+26137.2s 595 DONE (t=1.43s)
+26137.2s 596 creating index...
+26137.3s 597 index created!
+26137.3s 598 Running per image evaluation...
+26137.3s 599 Evaluate annotation type *bbox*
+26168.3s 600 DONE (t=30.94s).
+26168.3s 601 Accumulating evaluation results...
+26169.6s 602 DONE (t=1.34s).
+26169.6s 603 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.182
+26169.6s 604 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.433
+26169.6s 605 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.115
+26169.6s 606 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.096
+26169.6s 607 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.267
+26169.6s 608 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+26169.6s 609 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.028
+26169.6s 610 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.160
+26169.6s 611 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.318
+26169.6s 612 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.208
+26169.6s 613 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.448
+26169.6s 614 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+26169.8s 615 Overall mAP@0.5: 0.4333 | mAP_tiny@0.5: 0.2652 | mAP_tiny@0.5:0.95: 0.0956
+26170.1s 616 * Periodic checkpoint saved: epoch_25.pth
+27106.5s 617 [Epoch 26] Batch   20/625 | Total: 0.6910 (cls: 0.412, reg: 0.279)
+[Epoch 26] Batch   40/625 | Total: 0.7127 (cls: 0.452, reg: 0.260)
+[Epoch 26] Batch   60/625 | Total: 0.6158 (cls: 0.345, reg: 0.271)
+[Epoch 26] Batch   80/625 | Total: 0.6109 (cls: 0.330, reg: 0.280)
+[Epoch 26] Batch  100/625 | Total: 0.8180 (cls: 0.488, reg: 0.330)
+[Epoch 26] Batch  120/625 | Total: 0.6410 (cls: 0.375, reg: 0.266)
+[Epoch 26] Batch  140/625 | Total: 0.7106 (cls: 0.458, reg: 0.253)
+[Epoch 26] Batch  160/625 | Total: 0.6287 (cls: 0.372, reg: 0.256)
+[Epoch 26] Batch  180/625 | Total: 0.6974 (cls: 0.437, reg: 0.260)
+[Epoch 26] Batch  200/625 | Total: 0.6154 (cls: 0.345, reg: 0.271)
+[Epoch 26] Batch  220/625 | Total: 0.7113 (cls: 0.421, reg: 0.290)
+[Epoch 26] Batch  240/625 | Total: 0.7292 (cls: 0.442, reg: 0.287)
+[Epoch 26] Batch  260/625 | Total: 0.7795 (cls: 0.487, reg: 0.293)
+[Epoch 26] Batch  280/625 | Total: 0.6326 (cls: 0.355, reg: 0.278)
+[Epoch 26] Batch  300/625 | Total: 0.6635 (cls: 0.406, reg: 0.257)
+[Epoch 26] Batch  320/625 | Total: 0.5621 (cls: 0.324, reg: 0.238)
+[Epoch 26] Batch  340/625 | Total: 0.7153 (cls: 0.422, reg: 0.294)
+[Epoch 26] Batch  360/625 | Total: 0.7004 (cls: 0.414, reg: 0.287)
+[Epoch 26] Batch  380/625 | Total: 0.6248 (cls: 0.364, reg: 0.260)
+[Epoch 26] Batch  400/625 | Total: 0.6419 (cls: 0.374, reg: 0.268)
+[Epoch 26] Batch  420/625 | Total: 0.6405 (cls: 0.381, reg: 0.260)
+[Epoch 26] Batch  440/625 | Total: 0.6942 (cls: 0.443, reg: 0.251)
+[Epoch 26] Batch  460/625 | Total: 0.9501 (cls: 0.686, reg: 0.264)
+[Epoch 26] Batch  480/625 | Total: 0.6836 (cls: 0.432, reg: 0.252)
+[Epoch 26] Batch  500/625 | Total: 0.7039 (cls: 0.439, reg: 0.264)
+[Epoch 26] Batch  520/625 | Total: 0.7589 (cls: 0.426, reg: 0.333)
+[Epoch 26] Batch  540/625 | Total: 0.6311 (cls: 0.347, reg: 0.284)
+[Epoch 26] Batch  560/625 | Total: 0.7023 (cls: 0.399, reg: 0.304)
+[Epoch 26] Batch  580/625 | Total: 0.6253 (cls: 0.372, reg: 0.254)
+[Epoch 26] Batch  600/625 | Total: 0.5750 (cls: 0.330, reg: 0.245)
+[Epoch 26] Batch  620/625 | Total: 0.7363 (cls: 0.455, reg: 0.281)
+
+[Epoch 26/80] Loss=0.6701 Cls=0.4012 Reg=0.2690 LR=0.000798 (936.4s)
+27156.6s 618 Loading and preparing results...
+27158.8s 619 DONE (t=2.29s)
+27158.8s 620 creating index...
+27159.0s 621 index created!
+27159.0s 622 Running per image evaluation...
+27159.0s 623 Evaluate annotation type *bbox*
+27189.4s 624 DONE (t=30.29s).
+27189.4s 625 Accumulating evaluation results...
+27191.3s 626 DONE (t=1.94s).
+27191.3s 627 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.194
+27191.3s 628 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.455
+27191.3s 629 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.126
+27191.3s 630 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.101
+27191.3s 631 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.292
+27191.3s 632 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+27191.3s 633 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.030
+27191.3s 634 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.165
+27191.3s 635 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.331
+27191.3s 636 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.220
+27191.3s 637 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.470
+27191.3s 638 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+27191.5s 639 Overall mAP@0.5: 0.4551 | mAP_tiny@0.5: 0.2779 | mAP_tiny@0.5:0.95: 0.1014
+27191.8s 640 * New best checkpoint saved (Overall mAP@0.5: 0.4551)
+28132.0s 641 [Epoch 27] Batch   20/625 | Total: 0.6970 (cls: 0.440, reg: 0.257)
+[Epoch 27] Batch   40/625 | Total: 0.6584 (cls: 0.402, reg: 0.256)
+[Epoch 27] Batch   60/625 | Total: 0.7077 (cls: 0.467, reg: 0.241)
+[Epoch 27] Batch   80/625 | Total: 0.6689 (cls: 0.389, reg: 0.280)
+[Epoch 27] Batch  100/625 | Total: 0.5793 (cls: 0.333, reg: 0.246)
+[Epoch 27] Batch  120/625 | Total: 0.7730 (cls: 0.463, reg: 0.310)
+[Epoch 27] Batch  140/625 | Total: 0.8296 (cls: 0.479, reg: 0.351)
+[Epoch 27] Batch  160/625 | Total: 0.5765 (cls: 0.312, reg: 0.265)
+[Epoch 27] Batch  180/625 | Total: 0.6146 (cls: 0.348, reg: 0.266)
+[Epoch 27] Batch  200/625 | Total: 0.6191 (cls: 0.380, reg: 0.239)
+[Epoch 27] Batch  220/625 | Total: 0.6461 (cls: 0.371, reg: 0.275)
+[Epoch 27] Batch  240/625 | Total: 0.6568 (cls: 0.418, reg: 0.239)
+[Epoch 27] Batch  260/625 | Total: 0.6547 (cls: 0.383, reg: 0.272)
+[Epoch 27] Batch  280/625 | Total: 0.8657 (cls: 0.564, reg: 0.301)
+[Epoch 27] Batch  300/625 | Total: 0.5923 (cls: 0.339, reg: 0.253)
+[Epoch 27] Batch  320/625 | Total: 0.6867 (cls: 0.413, reg: 0.273)
+[Epoch 27] Batch  340/625 | Total: 0.6875 (cls: 0.449, reg: 0.238)
+[Epoch 27] Batch  360/625 | Total: 0.7234 (cls: 0.435, reg: 0.288)
+[Epoch 27] Batch  380/625 | Total: 0.6084 (cls: 0.373, reg: 0.235)
+[Epoch 27] Batch  400/625 | Total: 0.5975 (cls: 0.345, reg: 0.252)
+[Epoch 27] Batch  420/625 | Total: 0.6505 (cls: 0.369, reg: 0.281)
+[Epoch 27] Batch  440/625 | Total: 0.8996 (cls: 0.590, reg: 0.310)
+[Epoch 27] Batch  460/625 | Total: 0.7122 (cls: 0.445, reg: 0.267)
+[Epoch 27] Batch  480/625 | Total: 0.6795 (cls: 0.400, reg: 0.279)
+[Epoch 27] Batch  500/625 | Total: 0.5733 (cls: 0.340, reg: 0.233)
+[Epoch 27] Batch  520/625 | Total: 0.6655 (cls: 0.385, reg: 0.280)
+[Epoch 27] Batch  540/625 | Total: 0.6292 (cls: 0.353, reg: 0.276)
+[Epoch 27] Batch  560/625 | Total: 0.5611 (cls: 0.316, reg: 0.245)
+[Epoch 27] Batch  580/625 | Total: 0.6876 (cls: 0.441, reg: 0.247)
+[Epoch 27] Batch  600/625 | Total: 0.8042 (cls: 0.532, reg: 0.272)
+[Epoch 27] Batch  620/625 | Total: 0.8916 (cls: 0.597, reg: 0.294)
+
+[Epoch 27/80] Loss=0.6703 Cls=0.4029 Reg=0.2674 LR=0.000781 (940.2s)
+28182.7s 642 Loading and preparing results...
+28184.1s 643 DONE (t=1.46s)
+28184.1s 644 creating index...
+28184.3s 645 index created!
+28184.3s 646 Running per image evaluation...
+28184.3s 647 Evaluate annotation type *bbox*
+28214.7s 648 DONE (t=30.40s).
+28214.7s 649 Accumulating evaluation results...
+28216.0s 650 DONE (t=1.32s).
+28216.0s 651 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.196
+28216.0s 652 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.466
+28216.0s 653 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.125
+28216.0s 654 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.095
+28216.0s 655 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.317
+28216.0s 656 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+28216.0s 657 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.030
+28216.0s 658 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.164
+28216.0s 659 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.322
+28216.0s 660 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.204
+28216.0s 661 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.472
+28216.0s 662 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+28216.2s 663 Overall mAP@0.5: 0.4655 | mAP_tiny@0.5: 0.2780 | mAP_tiny@0.5:0.95: 0.0949
+28216.5s 664 * New best checkpoint saved (Overall mAP@0.5: 0.4655)
+29159.6s 665 [Epoch 28] Batch   20/625 | Total: 0.5103 (cls: 0.305, reg: 0.205)
+[Epoch 28] Batch   40/625 | Total: 0.6599 (cls: 0.370, reg: 0.290)
+[Epoch 28] Batch   60/625 | Total: 0.6959 (cls: 0.409, reg: 0.287)
+[Epoch 28] Batch   80/625 | Total: 0.6316 (cls: 0.381, reg: 0.251)
+[Epoch 28] Batch  100/625 | Total: 0.5839 (cls: 0.325, reg: 0.259)
+[Epoch 28] Batch  120/625 | Total: 0.7276 (cls: 0.453, reg: 0.275)
+[Epoch 28] Batch  140/625 | Total: 0.6296 (cls: 0.363, reg: 0.267)
+[Epoch 28] Batch  160/625 | Total: 0.5981 (cls: 0.367, reg: 0.232)
+[Epoch 28] Batch  180/625 | Total: 0.5789 (cls: 0.337, reg: 0.242)
+[Epoch 28] Batch  200/625 | Total: 0.6597 (cls: 0.401, reg: 0.258)
+[Epoch 28] Batch  220/625 | Total: 0.6235 (cls: 0.347, reg: 0.277)
+[Epoch 28] Batch  240/625 | Total: 0.7713 (cls: 0.512, reg: 0.259)
+[Epoch 28] Batch  260/625 | Total: 1.0076 (cls: 0.610, reg: 0.398)
+[Epoch 28] Batch  280/625 | Total: 0.6669 (cls: 0.410, reg: 0.257)
+[Epoch 28] Batch  300/625 | Total: 0.6827 (cls: 0.409, reg: 0.273)
+[Epoch 28] Batch  320/625 | Total: 0.5639 (cls: 0.311, reg: 0.252)
+[Epoch 28] Batch  340/625 | Total: 0.6250 (cls: 0.375, reg: 0.250)
+[Epoch 28] Batch  360/625 | Total: 0.6463 (cls: 0.426, reg: 0.220)
+[Epoch 28] Batch  380/625 | Total: 0.7402 (cls: 0.432, reg: 0.308)
+[Epoch 28] Batch  400/625 | Total: 0.5729 (cls: 0.328, reg: 0.245)
+[Epoch 28] Batch  420/625 | Total: 0.5960 (cls: 0.356, reg: 0.240)
+[Epoch 28] Batch  440/625 | Total: 0.8906 (cls: 0.604, reg: 0.286)
+[Epoch 28] Batch  460/625 | Total: 0.8222 (cls: 0.534, reg: 0.288)
+[Epoch 28] Batch  480/625 | Total: 0.7219 (cls: 0.452, reg: 0.269)
+[Epoch 28] Batch  500/625 | Total: 0.6535 (cls: 0.406, reg: 0.247)
+[Epoch 28] Batch  520/625 | Total: 0.6983 (cls: 0.425, reg: 0.273)
+[Epoch 28] Batch  540/625 | Total: 0.6965 (cls: 0.426, reg: 0.270)
+[Epoch 28] Batch  560/625 | Total: 0.8680 (cls: 0.554, reg: 0.314)
+[Epoch 28] Batch  580/625 | Total: 0.7001 (cls: 0.416, reg: 0.284)
+[Epoch 28] Batch  600/625 | Total: 0.6454 (cls: 0.356, reg: 0.290)
+[Epoch 28] Batch  620/625 | Total: 0.7141 (cls: 0.436, reg: 0.278)
+
+[Epoch 28/80] Loss=0.6631 Cls=0.3966 Reg=0.2665 LR=0.000764 (943.0s)
+29211.3s 666 Loading and preparing results...
+29212.8s 667 DONE (t=1.52s)
+29212.8s 668 creating index...
+29213.0s 669 index created!
+29213.0s 670 Running per image evaluation...
+29213.0s 671 Evaluate annotation type *bbox*
+29243.5s 672 DONE (t=30.47s).
+29243.5s 673 Accumulating evaluation results...
+29244.8s 674 DONE (t=1.31s).
+29244.8s 675 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.197
+29244.8s 676 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.453
+29244.8s 677 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.134
+29244.8s 678 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.104
+29244.8s 679 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.293
+29244.8s 680 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+29244.8s 681 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.030
+29244.8s 682 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.168
+29244.8s 683 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.331
+29244.8s 684 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.211
+29244.8s 685 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.479
+29244.8s 686 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+29245.0s 687 Overall mAP@0.5: 0.4531 | mAP_tiny@0.5: 0.2810 | mAP_tiny@0.5:0.95: 0.1043
+30193.5s 688 [Epoch 29] Batch   20/625 | Total: 0.6626 (cls: 0.393, reg: 0.270)
+[Epoch 29] Batch   40/625 | Total: 0.8215 (cls: 0.533, reg: 0.288)
+[Epoch 29] Batch   60/625 | Total: 0.6460 (cls: 0.395, reg: 0.251)
+[Epoch 29] Batch   80/625 | Total: 0.6453 (cls: 0.398, reg: 0.247)
+[Epoch 29] Batch  100/625 | Total: 0.6390 (cls: 0.370, reg: 0.269)
+[Epoch 29] Batch  120/625 | Total: 0.5572 (cls: 0.293, reg: 0.265)
+[Epoch 29] Batch  140/625 | Total: 0.6394 (cls: 0.392, reg: 0.248)
+[Epoch 29] Batch  160/625 | Total: 0.6082 (cls: 0.364, reg: 0.244)
+[Epoch 29] Batch  180/625 | Total: 0.7003 (cls: 0.384, reg: 0.316)
+[Epoch 29] Batch  200/625 | Total: 0.5224 (cls: 0.290, reg: 0.232)
+[Epoch 29] Batch  220/625 | Total: 0.6057 (cls: 0.358, reg: 0.248)
+[Epoch 29] Batch  240/625 | Total: 0.6903 (cls: 0.411, reg: 0.279)
+[Epoch 29] Batch  260/625 | Total: 0.7669 (cls: 0.503, reg: 0.264)
+[Epoch 29] Batch  280/625 | Total: 0.7188 (cls: 0.459, reg: 0.260)
+[Epoch 29] Batch  300/625 | Total: 0.5411 (cls: 0.311, reg: 0.230)
+[Epoch 29] Batch  320/625 | Total: 0.6238 (cls: 0.359, reg: 0.264)
+[Epoch 29] Batch  340/625 | Total: 0.7138 (cls: 0.399, reg: 0.315)
+[Epoch 29] Batch  360/625 | Total: 0.6456 (cls: 0.373, reg: 0.273)
+[Epoch 29] Batch  380/625 | Total: 0.6097 (cls: 0.342, reg: 0.268)
+[Epoch 29] Batch  400/625 | Total: 0.6479 (cls: 0.395, reg: 0.253)
+[Epoch 29] Batch  420/625 | Total: 0.6216 (cls: 0.395, reg: 0.227)
+[Epoch 29] Batch  440/625 | Total: 0.6284 (cls: 0.383, reg: 0.245)
+[Epoch 29] Batch  460/625 | Total: 0.6502 (cls: 0.361, reg: 0.289)
+[Epoch 29] Batch  480/625 | Total: 0.6587 (cls: 0.400, reg: 0.259)
+[Epoch 29] Batch  500/625 | Total: 0.6374 (cls: 0.410, reg: 0.227)
+[Epoch 29] Batch  520/625 | Total: 0.6235 (cls: 0.381, reg: 0.242)
+[Epoch 29] Batch  540/625 | Total: 0.6473 (cls: 0.365, reg: 0.282)
+[Epoch 29] Batch  560/625 | Total: 0.6328 (cls: 0.353, reg: 0.280)
+[Epoch 29] Batch  580/625 | Total: 0.6241 (cls: 0.351, reg: 0.274)
+[Epoch 29] Batch  600/625 | Total: 0.5451 (cls: 0.310, reg: 0.235)
+[Epoch 29] Batch  620/625 | Total: 0.5331 (cls: 0.287, reg: 0.246)
+
+[Epoch 29/80] Loss=0.6592 Cls=0.3937 Reg=0.2655 LR=0.000747 (948.3s)
+30243.8s 689 Loading and preparing results...
+30245.2s 690 DONE (t=1.43s)
+30245.2s 691 creating index...
+30245.3s 692 index created!
+30245.3s 693 Running per image evaluation...
+30245.3s 694 Evaluate annotation type *bbox*
+30275.6s 695 DONE (t=30.22s).
+30275.6s 696 Accumulating evaluation results...
+30277.6s 697 DONE (t=2.03s).
+30277.6s 698 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.197
+30277.6s 699 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.457
+30277.6s 700 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.126
+30277.6s 701 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.099
+30277.6s 702 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.295
+30277.6s 703 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+30277.6s 704 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.029
+30277.6s 705 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.166
+30277.6s 706 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.333
+30277.6s 707 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.220
+30277.6s 708 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.476
+30277.6s 709 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+30277.8s 710 Overall mAP@0.5: 0.4568 | mAP_tiny@0.5: 0.2772 | mAP_tiny@0.5:0.95: 0.0993
+31228.0s 711 [Epoch 30] Batch   20/625 | Total: 0.5825 (cls: 0.330, reg: 0.252)
+[Epoch 30] Batch   40/625 | Total: 0.6120 (cls: 0.361, reg: 0.251)
+[Epoch 30] Batch   60/625 | Total: 0.7872 (cls: 0.504, reg: 0.283)
+[Epoch 30] Batch   80/625 | Total: 0.6508 (cls: 0.398, reg: 0.253)
+[Epoch 30] Batch  100/625 | Total: 0.6312 (cls: 0.364, reg: 0.267)
+[Epoch 30] Batch  120/625 | Total: 0.6448 (cls: 0.369, reg: 0.276)
+[Epoch 30] Batch  140/625 | Total: 0.7402 (cls: 0.486, reg: 0.255)
+[Epoch 30] Batch  160/625 | Total: 0.6390 (cls: 0.369, reg: 0.270)
+[Epoch 30] Batch  180/625 | Total: 0.5818 (cls: 0.339, reg: 0.243)
+[Epoch 30] Batch  200/625 | Total: 0.6915 (cls: 0.392, reg: 0.300)
+[Epoch 30] Batch  220/625 | Total: 0.6199 (cls: 0.336, reg: 0.283)
+[Epoch 30] Batch  240/625 | Total: 0.6589 (cls: 0.385, reg: 0.274)
+[Epoch 30] Batch  260/625 | Total: 0.6357 (cls: 0.378, reg: 0.258)
+[Epoch 30] Batch  280/625 | Total: 0.5104 (cls: 0.323, reg: 0.188)
+[Epoch 30] Batch  300/625 | Total: 0.6655 (cls: 0.392, reg: 0.274)
+[Epoch 30] Batch  320/625 | Total: 0.7193 (cls: 0.411, reg: 0.308)
+[Epoch 30] Batch  340/625 | Total: 0.5949 (cls: 0.365, reg: 0.230)
+[Epoch 30] Batch  360/625 | Total: 0.7848 (cls: 0.508, reg: 0.277)
+[Epoch 30] Batch  380/625 | Total: 0.6442 (cls: 0.376, reg: 0.269)
+[Epoch 30] Batch  400/625 | Total: 0.6181 (cls: 0.363, reg: 0.255)
+[Epoch 30] Batch  420/625 | Total: 0.6338 (cls: 0.360, reg: 0.274)
+[Epoch 30] Batch  440/625 | Total: 0.5702 (cls: 0.279, reg: 0.291)
+[Epoch 30] Batch  460/625 | Total: 0.6901 (cls: 0.381, reg: 0.309)
+[Epoch 30] Batch  480/625 | Total: 0.5965 (cls: 0.389, reg: 0.208)
+[Epoch 30] Batch  500/625 | Total: 0.5882 (cls: 0.328, reg: 0.260)
+[Epoch 30] Batch  520/625 | Total: 0.7558 (cls: 0.470, reg: 0.286)
+[Epoch 30] Batch  540/625 | Total: 0.6227 (cls: 0.362, reg: 0.261)
+[Epoch 30] Batch  560/625 | Total: 0.7488 (cls: 0.492, reg: 0.257)
+[Epoch 30] Batch  580/625 | Total: 0.6185 (cls: 0.351, reg: 0.267)
+[Epoch 30] Batch  600/625 | Total: 0.5350 (cls: 0.299, reg: 0.236)
+[Epoch 30] Batch  620/625 | Total: 0.5525 (cls: 0.304, reg: 0.249)
+
+[Epoch 30/80] Loss=0.6504 Cls=0.3873 Reg=0.2631 LR=0.000729 (950.1s)
+31280.0s 712 Loading and preparing results...
+31281.3s 713 DONE (t=1.40s)
+31281.3s 714 creating index...
+31281.5s 715 index created!
+31281.5s 716 Running per image evaluation...
+31281.5s 717 Evaluate annotation type *bbox*
+31312.8s 718 DONE (t=31.24s).
+31312.8s 719 Accumulating evaluation results...
+31314.1s 720 DONE (t=1.36s).
+31314.1s 721 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.187
+31314.1s 722 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.443
+31314.1s 723 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.119
+31314.1s 724 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.090
+31314.1s 725 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.311
+31314.1s 726 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+31314.1s 727 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.029
+31314.1s 728 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.161
+31314.1s 729 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.325
+31314.1s 730 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.209
+31314.1s 731 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.456
+31314.1s 732 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+31314.3s 733 Overall mAP@0.5: 0.4433 | mAP_tiny@0.5: 0.2506 | mAP_tiny@0.5:0.95: 0.0904
+31314.6s 734 * Periodic checkpoint saved: epoch_30.pth
+32256.8s 735 [Epoch 31] Batch   20/625 | Total: 0.5294 (cls: 0.309, reg: 0.220)
+[Epoch 31] Batch   40/625 | Total: 0.6533 (cls: 0.385, reg: 0.269)
+[Epoch 31] Batch   60/625 | Total: 0.5939 (cls: 0.338, reg: 0.256)
+[Epoch 31] Batch   80/625 | Total: 0.6413 (cls: 0.370, reg: 0.271)
+[Epoch 31] Batch  100/625 | Total: 0.6313 (cls: 0.401, reg: 0.230)
+[Epoch 31] Batch  120/625 | Total: 0.6381 (cls: 0.418, reg: 0.220)
+[Epoch 31] Batch  140/625 | Total: 0.5759 (cls: 0.336, reg: 0.239)
+[Epoch 31] Batch  160/625 | Total: 0.6574 (cls: 0.428, reg: 0.229)
+[Epoch 31] Batch  180/625 | Total: 0.6301 (cls: 0.361, reg: 0.269)
+[Epoch 31] Batch  200/625 | Total: 0.7607 (cls: 0.417, reg: 0.344)
+[Epoch 31] Batch  220/625 | Total: 0.6810 (cls: 0.429, reg: 0.252)
+[Epoch 31] Batch  240/625 | Total: 0.7035 (cls: 0.424, reg: 0.279)
+[Epoch 31] Batch  260/625 | Total: 0.8627 (cls: 0.562, reg: 0.300)
+[Epoch 31] Batch  280/625 | Total: 0.6329 (cls: 0.342, reg: 0.290)
+[Epoch 31] Batch  300/625 | Total: 0.6631 (cls: 0.415, reg: 0.248)
+[Epoch 31] Batch  320/625 | Total: 0.5817 (cls: 0.330, reg: 0.251)
+[Epoch 31] Batch  340/625 | Total: 0.8493 (cls: 0.565, reg: 0.284)
+[Epoch 31] Batch  360/625 | Total: 0.6494 (cls: 0.383, reg: 0.266)
+[Epoch 31] Batch  380/625 | Total: 0.5421 (cls: 0.294, reg: 0.248)
+[Epoch 31] Batch  400/625 | Total: 0.6088 (cls: 0.312, reg: 0.297)
+[Epoch 31] Batch  420/625 | Total: 0.6303 (cls: 0.367, reg: 0.263)
+[Epoch 31] Batch  440/625 | Total: 0.6162 (cls: 0.365, reg: 0.251)
+[Epoch 31] Batch  460/625 | Total: 0.5199 (cls: 0.255, reg: 0.265)
+[Epoch 31] Batch  480/625 | Total: 0.6577 (cls: 0.384, reg: 0.274)
+[Epoch 31] Batch  500/625 | Total: 0.6337 (cls: 0.387, reg: 0.247)
+[Epoch 31] Batch  520/625 | Total: 0.6221 (cls: 0.363, reg: 0.259)
+[Epoch 31] Batch  540/625 | Total: 0.6072 (cls: 0.351, reg: 0.257)
+[Epoch 31] Batch  560/625 | Total: 0.6264 (cls: 0.356, reg: 0.270)
+[Epoch 31] Batch  580/625 | Total: 0.5533 (cls: 0.321, reg: 0.233)
+[Epoch 31] Batch  600/625 | Total: 0.7953 (cls: 0.544, reg: 0.251)
+[Epoch 31] Batch  620/625 | Total: 0.5464 (cls: 0.312, reg: 0.235)
+
+[Epoch 31/80] Loss=0.6493 Cls=0.3871 Reg=0.2622 LR=0.000711 (942.2s)
+32307.4s 736 Loading and preparing results...
+32309.6s 737 DONE (t=2.28s)
+32309.6s 738 creating index...
+32309.8s 739 index created!
+32309.8s 740 Running per image evaluation...
+32309.8s 741 Evaluate annotation type *bbox*
+32339.9s 742 DONE (t=30.05s).
+32339.9s 743 Accumulating evaluation results...
+32341.2s 744 DONE (t=1.36s).
+32341.2s 745 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.199
+32341.2s 746 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.457
+32341.2s 747 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.136
+32341.2s 748 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.102
+32341.2s 749 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.298
+32341.2s 750 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+32341.2s 751 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.030
+32341.2s 752 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.170
+32341.2s 753 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.335
+32341.2s 754 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.218
+32341.2s 755 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.480
+32341.2s 756 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+32341.4s 757 Overall mAP@0.5: 0.4571 | mAP_tiny@0.5: 0.2803 | mAP_tiny@0.5:0.95: 0.1023
+33282.1s 758 [Epoch 32] Batch   20/625 | Total: 0.5954 (cls: 0.347, reg: 0.249)
+[Epoch 32] Batch   40/625 | Total: 0.4755 (cls: 0.243, reg: 0.232)
+[Epoch 32] Batch   60/625 | Total: 0.6251 (cls: 0.354, reg: 0.271)
+[Epoch 32] Batch   80/625 | Total: 0.7098 (cls: 0.420, reg: 0.290)
+[Epoch 32] Batch  100/625 | Total: 0.7173 (cls: 0.422, reg: 0.296)
+[Epoch 32] Batch  120/625 | Total: 0.7050 (cls: 0.426, reg: 0.279)
+[Epoch 32] Batch  140/625 | Total: 0.6587 (cls: 0.380, reg: 0.279)
+[Epoch 32] Batch  160/625 | Total: 0.6574 (cls: 0.391, reg: 0.267)
+[Epoch 32] Batch  180/625 | Total: 0.7608 (cls: 0.475, reg: 0.286)
+[Epoch 32] Batch  200/625 | Total: 0.7030 (cls: 0.425, reg: 0.278)
+[Epoch 32] Batch  220/625 | Total: 0.6013 (cls: 0.351, reg: 0.250)
+[Epoch 32] Batch  240/625 | Total: 0.5883 (cls: 0.334, reg: 0.254)
+[Epoch 32] Batch  260/625 | Total: 0.6241 (cls: 0.346, reg: 0.278)
+[Epoch 32] Batch  280/625 | Total: 0.6544 (cls: 0.384, reg: 0.270)
+[Epoch 32] Batch  300/625 | Total: 0.6180 (cls: 0.334, reg: 0.284)
+[Epoch 32] Batch  320/625 | Total: 0.6108 (cls: 0.326, reg: 0.285)
+[Epoch 32] Batch  340/625 | Total: 0.8184 (cls: 0.504, reg: 0.314)
+[Epoch 32] Batch  360/625 | Total: 0.5541 (cls: 0.334, reg: 0.220)
+[Epoch 32] Batch  380/625 | Total: 0.7347 (cls: 0.441, reg: 0.294)
+[Epoch 32] Batch  400/625 | Total: 0.6010 (cls: 0.362, reg: 0.239)
+[Epoch 32] Batch  420/625 | Total: 0.6784 (cls: 0.428, reg: 0.250)
+[Epoch 32] Batch  440/625 | Total: 0.7012 (cls: 0.431, reg: 0.270)
+[Epoch 32] Batch  460/625 | Total: 0.7381 (cls: 0.452, reg: 0.286)
+[Epoch 32] Batch  480/625 | Total: 0.6770 (cls: 0.386, reg: 0.291)
+[Epoch 32] Batch  500/625 | Total: 0.5717 (cls: 0.315, reg: 0.257)
+[Epoch 32] Batch  520/625 | Total: 0.6974 (cls: 0.430, reg: 0.267)
+[Epoch 32] Batch  540/625 | Total: 0.5970 (cls: 0.349, reg: 0.248)
+[Epoch 32] Batch  560/625 | Total: 0.6306 (cls: 0.368, reg: 0.263)
+[Epoch 32] Batch  580/625 | Total: 0.7235 (cls: 0.440, reg: 0.283)
+[Epoch 32] Batch  600/625 | Total: 0.5041 (cls: 0.282, reg: 0.222)
+[Epoch 32] Batch  620/625 | Total: 0.5760 (cls: 0.323, reg: 0.253)
+
+[Epoch 32/80] Loss=0.6449 Cls=0.3838 Reg=0.2611 LR=0.000692 (940.4s)
+33332.7s 759 Loading and preparing results...
+33334.0s 760 DONE (t=1.50s)
+33334.0s 761 creating index...
+33334.2s 762 index created!
+33334.2s 763 Running per image evaluation...
+33334.2s 764 Evaluate annotation type *bbox*
+33364.6s 765 DONE (t=30.29s).
+33364.6s 766 Accumulating evaluation results...
+33365.9s 767 DONE (t=1.32s).
+33365.9s 768 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.195
+33365.9s 769 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.452
+33365.9s 770 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.126
+33365.9s 771 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.094
+33365.9s 772 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.322
+33365.9s 773 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+33365.9s 774 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.029
+33365.9s 775 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.166
+33365.9s 776 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.328
+33365.9s 777 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.209
+33365.9s 778 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.471
+33365.9s 779 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+33366.1s 780 Overall mAP@0.5: 0.4524 | mAP_tiny@0.5: 0.2603 | mAP_tiny@0.5:0.95: 0.0942
+34305.4s 781 [Epoch 33] Batch   20/625 | Total: 0.6602 (cls: 0.429, reg: 0.231)
+[Epoch 33] Batch   40/625 | Total: 0.6584 (cls: 0.431, reg: 0.228)
+[Epoch 33] Batch   60/625 | Total: 0.7270 (cls: 0.438, reg: 0.289)
+[Epoch 33] Batch   80/625 | Total: 0.6827 (cls: 0.432, reg: 0.251)
+[Epoch 33] Batch  100/625 | Total: 0.5338 (cls: 0.294, reg: 0.240)
+[Epoch 33] Batch  120/625 | Total: 0.7344 (cls: 0.451, reg: 0.283)
+[Epoch 33] Batch  140/625 | Total: 0.7209 (cls: 0.441, reg: 0.280)
+[Epoch 33] Batch  160/625 | Total: 0.6794 (cls: 0.438, reg: 0.242)
+[Epoch 33] Batch  180/625 | Total: 0.5740 (cls: 0.330, reg: 0.244)
+[Epoch 33] Batch  200/625 | Total: 0.4374 (cls: 0.225, reg: 0.212)
+[Epoch 33] Batch  220/625 | Total: 0.6392 (cls: 0.372, reg: 0.267)
+[Epoch 33] Batch  240/625 | Total: 0.6472 (cls: 0.400, reg: 0.247)
+[Epoch 33] Batch  260/625 | Total: 0.6492 (cls: 0.375, reg: 0.274)
+[Epoch 33] Batch  280/625 | Total: 0.7388 (cls: 0.473, reg: 0.265)
+[Epoch 33] Batch  300/625 | Total: 0.6060 (cls: 0.349, reg: 0.257)
+[Epoch 33] Batch  320/625 | Total: 0.7076 (cls: 0.474, reg: 0.233)
+[Epoch 33] Batch  340/625 | Total: 0.6061 (cls: 0.361, reg: 0.245)
+[Epoch 33] Batch  360/625 | Total: 0.6577 (cls: 0.423, reg: 0.234)
+[Epoch 33] Batch  380/625 | Total: 0.5334 (cls: 0.287, reg: 0.247)
+[Epoch 33] Batch  400/625 | Total: 0.6819 (cls: 0.415, reg: 0.267)
+[Epoch 33] Batch  420/625 | Total: 0.7550 (cls: 0.435, reg: 0.320)
+[Epoch 33] Batch  440/625 | Total: 0.9072 (cls: 0.627, reg: 0.281)
+[Epoch 33] Batch  460/625 | Total: 0.5480 (cls: 0.297, reg: 0.251)
+[Epoch 33] Batch  480/625 | Total: 0.6261 (cls: 0.368, reg: 0.258)
+[Epoch 33] Batch  500/625 | Total: 0.8266 (cls: 0.504, reg: 0.323)
+[Epoch 33] Batch  520/625 | Total: 0.6613 (cls: 0.392, reg: 0.270)
+[Epoch 33] Batch  540/625 | Total: 0.5876 (cls: 0.362, reg: 0.226)
+[Epoch 33] Batch  560/625 | Total: 0.7276 (cls: 0.446, reg: 0.282)
+[Epoch 33] Batch  580/625 | Total: 0.5818 (cls: 0.348, reg: 0.234)
+[Epoch 33] Batch  600/625 | Total: 0.5325 (cls: 0.285, reg: 0.247)
+[Epoch 33] Batch  620/625 | Total: 0.7627 (cls: 0.501, reg: 0.262)
+
+[Epoch 33/80] Loss=0.6436 Cls=0.3838 Reg=0.2599 LR=0.000673 (939.1s)
+34356.1s 782 Loading and preparing results...
+34358.4s 783 DONE (t=2.26s)
+34358.4s 784 creating index...
+34358.6s 785 index created!
+34358.6s 786 Running per image evaluation...
+34358.6s 787 Evaluate annotation type *bbox*
+34388.6s 788 DONE (t=29.98s).
+34388.6s 789 Accumulating evaluation results...
+34390.5s 790 DONE (t=2.00s).
+34390.5s 791 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.202
+34390.5s 792 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.463
+34390.5s 793 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.139
+34390.5s 794 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.100
+34390.5s 795 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.311
+34390.5s 796 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+34390.5s 797 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.029
+34390.5s 798 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.170
+34390.5s 799 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.338
+34390.5s 800 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.220
+34390.5s 801 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.480
+34390.5s 802 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+34390.7s 803 Overall mAP@0.5: 0.4629 | mAP_tiny@0.5: 0.2707 | mAP_tiny@0.5:0.95: 0.1005
+35333.9s 804 [Epoch 34] Batch   20/625 | Total: 0.7153 (cls: 0.451, reg: 0.264)
+[Epoch 34] Batch   40/625 | Total: 0.6501 (cls: 0.410, reg: 0.240)
+[Epoch 34] Batch   60/625 | Total: 0.7320 (cls: 0.463, reg: 0.269)
+[Epoch 34] Batch   80/625 | Total: 0.5791 (cls: 0.319, reg: 0.260)
+[Epoch 34] Batch  100/625 | Total: 0.7277 (cls: 0.432, reg: 0.296)
+[Epoch 34] Batch  120/625 | Total: 0.7275 (cls: 0.442, reg: 0.285)
+[Epoch 34] Batch  140/625 | Total: 0.5486 (cls: 0.335, reg: 0.213)
+[Epoch 34] Batch  160/625 | Total: 0.5991 (cls: 0.342, reg: 0.257)
+[Epoch 34] Batch  180/625 | Total: 0.6244 (cls: 0.371, reg: 0.253)
+[Epoch 34] Batch  200/625 | Total: 0.6151 (cls: 0.379, reg: 0.236)
+[Epoch 34] Batch  220/625 | Total: 0.5374 (cls: 0.289, reg: 0.249)
+[Epoch 34] Batch  240/625 | Total: 0.5439 (cls: 0.295, reg: 0.249)
+[Epoch 34] Batch  260/625 | Total: 0.6635 (cls: 0.396, reg: 0.267)
+[Epoch 34] Batch  280/625 | Total: 0.6173 (cls: 0.367, reg: 0.251)
+[Epoch 34] Batch  300/625 | Total: 0.7574 (cls: 0.496, reg: 0.261)
+[Epoch 34] Batch  320/625 | Total: 0.6123 (cls: 0.371, reg: 0.241)
+[Epoch 34] Batch  340/625 | Total: 0.7407 (cls: 0.457, reg: 0.284)
+[Epoch 34] Batch  360/625 | Total: 0.6514 (cls: 0.391, reg: 0.261)
+[Epoch 34] Batch  380/625 | Total: 0.6464 (cls: 0.376, reg: 0.270)
+[Epoch 34] Batch  400/625 | Total: 0.7798 (cls: 0.534, reg: 0.246)
+[Epoch 34] Batch  420/625 | Total: 0.6973 (cls: 0.408, reg: 0.289)
+[Epoch 34] Batch  440/625 | Total: 0.5525 (cls: 0.325, reg: 0.228)
+[Epoch 34] Batch  460/625 | Total: 0.5102 (cls: 0.302, reg: 0.208)
+[Epoch 34] Batch  480/625 | Total: 0.6195 (cls: 0.361, reg: 0.258)
+[Epoch 34] Batch  500/625 | Total: 0.5840 (cls: 0.319, reg: 0.265)
+[Epoch 34] Batch  520/625 | Total: 0.5700 (cls: 0.316, reg: 0.254)
+[Epoch 34] Batch  540/625 | Total: 0.5651 (cls: 0.328, reg: 0.237)
+[Epoch 34] Batch  560/625 | Total: 0.5885 (cls: 0.324, reg: 0.265)
+[Epoch 34] Batch  580/625 | Total: 0.6855 (cls: 0.409, reg: 0.277)
+[Epoch 34] Batch  600/625 | Total: 0.5986 (cls: 0.311, reg: 0.287)
+[Epoch 34] Batch  620/625 | Total: 0.5825 (cls: 0.328, reg: 0.255)
+
+[Epoch 34/80] Loss=0.6445 Cls=0.3854 Reg=0.2590 LR=0.000654 (942.8s)
+35384.2s 805 Loading and preparing results...
+35385.6s 806 DONE (t=1.46s)
+35385.6s 807 creating index...
+35385.8s 808 index created!
+35385.8s 809 Running per image evaluation...
+35385.8s 810 Evaluate annotation type *bbox*
+35416.5s 811 DONE (t=30.62s).
+35416.5s 812 Accumulating evaluation results...
+35417.8s 813 DONE (t=1.36s).
+35417.8s 814 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.200
+35417.8s 815 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.456
+35417.8s 816 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.139
+35417.8s 817 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.103
+35417.8s 818 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.326
+35417.8s 819 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+35417.8s 820 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.030
+35417.8s 821 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.169
+35417.8s 822 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.329
+35417.8s 823 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.199
+35417.8s 824 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.494
+35417.8s 825 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+35418.0s 826 Overall mAP@0.5: 0.4563 | mAP_tiny@0.5: 0.2797 | mAP_tiny@0.5:0.95: 0.1032
+36359.2s 827 [Epoch 35] Batch   20/625 | Total: 0.5649 (cls: 0.314, reg: 0.251)
+[Epoch 35] Batch   40/625 | Total: 0.6299 (cls: 0.361, reg: 0.269)
+[Epoch 35] Batch   60/625 | Total: 0.6037 (cls: 0.364, reg: 0.240)
+[Epoch 35] Batch   80/625 | Total: 0.6373 (cls: 0.391, reg: 0.246)
+[Epoch 35] Batch  100/625 | Total: 0.5734 (cls: 0.300, reg: 0.273)
+[Epoch 35] Batch  120/625 | Total: 0.7135 (cls: 0.391, reg: 0.323)
+[Epoch 35] Batch  140/625 | Total: 0.5625 (cls: 0.307, reg: 0.256)
+[Epoch 35] Batch  160/625 | Total: 0.5029 (cls: 0.275, reg: 0.228)
+[Epoch 35] Batch  180/625 | Total: 0.6674 (cls: 0.416, reg: 0.251)
+[Epoch 35] Batch  200/625 | Total: 0.6864 (cls: 0.402, reg: 0.285)
+[Epoch 35] Batch  220/625 | Total: 0.5226 (cls: 0.321, reg: 0.202)
+[Epoch 35] Batch  240/625 | Total: 0.6180 (cls: 0.376, reg: 0.242)
+[Epoch 35] Batch  260/625 | Total: 0.5768 (cls: 0.338, reg: 0.239)
+[Epoch 35] Batch  280/625 | Total: 0.5821 (cls: 0.326, reg: 0.256)
+[Epoch 35] Batch  300/625 | Total: 0.6039 (cls: 0.340, reg: 0.264)
+[Epoch 35] Batch  320/625 | Total: 0.6913 (cls: 0.437, reg: 0.254)
+[Epoch 35] Batch  340/625 | Total: 0.6689 (cls: 0.402, reg: 0.267)
+[Epoch 35] Batch  360/625 | Total: 0.5839 (cls: 0.360, reg: 0.224)
+[Epoch 35] Batch  380/625 | Total: 0.5955 (cls: 0.319, reg: 0.276)
+[Epoch 35] Batch  400/625 | Total: 0.6074 (cls: 0.336, reg: 0.271)
+[Epoch 35] Batch  420/625 | Total: 0.5568 (cls: 0.313, reg: 0.244)
+[Epoch 35] Batch  440/625 | Total: 0.5747 (cls: 0.344, reg: 0.231)
+[Epoch 35] Batch  460/625 | Total: 0.6105 (cls: 0.393, reg: 0.217)
+[Epoch 35] Batch  480/625 | Total: 0.5115 (cls: 0.294, reg: 0.218)
+[Epoch 35] Batch  500/625 | Total: 0.7938 (cls: 0.488, reg: 0.305)
+[Epoch 35] Batch  520/625 | Total: 0.6013 (cls: 0.362, reg: 0.239)
+[Epoch 35] Batch  540/625 | Total: 0.7035 (cls: 0.458, reg: 0.245)
+[Epoch 35] Batch  560/625 | Total: 0.6799 (cls: 0.434, reg: 0.246)
+[Epoch 35] Batch  580/625 | Total: 0.9132 (cls: 0.642, reg: 0.271)
+[Epoch 35] Batch  600/625 | Total: 0.6606 (cls: 0.375, reg: 0.286)
+[Epoch 35] Batch  620/625 | Total: 0.6103 (cls: 0.351, reg: 0.259)
+
+[Epoch 35/80] Loss=0.6339 Cls=0.3773 Reg=0.2566 LR=0.000635 (941.0s)
+36410.1s 828 Loading and preparing results...
+36411.4s 829 DONE (t=1.45s)
+36411.4s 830 creating index...
+36411.6s 831 index created!
+36411.6s 832 Running per image evaluation...
+36411.6s 833 Evaluate annotation type *bbox*
+36442.6s 834 DONE (t=30.88s).
+36442.6s 835 Accumulating evaluation results...
+36443.9s 836 DONE (t=1.37s).
+36443.9s 837 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.204
+36443.9s 838 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.463
+36443.9s 839 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.144
+36443.9s 840 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.101
+36443.9s 841 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.326
+36443.9s 842 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+36443.9s 843 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.031
+36443.9s 844 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.173
+36443.9s 845 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.336
+36443.9s 846 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.213
+36443.9s 847 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.495
+36443.9s 848 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+36444.1s 849 Overall mAP@0.5: 0.4632 | mAP_tiny@0.5: 0.2756 | mAP_tiny@0.5:0.95: 0.1013
+36444.3s 850 * Periodic checkpoint saved: epoch_35.pth
+37389.2s 851 [Epoch 36] Batch   20/625 | Total: 0.6046 (cls: 0.303, reg: 0.302)
+[Epoch 36] Batch   40/625 | Total: 0.6130 (cls: 0.363, reg: 0.250)
+[Epoch 36] Batch   60/625 | Total: 0.6636 (cls: 0.405, reg: 0.259)
+[Epoch 36] Batch   80/625 | Total: 0.5644 (cls: 0.357, reg: 0.207)
+[Epoch 36] Batch  100/625 | Total: 0.5798 (cls: 0.357, reg: 0.223)
+[Epoch 36] Batch  120/625 | Total: 0.7031 (cls: 0.434, reg: 0.270)
+[Epoch 36] Batch  140/625 | Total: 0.6390 (cls: 0.386, reg: 0.253)
+[Epoch 36] Batch  160/625 | Total: 0.5773 (cls: 0.304, reg: 0.274)
+[Epoch 36] Batch  180/625 | Total: 0.5947 (cls: 0.339, reg: 0.256)
+[Epoch 36] Batch  200/625 | Total: 0.6102 (cls: 0.333, reg: 0.277)
+[Epoch 36] Batch  220/625 | Total: 0.6258 (cls: 0.354, reg: 0.272)
+[Epoch 36] Batch  240/625 | Total: 0.7165 (cls: 0.417, reg: 0.300)
+[Epoch 36] Batch  260/625 | Total: 0.6360 (cls: 0.373, reg: 0.263)
+[Epoch 36] Batch  280/625 | Total: 0.6073 (cls: 0.362, reg: 0.246)
+[Epoch 36] Batch  300/625 | Total: 0.5759 (cls: 0.277, reg: 0.299)
+[Epoch 36] Batch  320/625 | Total: 0.6212 (cls: 0.402, reg: 0.219)
+[Epoch 36] Batch  340/625 | Total: 0.6195 (cls: 0.394, reg: 0.226)
+[Epoch 36] Batch  360/625 | Total: 0.7545 (cls: 0.476, reg: 0.279)
+[Epoch 36] Batch  380/625 | Total: 0.6449 (cls: 0.376, reg: 0.268)
+[Epoch 36] Batch  400/625 | Total: 0.6035 (cls: 0.370, reg: 0.233)
+[Epoch 36] Batch  420/625 | Total: 0.6952 (cls: 0.422, reg: 0.273)
+[Epoch 36] Batch  440/625 | Total: 0.5973 (cls: 0.309, reg: 0.288)
+[Epoch 36] Batch  460/625 | Total: 0.6450 (cls: 0.402, reg: 0.243)
+[Epoch 36] Batch  480/625 | Total: 0.5662 (cls: 0.332, reg: 0.235)
+[Epoch 36] Batch  500/625 | Total: 0.5640 (cls: 0.340, reg: 0.224)
+[Epoch 36] Batch  520/625 | Total: 0.5256 (cls: 0.303, reg: 0.222)
+[Epoch 36] Batch  540/625 | Total: 0.6717 (cls: 0.393, reg: 0.278)
+[Epoch 36] Batch  560/625 | Total: 0.5001 (cls: 0.280, reg: 0.220)
+[Epoch 36] Batch  580/625 | Total: 0.5538 (cls: 0.329, reg: 0.225)
+[Epoch 36] Batch  600/625 | Total: 0.7523 (cls: 0.496, reg: 0.256)
+[Epoch 36] Batch  620/625 | Total: 0.6377 (cls: 0.370, reg: 0.268)
+
+[Epoch 36/80] Loss=0.6321 Cls=0.3765 Reg=0.2556 LR=0.000615 (944.8s)
+37440.5s 852 Loading and preparing results...
+37441.9s 853 DONE (t=1.45s)
+37441.9s 854 creating index...
+37442.1s 855 index created!
+37442.1s 856 Running per image evaluation...
+37442.1s 857 Evaluate annotation type *bbox*
+37472.2s 858 DONE (t=30.08s).
+37472.2s 859 Accumulating evaluation results...
+37473.5s 860 DONE (t=1.38s).
+37473.5s 861 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.207
+37473.5s 862 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.478
+37473.5s 863 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.143
+37473.5s 864 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.105
+37473.5s 865 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.340
+37473.5s 866 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+37473.5s 867 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.030
+37473.5s 868 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.173
+37473.5s 869 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.343
+37473.5s 870 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.226
+37473.5s 871 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.492
+37473.5s 872 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+37473.7s 873 Overall mAP@0.5: 0.4780 | mAP_tiny@0.5: 0.2944 | mAP_tiny@0.5:0.95: 0.1049
+37474.0s 874 * New best checkpoint saved (Overall mAP@0.5: 0.4780)
+38422.3s 875 [Epoch 37] Batch   20/625 | Total: 0.6258 (cls: 0.346, reg: 0.279)
+[Epoch 37] Batch   40/625 | Total: 0.5924 (cls: 0.323, reg: 0.269)
+[Epoch 37] Batch   60/625 | Total: 0.8253 (cls: 0.553, reg: 0.273)
+[Epoch 37] Batch   80/625 | Total: 0.6613 (cls: 0.395, reg: 0.266)
+[Epoch 37] Batch  100/625 | Total: 0.6963 (cls: 0.395, reg: 0.302)
+[Epoch 37] Batch  120/625 | Total: 0.5803 (cls: 0.351, reg: 0.229)
+[Epoch 37] Batch  140/625 | Total: 0.6182 (cls: 0.369, reg: 0.249)
+[Epoch 37] Batch  160/625 | Total: 0.6529 (cls: 0.403, reg: 0.250)
+[Epoch 37] Batch  180/625 | Total: 0.6665 (cls: 0.385, reg: 0.282)
+[Epoch 37] Batch  200/625 | Total: 0.6052 (cls: 0.350, reg: 0.255)
+[Epoch 37] Batch  220/625 | Total: 0.6119 (cls: 0.338, reg: 0.274)
+[Epoch 37] Batch  240/625 | Total: 0.6622 (cls: 0.336, reg: 0.327)
+[Epoch 37] Batch  260/625 | Total: 0.5902 (cls: 0.357, reg: 0.233)
+[Epoch 37] Batch  280/625 | Total: 0.6308 (cls: 0.386, reg: 0.245)
+[Epoch 37] Batch  300/625 | Total: 0.7274 (cls: 0.456, reg: 0.272)
+[Epoch 37] Batch  320/625 | Total: 0.5778 (cls: 0.346, reg: 0.232)
+[Epoch 37] Batch  340/625 | Total: 0.7463 (cls: 0.468, reg: 0.278)
+[Epoch 37] Batch  360/625 | Total: 0.5987 (cls: 0.316, reg: 0.283)
+[Epoch 37] Batch  380/625 | Total: 0.5949 (cls: 0.351, reg: 0.244)
+[Epoch 37] Batch  400/625 | Total: 0.7467 (cls: 0.484, reg: 0.263)
+[Epoch 37] Batch  420/625 | Total: 0.4950 (cls: 0.254, reg: 0.241)
+[Epoch 37] Batch  440/625 | Total: 0.6249 (cls: 0.352, reg: 0.273)
+[Epoch 37] Batch  460/625 | Total: 0.6529 (cls: 0.429, reg: 0.224)
+[Epoch 37] Batch  480/625 | Total: 0.6469 (cls: 0.403, reg: 0.244)
+[Epoch 37] Batch  500/625 | Total: 0.6260 (cls: 0.388, reg: 0.238)
+[Epoch 37] Batch  520/625 | Total: 0.6183 (cls: 0.351, reg: 0.267)
+[Epoch 37] Batch  540/625 | Total: 0.7687 (cls: 0.508, reg: 0.261)
+[Epoch 37] Batch  560/625 | Total: 0.5614 (cls: 0.326, reg: 0.236)
+[Epoch 37] Batch  580/625 | Total: 0.6556 (cls: 0.399, reg: 0.257)
+[Epoch 37] Batch  600/625 | Total: 0.5237 (cls: 0.297, reg: 0.227)
+[Epoch 37] Batch  620/625 | Total: 0.6077 (cls: 0.353, reg: 0.254)
+
+[Epoch 37/80] Loss=0.6292 Cls=0.3738 Reg=0.2555 LR=0.000595 (948.2s)
+38473.3s 876 Loading and preparing results...
+38474.6s 877 DONE (t=1.46s)
+38474.6s 878 creating index...
+38474.8s 879 index created!
+38474.8s 880 Running per image evaluation...
+38474.8s 881 Evaluate annotation type *bbox*
+38505.1s 882 DONE (t=30.23s).
+38505.1s 883 Accumulating evaluation results...
+38506.4s 884 DONE (t=1.37s).
+38506.4s 885 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.197
+38506.4s 886 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.466
+38506.4s 887 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.117
+38506.4s 888 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.103
+38506.4s 889 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.338
+38506.4s 890 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+38506.4s 891 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.030
+38506.4s 892 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.165
+38506.4s 893 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.333
+38506.4s 894 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.227
+38506.4s 895 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.472
+38506.4s 896 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+38506.6s 897 Overall mAP@0.5: 0.4663 | mAP_tiny@0.5: 0.2805 | mAP_tiny@0.5:0.95: 0.1027
+39444.1s 898 [Epoch 38] Batch   20/625 | Total: 0.6260 (cls: 0.362, reg: 0.264)
+[Epoch 38] Batch   40/625 | Total: 0.5435 (cls: 0.321, reg: 0.222)
+[Epoch 38] Batch   60/625 | Total: 0.6253 (cls: 0.316, reg: 0.310)
+[Epoch 38] Batch   80/625 | Total: 0.5285 (cls: 0.301, reg: 0.228)
+[Epoch 38] Batch  100/625 | Total: 0.5592 (cls: 0.346, reg: 0.214)
+[Epoch 38] Batch  120/625 | Total: 0.6680 (cls: 0.406, reg: 0.262)
+[Epoch 38] Batch  140/625 | Total: 0.5684 (cls: 0.333, reg: 0.236)
+[Epoch 38] Batch  160/625 | Total: 0.6741 (cls: 0.404, reg: 0.270)
+[Epoch 38] Batch  180/625 | Total: 0.5931 (cls: 0.323, reg: 0.270)
+[Epoch 38] Batch  200/625 | Total: 0.6053 (cls: 0.356, reg: 0.249)
+[Epoch 38] Batch  220/625 | Total: 1.0238 (cls: 0.744, reg: 0.280)
+[Epoch 38] Batch  240/625 | Total: 0.5414 (cls: 0.329, reg: 0.212)
+[Epoch 38] Batch  260/625 | Total: 0.5818 (cls: 0.323, reg: 0.259)
+[Epoch 38] Batch  280/625 | Total: 0.5640 (cls: 0.315, reg: 0.249)
+[Epoch 38] Batch  300/625 | Total: 0.6910 (cls: 0.417, reg: 0.274)
+[Epoch 38] Batch  320/625 | Total: 0.6480 (cls: 0.428, reg: 0.220)
+[Epoch 38] Batch  340/625 | Total: 0.5532 (cls: 0.308, reg: 0.245)
+[Epoch 38] Batch  360/625 | Total: 0.6046 (cls: 0.353, reg: 0.252)
+[Epoch 38] Batch  380/625 | Total: 0.5376 (cls: 0.301, reg: 0.236)
+[Epoch 38] Batch  400/625 | Total: 0.5714 (cls: 0.301, reg: 0.270)
+[Epoch 38] Batch  420/625 | Total: 0.6519 (cls: 0.351, reg: 0.301)
+[Epoch 38] Batch  440/625 | Total: 0.6017 (cls: 0.348, reg: 0.254)
+[Epoch 38] Batch  460/625 | Total: 0.7142 (cls: 0.420, reg: 0.295)
+[Epoch 38] Batch  480/625 | Total: 0.6578 (cls: 0.427, reg: 0.231)
+[Epoch 38] Batch  500/625 | Total: 0.5769 (cls: 0.310, reg: 0.267)
+[Epoch 38] Batch  520/625 | Total: 0.6724 (cls: 0.410, reg: 0.262)
+[Epoch 38] Batch  540/625 | Total: 0.5965 (cls: 0.374, reg: 0.222)
+[Epoch 38] Batch  560/625 | Total: 0.5561 (cls: 0.307, reg: 0.249)
+[Epoch 38] Batch  580/625 | Total: 0.5840 (cls: 0.325, reg: 0.259)
+[Epoch 38] Batch  600/625 | Total: 0.6658 (cls: 0.394, reg: 0.271)
+[Epoch 38] Batch  620/625 | Total: 0.5518 (cls: 0.298, reg: 0.254)
+
+[Epoch 38/80] Loss=0.6264 Cls=0.3730 Reg=0.2533 LR=0.000575 (937.3s)
+39495.7s 899 Loading and preparing results...
+39497.1s 900 DONE (t=1.50s)
+39497.1s 901 creating index...
+39497.3s 902 index created!
+39497.3s 903 Running per image evaluation...
+39497.3s 904 Evaluate annotation type *bbox*
+39527.5s 905 DONE (t=30.17s).
+39527.5s 906 Accumulating evaluation results...
+39528.8s 907 DONE (t=1.33s).
+39528.8s 908 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.206
+39528.8s 909 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.479
+39528.8s 910 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.138
+39528.8s 911 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.104
+39528.8s 912 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.351
+39528.8s 913 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+39528.8s 914 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.031
+39528.8s 915 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.172
+39528.8s 916 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.340
+39528.8s 917 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.225
+39528.8s 918 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.492
+39528.8s 919 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+39529.0s 920 Overall mAP@0.5: 0.4790 | mAP_tiny@0.5: 0.2857 | mAP_tiny@0.5:0.95: 0.1040
+39529.3s 921 * New best checkpoint saved (Overall mAP@0.5: 0.4790)
+40474.6s 922 [Epoch 39] Batch   20/625 | Total: 0.6373 (cls: 0.366, reg: 0.271)
+[Epoch 39] Batch   40/625 | Total: 0.6241 (cls: 0.378, reg: 0.246)
+[Epoch 39] Batch   60/625 | Total: 0.5601 (cls: 0.243, reg: 0.317)
+[Epoch 39] Batch   80/625 | Total: 0.6668 (cls: 0.435, reg: 0.232)
+[Epoch 39] Batch  100/625 | Total: 0.7281 (cls: 0.488, reg: 0.240)
+[Epoch 39] Batch  120/625 | Total: 0.7230 (cls: 0.479, reg: 0.244)
+[Epoch 39] Batch  140/625 | Total: 0.6058 (cls: 0.330, reg: 0.276)
+[Epoch 39] Batch  160/625 | Total: 0.6056 (cls: 0.366, reg: 0.240)
+[Epoch 39] Batch  180/625 | Total: 0.5597 (cls: 0.311, reg: 0.249)
+[Epoch 39] Batch  200/625 | Total: 0.5776 (cls: 0.328, reg: 0.250)
+[Epoch 39] Batch  220/625 | Total: 0.5962 (cls: 0.313, reg: 0.284)
+[Epoch 39] Batch  240/625 | Total: 0.4920 (cls: 0.260, reg: 0.232)
+[Epoch 39] Batch  260/625 | Total: 0.5851 (cls: 0.304, reg: 0.281)
+[Epoch 39] Batch  280/625 | Total: 0.5775 (cls: 0.377, reg: 0.201)
+[Epoch 39] Batch  300/625 | Total: 0.6552 (cls: 0.343, reg: 0.313)
+[Epoch 39] Batch  320/625 | Total: 0.5780 (cls: 0.342, reg: 0.236)
+[Epoch 39] Batch  340/625 | Total: 0.4449 (cls: 0.257, reg: 0.188)
+[Epoch 39] Batch  360/625 | Total: 0.5182 (cls: 0.296, reg: 0.222)
+[Epoch 39] Batch  380/625 | Total: 0.8539 (cls: 0.583, reg: 0.271)
+[Epoch 39] Batch  400/625 | Total: 0.6990 (cls: 0.441, reg: 0.258)
+[Epoch 39] Batch  420/625 | Total: 0.8001 (cls: 0.556, reg: 0.244)
+[Epoch 39] Batch  440/625 | Total: 0.5305 (cls: 0.274, reg: 0.256)
+[Epoch 39] Batch  460/625 | Total: 0.6742 (cls: 0.405, reg: 0.269)
+[Epoch 39] Batch  480/625 | Total: 0.5735 (cls: 0.365, reg: 0.209)
+[Epoch 39] Batch  500/625 | Total: 0.6099 (cls: 0.345, reg: 0.265)
+[Epoch 39] Batch  520/625 | Total: 0.5997 (cls: 0.393, reg: 0.207)
+[Epoch 39] Batch  540/625 | Total: 0.7080 (cls: 0.438, reg: 0.270)
+[Epoch 39] Batch  560/625 | Total: 0.5557 (cls: 0.337, reg: 0.218)
+[Epoch 39] Batch  580/625 | Total: 0.5667 (cls: 0.344, reg: 0.222)
+[Epoch 39] Batch  600/625 | Total: 0.6734 (cls: 0.449, reg: 0.224)
+[Epoch 39] Batch  620/625 | Total: 0.5286 (cls: 0.299, reg: 0.229)
+
+[Epoch 39/80] Loss=0.6241 Cls=0.3710 Reg=0.2531 LR=0.000555 (945.3s)
+40524.8s 923 Loading and preparing results...
+40527.1s 924 DONE (t=2.35s)
+40527.1s 925 creating index...
+40527.3s 926 index created!
+40527.3s 927 Running per image evaluation...
+40527.3s 928 Evaluate annotation type *bbox*
+40558.2s 929 DONE (t=30.88s).
+40558.2s 930 Accumulating evaluation results...
+40559.5s 931 DONE (t=1.34s).
+40559.5s 932 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.205
+40559.5s 933 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.477
+40559.5s 934 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.133
+40559.5s 935 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.102
+40559.5s 936 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.337
+40559.5s 937 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+40559.5s 938 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.030
+40559.5s 939 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.169
+40559.5s 940 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.336
+40559.5s 941 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.218
+40559.5s 942 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.494
+40559.5s 943 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+40559.7s 944 Overall mAP@0.5: 0.4771 | mAP_tiny@0.5: 0.2888 | mAP_tiny@0.5:0.95: 0.1016
+41498.3s 945 [Epoch 40] Batch   20/625 | Total: 0.7326 (cls: 0.451, reg: 0.281)
+[Epoch 40] Batch   40/625 | Total: 0.6667 (cls: 0.386, reg: 0.280)
+[Epoch 40] Batch   60/625 | Total: 0.6028 (cls: 0.355, reg: 0.248)
+[Epoch 40] Batch   80/625 | Total: 0.5625 (cls: 0.326, reg: 0.237)
+[Epoch 40] Batch  100/625 | Total: 0.5369 (cls: 0.288, reg: 0.248)
+[Epoch 40] Batch  120/625 | Total: 0.5811 (cls: 0.337, reg: 0.244)
+[Epoch 40] Batch  140/625 | Total: 0.8479 (cls: 0.550, reg: 0.298)
+[Epoch 40] Batch  160/625 | Total: 0.5729 (cls: 0.339, reg: 0.234)
+[Epoch 40] Batch  180/625 | Total: 0.6887 (cls: 0.430, reg: 0.258)
+[Epoch 40] Batch  200/625 | Total: 0.6246 (cls: 0.359, reg: 0.265)
+[Epoch 40] Batch  220/625 | Total: 0.5926 (cls: 0.338, reg: 0.254)
+[Epoch 40] Batch  240/625 | Total: 0.6102 (cls: 0.382, reg: 0.228)
+[Epoch 40] Batch  260/625 | Total: 0.6386 (cls: 0.372, reg: 0.267)
+[Epoch 40] Batch  280/625 | Total: 0.5669 (cls: 0.352, reg: 0.215)
+[Epoch 40] Batch  300/625 | Total: 0.5634 (cls: 0.317, reg: 0.246)
+[Epoch 40] Batch  320/625 | Total: 0.5791 (cls: 0.365, reg: 0.214)
+[Epoch 40] Batch  340/625 | Total: 0.6028 (cls: 0.371, reg: 0.232)
+[Epoch 40] Batch  360/625 | Total: 0.5683 (cls: 0.316, reg: 0.252)
+[Epoch 40] Batch  380/625 | Total: 0.6098 (cls: 0.349, reg: 0.261)
+[Epoch 40] Batch  400/625 | Total: 0.5768 (cls: 0.296, reg: 0.281)
+[Epoch 40] Batch  420/625 | Total: 0.7312 (cls: 0.419, reg: 0.312)
+[Epoch 40] Batch  440/625 | Total: 0.5447 (cls: 0.276, reg: 0.268)
+[Epoch 40] Batch  460/625 | Total: 0.6406 (cls: 0.380, reg: 0.261)
+[Epoch 40] Batch  480/625 | Total: 0.6373 (cls: 0.379, reg: 0.258)
+[Epoch 40] Batch  500/625 | Total: 0.5793 (cls: 0.340, reg: 0.240)
+[Epoch 40] Batch  520/625 | Total: 0.5751 (cls: 0.370, reg: 0.205)
+[Epoch 40] Batch  540/625 | Total: 0.5361 (cls: 0.305, reg: 0.232)
+[Epoch 40] Batch  560/625 | Total: 0.5327 (cls: 0.290, reg: 0.243)
+[Epoch 40] Batch  580/625 | Total: 0.6330 (cls: 0.403, reg: 0.230)
+[Epoch 40] Batch  600/625 | Total: 0.6250 (cls: 0.353, reg: 0.272)
+[Epoch 40] Batch  620/625 | Total: 0.5056 (cls: 0.266, reg: 0.240)
+
+[Epoch 40/80] Loss=0.6195 Cls=0.3679 Reg=0.2517 LR=0.000535 (938.3s)
+41548.8s 946 Loading and preparing results...
+41550.2s 947 DONE (t=1.46s)
+41550.2s 948 creating index...
+41550.4s 949 index created!
+41550.4s 950 Running per image evaluation...
+41550.4s 951 Evaluate annotation type *bbox*
+41581.6s 952 DONE (t=31.08s).
+41581.6s 953 Accumulating evaluation results...
+41582.9s 954 DONE (t=1.44s).
+41582.9s 955 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.214
+41582.9s 956 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.472
+41582.9s 957 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.159
+41582.9s 958 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.107
+41582.9s 959 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.347
+41582.9s 960 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+41582.9s 961 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.032
+41582.9s 962 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.177
+41582.9s 963 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.345
+41582.9s 964 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.220
+41582.9s 965 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.511
+41582.9s 966 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+41583.2s 967 Overall mAP@0.5: 0.4715 | mAP_tiny@0.5: 0.2874 | mAP_tiny@0.5:0.95: 0.1070
+41583.4s 968 * Periodic checkpoint saved: epoch_40.pth
+42520.5s 969 [Epoch 41] Batch   20/625 | Total: 0.5765 (cls: 0.331, reg: 0.245)
+[Epoch 41] Batch   40/625 | Total: 0.5159 (cls: 0.278, reg: 0.238)
+[Epoch 41] Batch   60/625 | Total: 0.5064 (cls: 0.286, reg: 0.221)
+[Epoch 41] Batch   80/625 | Total: 0.5127 (cls: 0.297, reg: 0.216)
+[Epoch 41] Batch  100/625 | Total: 0.5783 (cls: 0.346, reg: 0.232)
+[Epoch 41] Batch  120/625 | Total: 0.5257 (cls: 0.305, reg: 0.221)
+[Epoch 41] Batch  140/625 | Total: 0.5520 (cls: 0.296, reg: 0.256)
+[Epoch 41] Batch  160/625 | Total: 0.5948 (cls: 0.339, reg: 0.256)
+[Epoch 41] Batch  180/625 | Total: 0.5589 (cls: 0.293, reg: 0.266)
+[Epoch 41] Batch  200/625 | Total: 0.6613 (cls: 0.361, reg: 0.301)
+[Epoch 41] Batch  220/625 | Total: 0.7157 (cls: 0.472, reg: 0.244)
+[Epoch 41] Batch  240/625 | Total: 0.7049 (cls: 0.447, reg: 0.258)
+[Epoch 41] Batch  260/625 | Total: 0.5557 (cls: 0.295, reg: 0.260)
+[Epoch 41] Batch  280/625 | Total: 0.6019 (cls: 0.326, reg: 0.276)
+[Epoch 41] Batch  300/625 | Total: 0.8063 (cls: 0.497, reg: 0.310)
+[Epoch 41] Batch  320/625 | Total: 0.6305 (cls: 0.391, reg: 0.240)
+[Epoch 41] Batch  340/625 | Total: 0.7387 (cls: 0.533, reg: 0.206)
+[Epoch 41] Batch  360/625 | Total: 0.5995 (cls: 0.348, reg: 0.251)
+[Epoch 41] Batch  380/625 | Total: 0.5872 (cls: 0.356, reg: 0.232)
+[Epoch 41] Batch  400/625 | Total: 0.7338 (cls: 0.491, reg: 0.243)
+[Epoch 41] Batch  420/625 | Total: 0.5563 (cls: 0.287, reg: 0.270)
+[Epoch 41] Batch  440/625 | Total: 0.5955 (cls: 0.346, reg: 0.250)
+[Epoch 41] Batch  460/625 | Total: 0.4861 (cls: 0.272, reg: 0.214)
+[Epoch 41] Batch  480/625 | Total: 0.5386 (cls: 0.330, reg: 0.209)
+[Epoch 41] Batch  500/625 | Total: 0.5995 (cls: 0.350, reg: 0.250)
+[Epoch 41] Batch  520/625 | Total: 0.5897 (cls: 0.335, reg: 0.255)
+[Epoch 41] Batch  540/625 | Total: 0.7500 (cls: 0.477, reg: 0.273)
+[Epoch 41] Batch  560/625 | Total: 0.7070 (cls: 0.468, reg: 0.239)
+[Epoch 41] Batch  580/625 | Total: 0.7377 (cls: 0.445, reg: 0.292)
+[Epoch 41] Batch  600/625 | Total: 0.5480 (cls: 0.300, reg: 0.248)
+[Epoch 41] Batch  620/625 | Total: 0.6043 (cls: 0.332, reg: 0.272)
+
+[Epoch 41/80] Loss=0.6185 Cls=0.3675 Reg=0.2509 LR=0.000515 (937.1s)
+42570.8s 970 Loading and preparing results...
+42573.1s 971 DONE (t=2.40s)
+42573.1s 972 creating index...
+42573.3s 973 index created!
+42573.3s 974 Running per image evaluation...
+42573.3s 975 Evaluate annotation type *bbox*
+42603.5s 976 DONE (t=30.13s).
+42603.5s 977 Accumulating evaluation results...
+42604.7s 978 DONE (t=1.33s).
+42604.7s 979 Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.214
+42604.7s 980 Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.495
+42604.7s 981 Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.141
+42604.7s 982 Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.111
+42604.7s 983 Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.343
+42604.7s 984 Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+42604.7s 985 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.031
+42604.7s 986 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.173
+42604.7s 987 Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.346
+42604.7s 988 Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.233
+42604.7s 989 Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.497
+42604.7s 990 Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.000
+42604.9s 991 Overall mAP@0.5: 0.4954 | mAP_tiny@0.5: 0.3044 | mAP_tiny@0.5:0.95: 0.1110
+42605.3s 992 * New best checkpoint saved (Overall mAP@0.5: 0.4954)
+
